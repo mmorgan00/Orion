@@ -74,7 +74,7 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #define OPLATFORM_IOS 1
 // iOS device
 #elif TARGET_OS_MAC
-// Other kinds of Mac OS
+// Other Oinds of Mac OS
 #else
 #error "Unknown Apple platform"
 #endif
@@ -82,7 +82,7 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #error "Unknown platform!"
 #endif
 
-#ifdef OEXPORT  
+#ifdef OEXPORT
 // Exports
 #ifdef _MSC_VER
 #define OAPI __declspec(dllexport)
@@ -92,7 +92,7 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #else
 // Imports
 #ifdef _MSC_VER
-#define OAPI __declspec(dllimport)
+#define OAPI __declspec(dllimport)  
 #else
 #define OAPI
 #endif
