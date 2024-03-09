@@ -1,4 +1,4 @@
-#include "platform/platform.h"
+/*#include "platform/platform.h"
 
 // Check we are on windows
 #if OPLATFORM_WINDOWS
@@ -240,3 +240,4 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
 
 #endif
 // nothing if we aren't on windows
+*/
