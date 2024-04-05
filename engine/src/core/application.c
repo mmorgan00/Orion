@@ -5,7 +5,7 @@
 #include "core/omemory.h"
 #include "platform/platform.h"
 #include "core/event.h"
-
+#include "core/input.h"
 
 typedef struct application_state {
   game* game_inst;
@@ -20,6 +20,10 @@ typedef struct application_state {
 static b8 initialized = FALSE;
 static application_state app_state;
 
+// Event handlers
+b8 application_on_event(u16 code, void* sender, void* listener_inst, event_context context);
+b8 application_on_key(u16 code, void* sender, void* listener_inst, event_context context);
+
 b8 application_create(game* game_inst) {
   if(initialized) {
     OERROR("application_create called more than once");
@@ -29,7 +33,8 @@ b8 application_create(game* game_inst) {
   app_state.game_inst = game_inst;
   // Initialize subsystems
   initialize_logging();
-
+  input_initialize();
+  
   // TODO: REMOVE
   OFATAL("A fatal  message", "");
   OERROR("An error message", "");
@@ -44,6 +49,10 @@ b8 application_create(game* game_inst) {
     OERROR("Event system failed initialization. Application cannot continue");
     return FALSE;
   }
+
+  event_register(EVENT_CODE_APPLICATION_QUIT, 0, application_on_event);
+  event_register(EVENT_CODE_KEY_PRESSED, 0, application_on_key);
+  event_register(EVENT_CODE_KEY_RELEASED, 0, application_on_key);
   
    // check if platform initializes properly
   if(!platform_startup(&app_state.platform,
@@ -88,6 +97,10 @@ b8 application_run() {
 	app_state.is_running = FALSE;
 	break;
       }
+
+      // Input update/state copying should always be handled after any input should be recorded
+      // Input is the last thing to be updated before the frame ends
+      input_update(0);
     }
   }
 
@@ -96,9 +109,55 @@ b8 application_run() {
   
   app_state.is_running = FALSE;
 
+  event_unregister(EVENT_CODE_APPLICATION_QUIT, 0, application_on_event);
+  event_unregister(EVENT_CODE_KEY_PRESSED, 0, application_on_key);
+  event_unregister(EVENT_CODE_KEY_RELEASED, 0, application_on_key);
+  
   event_shutdown();
+  input_shutdown();
+  
   
   platform_shutdown(&app_state.platform);
 
   return TRUE;
+}
+
+b8 application_on_event(u16 code, void* sender, void* listener_inst, event_context context) {
+  switch (code) {
+  case EVENT_CODE_APPLICATION_QUIT: {
+    OINFO("EVENT_CODE_APPLICATION_QUIT recieved, shutting down.\n");
+    app_state.is_running = FALSE;
+    return TRUE;
+  }
+  }
+
+  return FALSE;
+}
+
+b8 application_on_key(u16 code, void* sender, void* listener_inst, event_context context) {
+  if (code == EVENT_CODE_KEY_PRESSED) {
+    u16 key_code = context.data.u16[0];
+    if (key_code == KEY_ESCAPE) {
+      // NOTE: Technically firing an event to itself, but there may be other listeners.
+      event_context data = {};
+      event_fire(EVENT_CODE_APPLICATION_QUIT, 0, data);
+
+      // Block anything else from processing this.
+      return TRUE;
+    } else if (key_code == KEY_A) {
+      // Example on checking for a key
+      ODEBUG("Explicit - A key pressed!");
+    } else {
+      ODEBUG("'%c' key pressed in window.", key_code);
+    }
+  } else if (code == EVENT_CODE_KEY_RELEASED) {
+    u16 key_code = context.data.u16[0];
+    if (key_code == KEY_B) {
+      // Example on checking for a key
+      ODEBUG("Explicit - B key released!");
+    } else {
+      ODEBUG("'%c' key released in window.", key_code);
+    }
+  }
+  return FALSE;
 }

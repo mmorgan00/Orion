@@ -3,8 +3,7 @@
 #include "core/logger.h"
 #include "platform/platform.h"
 
-// TODO: Custom string lib
-#include <string.h>
+#include "core/ostring.h"
 #include <stdio.h>
 
 struct memory_stats {
@@ -81,14 +80,6 @@ void* oset_memory(void* dest, i32 value, u64 size) {
   return platform_set_memory(dest, value, size);
 }
 
-char *strdup(const char *s) {
-    size_t size = strlen(s) + 1;
-    char *p = platform_allocate(size, FALSE);
-    if (p) {
-        memcpy(p, s, size);
-    }
-    return p;
-}
 
 char* get_memory_usage_str() {
 
@@ -97,7 +88,7 @@ char* get_memory_usage_str() {
   const u64 kib = 1024;
 
   char buffer[8000] = "System memory use (tagged):\n";
-  u64 offset = strlen(buffer);
+  u64 offset = string_length(buffer);
   
   for(u32 i = 0; i < MEMORY_TAG_MAX_TAGS; ++i) {
     char unit[4] = "xib"; // X bytes, holder string
@@ -120,7 +111,7 @@ char* get_memory_usage_str() {
     i32 length = snprintf(buffer + offset, 8000, "  %s: %.2f%s\n", memory_tag_strings[i], amount, unit);
     offset += length; // length of composed string, move the pointer up
   }
-  char* out_string = strdup(buffer);
+  char* out_string = string_duplicate(buffer);
   return out_string;
     
 }
