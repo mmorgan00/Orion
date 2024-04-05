@@ -83,7 +83,7 @@ void* oset_memory(void* dest, i32 value, u64 size) {
 
 char *strdup(const char *s) {
     size_t size = strlen(s) + 1;
-    char *p = malloc(size);
+    char *p = platform_allocate(size, FALSE);
     if (p) {
         memcpy(p, s, size);
     }

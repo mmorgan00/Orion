@@ -4,6 +4,8 @@
 #include "logger.h"
 #include "core/omemory.h"
 #include "platform/platform.h"
+#include "core/event.h"
+
 
 typedef struct application_state {
   game* game_inst;
@@ -38,6 +40,11 @@ b8 application_create(game* game_inst) {
   app_state.is_running = TRUE;
   app_state.is_suspended = FALSE;
 
+  if(!event_initialize()) {
+    OERROR("Event system failed initialization. Application cannot continue");
+    return FALSE;
+  }
+  
    // check if platform initializes properly
   if(!platform_startup(&app_state.platform,
 		      game_inst->app_config.name,
@@ -88,6 +95,8 @@ b8 application_run() {
   
   
   app_state.is_running = FALSE;
+
+  event_shutdown();
   
   platform_shutdown(&app_state.platform);
 
