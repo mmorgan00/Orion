@@ -7,6 +7,7 @@
 #include "core/event.h"
 #include "core/input.h"
 
+#include "containers/darray.h"
 
 #include <xcb/xcb.h>
 #include <X11/keysym.h>
@@ -303,6 +304,10 @@ void platform_sleep(u64 ms) {
 #endif
 }
 
+void  platform_get_required_extension_names(const char ***names_darray) {
+  darray_push(*names_darray, &"VK_KHR_xcb_surface");
+}
+								     
 // Key translation
 keys translate_keycode(u32 x_keycode) {
     switch (x_keycode) {
