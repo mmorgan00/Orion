@@ -2,7 +2,7 @@
 
 #include "vulkan_types.inl"
 #include "vulkan_platform.h"
-
+#include "vulkan_device.h"
 
 #include "core/logger.h"
 #include "core/ostring.h"
@@ -120,11 +120,31 @@ b8 vulkan_renderer_backend_initialize(renderer_backend* backend, const char* app
     VK_CHECK(func(context.instance, &debug_create_info, context.allocator, &context.debug_messenger));
     ODEBUG("Vulkan debugger created.");
 #endif
+
+    // Create surface
+    ODEBUG("Creating Vulkan surface...");
+    if (!platform_create_vulkan_surface(plat_state, &context)) {
+      OERROR("Failed to create platform surface!");
+      return FALSE;
+    }
+
+    ODEBUG("Vulkan surface created");
+    
+    // Create the device
+    if(!vulkan_device_create(&context)) {
+      OERROR("Failed to create device!");
+      return FALSE;
+      }
+    
     OINFO("Vulkan renderer initialized successfully.");
     return TRUE;
     
 }
 void vulkan_renderer_backend_shutdown(renderer_backend* backend) {
+  ODEBUG("Destroying Vulkan surface...");
+  vkDestroySurfaceKHR(context.instance, context.surface, context.allocator);
+
+  
   ODEBUG("Destroying Vulkan debugger...");
   if (context.debug_messenger) {
     PFN_vkDestroyDebugUtilsMessengerEXT func =
