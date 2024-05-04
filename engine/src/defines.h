@@ -45,7 +45,7 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #define FALSE 0
 
 // Platform detection
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
 #define OPLATFORM_WINDOWS 1
 #ifndef _WIN64
 #error "64-bit is required on Windows!"
@@ -92,8 +92,11 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #else
 // Imports
 #ifdef _MSC_VER
-#define OAPI __declspec(dllimport)  
+#define OAPI __declspec(dllimport)
 #else
 #define OAPI
 #endif
 #endif
+
+
+#define OCLAMP(value, min, max) (value <= min) ? min : (value >= max) ? max : value;

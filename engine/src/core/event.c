@@ -1,18 +1,16 @@
 #include "core/event.h"
 
-#include "core/omemory.h"
 #include "containers/darray.h"
-
+#include "core/omemory.h"
 
 typedef struct registered_event {
-  void* listener;
+  void *listener;
   PFN_on_event callback;
 } registered_event;
 
 typedef struct event_code_entry {
-  registered_event* events;
+  registered_event *events;
 } event_code_entry;
-
 
 // Should be plenty
 #define MAX_MESSAGE_CODES 16384
@@ -42,34 +40,34 @@ b8 event_initialize() {
 }
 
 void event_shutdown() {
-  for(u16 i = 0; i < MAX_MESSAGE_CODES; ++i){
-    if(state.registered[i].events != 0) {
+  for (u16 i = 0; i < MAX_MESSAGE_CODES; ++i) {
+    if (state.registered[i].events != 0) {
       darray_destroy(state.registered[i].events);
       state.registered[i].events = 0;
     }
   }
 }
 
-
-b8 event_register(u16 code, void* listener, PFN_on_event on_event) {
-  if(is_initialized == FALSE) {
+b8 event_register(u16 code, void *listener, PFN_on_event on_event) {
+  if (is_initialized == FALSE) {
     return FALSE;
   }
 
-  // if nothing has been registerd for this code yet, create a new darray of type registered_event
-  if(state.registered[code].events == 0) {
+  // if nothing has been registerd for this code yet, create a new darray of
+  // type registered_event
+  if (state.registered[code].events == 0) {
     state.registered[code].events = darray_create(registered_event);
   }
 
   u64 registered_count = darray_length(state.registered[code].events);
   // check for and prevent duplicates
-  for(u64 i = 0; i < registered_count; ++i) {
-    if(state.registered[code].events[i].listener == listener) {
+  for (u64 i = 0; i < registered_count; ++i) {
+    if (state.registered[code].events[i].listener == listener) {
       // TODO: warn
       return FALSE;
     }
   }
-  
+
   // registere
   registered_event event;
   event.listener = listener;
@@ -79,49 +77,48 @@ b8 event_register(u16 code, void* listener, PFN_on_event on_event) {
   return TRUE;
 }
 
-b8 event_unregister(u16 code, void* listener, PFN_on_event on_event) {
-  if(is_initialized == FALSE) {
+b8 event_unregister(u16 code, void *listener, PFN_on_event on_event) {
+  if (is_initialized == FALSE) {
     return FALSE;
   }
 
-  if(state.registered[code].events == 0) {
+  if (state.registered[code].events == 0) {
     // TODO: warn
     return FALSE;
   }
 
   u64 registered_count = darray_length(state.registered[code].events);
-  for(u64 i = 0; i < registered_count; ++i) {
+  for (u64 i = 0; i < registered_count; ++i) {
     registered_event e = state.registered[code].events[i];
-    if(e.listener == listener && e.callback == on_event) {
+    if (e.listener == listener && e.callback == on_event) {
       registered_event popped_event;
       // pop the current iteration value's event, we found the match
       darray_pop_at(state.registered[code].events, i, &popped_event);
       return TRUE;
     }
   }
-  
-    // Not found
+
+  // Not found
   return FALSE;
 }
-  
 
-
-b8 event_fire(u16 code, void* sender, event_context context) {
-  if(is_initialized == FALSE) {
+b8 event_fire(u16 code, void *sender, event_context context) {
+  if (is_initialized == FALSE) {
     return FALSE;
   }
 
-  if(state.registered[code].events == 0) {
+  if (state.registered[code].events == 0) {
     // TODO: warn
     return FALSE;
   }
 
   u64 registered_count = darray_length(state.registered[code].events);
-  for(u64 i = 0; i < registered_count; ++i) {
+  for (u64 i = 0; i < registered_count; ++i) {
     registered_event e = state.registered[code].events[i];
-    if(e.callback(code, sender, e.listener, context)) {
+    if (e.callback(code, sender, e.listener, context)) {
       // Message was handled, do not send to other listeners.
-      // HANDLERS CAN RETURN FALSE AND STILL FIRE IT. THIS JUST WILL MEAN ANOTHER HANDLER ALSO RECEIVES THE MESSAGE
+      // HANDLERS CAN RETURN FALSE AND STILL FIRE IT. THIS JUST WILL MEAN
+      // ANOTHER HANDLER ALSO RECEIVES THE MESSAGE
       return TRUE;
     }
   }

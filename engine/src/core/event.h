@@ -2,7 +2,6 @@
 
 #include "defines.h"
 
-
 typedef struct event_context {
   // 128 bytes, stack allocated
   union {
@@ -22,31 +21,27 @@ typedef struct event_context {
 
     char c[16];
   } data;
-}  event_context;
+} event_context;
 
 // should return true if handled
 // PFN = Pointer function
-typedef b8 (*PFN_on_event)(u16 code, void* sender, void* listener_inst, event_context data);
-
+typedef b8 (*PFN_on_event)(u16 code, void *sender, void *listener_inst,
+                           event_context data);
 
 b8 event_initialize();
 void event_shutdown();
 
-
 /**
- * Register to listen for when events are sent 
+ * Register to listen for when events are sent
  */
-OAPI b8 event_register(u16 code, void* listener, PFN_on_event on_event);
+OAPI b8 event_register(u16 code, void *listener, PFN_on_event on_event);
 
-
-OAPI b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
-
+OAPI b8 event_unregister(u16 code, void *listener, PFN_on_event on_event);
 
 /**
  * Fires an event to listeners of the given code.
  */
-OAPI b8 event_fire(u16 code, void* sender, event_context context);
-
+OAPI b8 event_fire(u16 code, void *sender, event_context context);
 
 typedef enum system_event_code {
   // Shuts the applicaiton down on the next frame;
@@ -73,7 +68,7 @@ typedef enum system_event_code {
   // Mouse button released
   /* Context usage:
    * u16 button = data.data.u16[0];
-   */ 
+   */
   EVENT_CODE_BUTTON_RELEASED = 0x05,
 
   // Mouse moved
@@ -81,7 +76,7 @@ typedef enum system_event_code {
    * u16 x = data.data.u16[0];
    * u16 y = data.data.u16[1];
    */
-  
+
   EVENT_CODE_MOUSE_MOVED = 0x06,
 
   // Mouse moved

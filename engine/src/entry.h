@@ -6,7 +6,7 @@
 #include "game_types.h"
 
 // Externally defined function to create the game
-extern b8 create_game(game* out_game);
+extern b8 create_game(game *out_game);
 
 /**
  * The main entry for the application
@@ -14,7 +14,7 @@ extern b8 create_game(game* out_game);
 int main(void) {
 
   initialize_memory();
-  
+
   game game_inst;
   if (!create_game(&game_inst)) {
     OFATAL("Could not create game");
@@ -22,7 +22,8 @@ int main(void) {
   }
 
   // Ensure function pointers are set
-  if (!game_inst.render || !game_inst.update || !game_inst.initialize || !game_inst.on_resize) {
+  if (!game_inst.render || !game_inst.update || !game_inst.initialize ||
+      !game_inst.on_resize) {
     OFATAL("The game's driver functions must be assigned");
     return -2;
   }
@@ -38,14 +39,14 @@ int main(void) {
     OINFO("Application did not shut down gracefully\n");
     return 2;
   }
-  
+
   application_config config;
   config.start_pos_x = 100;
   config.start_pos_y = 100;
   config.start_width = 1280;
   config.start_height = 720;
   config.name = "Orion Engine Testbed";
-  
+
   shutdown_memory();
   return 0;
 }

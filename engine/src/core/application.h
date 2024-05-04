@@ -15,14 +15,14 @@ typedef struct application_config {
   // starting window width
   i16 start_width;
 
-    // starting window height
+  // starting window height
   i16 start_height;
 
   // application/window name
-  char* name;
-  
+  char *name;
+
 } application_config;
 
-OAPI b8 application_create(struct game* game_inst);
+OAPI b8 application_create(struct game *game_inst);
 
 OAPI b8 application_run();

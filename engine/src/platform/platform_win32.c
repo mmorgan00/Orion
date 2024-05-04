@@ -3,19 +3,19 @@
 // Check we are on windows
 #if OPLATFORM_WINDOWS
 
-#include "core/logger.h"
-#include "core/input.h"
 #include "containers/darray.h"
+#include "core/input.h"
+#include "core/logger.h"
 
+#include <stdlib.h>
 #include <windows.h>
 #include <windowsx.h>
-#include <stdlib.h>
 
 
 // Surface creation
+#include "renderer/vulkan/vulkan_types.inl"
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_win32.h>
-#include "renderer/vulkan/vulkan_types.inl"
 
 // windows specific state
 typedef struct internal_state {
@@ -27,7 +27,8 @@ typedef struct internal_state {
 static f64 clock_frequency;
 static LARGE_INTEGER start_time;
 
-LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARAM l_param);
+LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param,
+LPARAM l_param);
 
 
 b8 platform_startup (
@@ -36,9 +37,9 @@ b8 platform_startup (
     i32 x,
     i32 y,
     i32 width,
-    i32 height) {   
+    i32 height) {
         plat_state->internal_state = malloc(sizeof(internal_state));
-        internal_state *state = (internal_state *)plat_state->internal_state;   
+        internal_state *state = (internal_state *)plat_state->internal_state;
 
         state->h_instance = GetModuleHandleA(0);
 
@@ -58,8 +59,8 @@ b8 platform_startup (
 
         if(!RegisterClassA(&wc))
         {
-            MessageBoxA(0, "Window registration failed", "Error", MB_ICONEXCLAMATION | MB_OK);
-            return FALSE;
+            MessageBoxA(0, "Window registration failed", "Error",
+MB_ICONEXCLAMATION | MB_OK); return FALSE;
         }
 
         // create window
@@ -92,13 +93,14 @@ b8 platform_startup (
         window_width += border_rect.bottom - border_rect.top;
 
         HWND handle = CreateWindowExA(
-            window_ex_style, "orion_window_class", application_name, 
+            window_ex_style, "orion_window_class", application_name,
             window_style, window_x, window_y, window_width, window_height,
             0, 0, state->h_instance, 0);
 
         if (handle == 0)
         {
-            MessageBoxA(NULL, "window creation failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
+            MessageBoxA(NULL, "window creation failed!", "Error!",
+MB_ICONEXCLAMATION | MB_OK);
 
             OFATAL("Window creation failed");
             return FALSE;
@@ -109,8 +111,9 @@ b8 platform_startup (
         }
 
         // show Window
-        b32 should_activate = 1; // TODO: If the window should not accept input, set false
-        i32 show_window_command_flags = should_activate ? SW_SHOW : SW_SHOWNOACTIVATE;
+        b32 should_activate = 1; // TODO: If the window should not accept input,
+set false i32 show_window_command_flags = should_activate ? SW_SHOW :
+SW_SHOWNOACTIVATE;
 
         ShowWindow(state->hwnd, show_window_command_flags);
 
@@ -125,7 +128,7 @@ b8 platform_startup (
 
 void platform_shutdown(platform_state* plat_state) {
     internal_state *state = (internal_state *)plat_state->internal_state;
-    
+
     if(state->hwnd) {
         DestroyWindow(state->hwnd);
         state->hwnd = 0;
@@ -148,7 +151,7 @@ void* platform_allocate(u64 size, b8 aligned) {
 }
 // free
 void platform_freeze(void* block, b8 aligned) {
-    return (free(block));    
+    return (free(block));
 }
 // other operations we'll want to have
 void* platform_zero_copy(void* block, u64 size)
@@ -174,7 +177,8 @@ void platform_console_write(const char* message, u8 color)
     OutputDebugStringA(message);
     u64 length = strlen(message);
     LPDWORD number_written = 0;
-    WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message, (DWORD)length, number_written, 0);
+    WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message, (DWORD)length,
+number_written, 0);
 }
 void platform_console_write_error(const char* message, u8 color)
 {
@@ -186,7 +190,8 @@ void platform_console_write_error(const char* message, u8 color)
     OutputDebugStringA(message);
     u64 length = strlen(message);
     LPDWORD number_written = 0;
-    WriteConsoleA(GetStdHandle(STD_ERROR_HANDLE), message, (DWORD)length, number_written, 0);
+    WriteConsoleA(GetStdHandle(STD_ERROR_HANDLE), message, (DWORD)length,
+number_written, 0);
 }
 
 f64 platform_get_absolute_time(){
@@ -199,23 +204,23 @@ f64 platform_get_absolute_time(){
 // Not exported
 void platform_sleep(u64 ms){
     Sleep(ms);
-} 
+}
 
 void platform_get_required_extension_names(const char ***names_darray) {
 darray_push(*Names_darray, &"VK_KHR_win32_srface");
 }
 
-b8 platform_create_vulkan_surface(platform_state* plat_state, vulkan_context *context) {
-internal_state *state = (internal_state *)plat_state->internal_state;
+b8 platform_create_vulkan_surface(platform_state* plat_state, vulkan_context
+*context) { internal_state *state = (internal_state
+*)plat_state->internal_state;
 
 VkWin32SurfaceCreateInfoKHR create_info = {VK_STRUCTURE_TYPE_WIN32_SURFACE};
 create_info.hinstance = state->h_instance;
 create_info.hwnd = state->hwnd;
 
-VkResult result = vkCreateWin32SurfaceKHR(context->instance, &create_info, context->allocator, &state->surface);
-if (result != VK_SUCCESS) {
-OFATAL("Vulkan surface creation failed.");
-return FALSE;
+VkResult result = vkCreateWin32SurfaceKHR(context->instance, &create_info,
+context->allocator, &state->surface); if (result != VK_SUCCESS) { OFATAL("Vulkan
+surface creation failed."); return FALSE;
 }
 
 context->surface = state->surface;
@@ -223,11 +228,8 @@ return TRUE:
 
 }
 
-LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARAM l_param) {
-    Switch(msg) {
-        case WM_ERASEBKGND:
-            return 1;
-        case WM_CLOSE:
+LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param,
+LPARAM l_param) { Switch(msg) { case WM_ERASEBKGND: return 1; case WM_CLOSE:
             // TODO: Fire event for application to quit
             return 0;
         case WM_DESTROY:
@@ -246,20 +248,20 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
         case WM_KEYUP:
         case WM_SYSKEYUP: {
             // // Key press/release
-	    b8 pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
+            b8 pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
             // // TODO: Input processing
-	    keys key = (u16)w_param;
+            keys key = (u16)w_param;
 
-	    // Pass to input, keys map directly
-	    input_process_key(key, pressed);
-	    
+            // Pass to input, keys map directly
+            input_process_key(key, pressed);
+
         } break;
         case WM_MOUSEMOVE: {
-	    i32 x_position = GET_X_LPARAM(lparam);
-	    i32 y_position = GET_Y_LPARAM(lparam);
+            i32 x_position = GET_X_LPARAM(lparam);
+            i32 y_position = GET_Y_LPARAM(lparam);
             // // TODO: input processing
-	    input_process_mouse_move(x_position, y_position);
-	    
+            input_process_mouse_move(x_position, y_position);
+
         } break;
         case WM_MOUSEHWHEEL: {
              i32 z_delta = GET_WHEEL_DELTA_WPARAM(w_param);
@@ -268,7 +270,7 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
                  // flatten input to -1 or 1
                  z_delta = (z_delta < 0) ? -1 : 1;
                  // TODO: input processing
-		 input_proess_mouse_wheel(z_delta);
+                 input_proess_mouse_wheel(z_delta);
              }
         } break;
         case WM_LBUTTONDOWN:
@@ -277,9 +279,8 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
         case WM_LBUTTONUP:
         case WM_MBUTTONUP:
         case WM_RBUTTONUP: {
-            b8 pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg == WM_MBUTTONDOWN;
-            buttons mouse_button = BUTTON_MAX_BUTTONS;
-            switch (msg) {
+            b8 pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg
+== WM_MBUTTONDOWN; buttons mouse_button = BUTTON_MAX_BUTTONS; switch (msg) {
                 case WM_LBUTTONDOWN:
                 case WM_LBUTTONUP:
                     mouse_button = BUTTON_LEFT;
@@ -296,11 +297,11 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
 
             // Pass over to the input subsystem.
             if (mouse_button != BUTTON_MAX_BUTTONS) {
-	        input_process_button(mouse_button, pressed);
-		}
-	    } break;
-	}
-        
+                input_process_button(mouse_button, pressed);
+                }
+            } break;
+        }
+
     }
 }
 

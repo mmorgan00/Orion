@@ -21,23 +21,21 @@ typedef enum memory_tag {
   MEMORY_TAG_ENTITY,
   MEMORY_TAG_ENTITY_NODE,
   MEMORY_TAG_SCENE,
-  
 
   MEMORY_TAG_MAX_TAGS
 } memory_tag;
 
-
 OAPI void initialize_memory();
 OAPI void shutdown_memory();
 
-OAPI void* oallocate(u64 size, memory_tag tag);
+OAPI void *oallocate(u64 size, memory_tag tag);
 
-OAPI void ofree(void* block, u64 size, memory_tag tag);
+OAPI void ofree(void *block, u64 size, memory_tag tag);
 
-OAPI void* ozero_memory(void* block, u64 size);
+OAPI void *ozero_memory(void *block, u64 size);
 
-OAPI void* ocopy_memory(void* dest, const void* source, u64 size);
+OAPI void *ocopy_memory(void *dest, const void *source, u64 size);
 
-OAPI void* oset_memory(void* dest, i32 value, u64 size);
+OAPI void *oset_memory(void *dest, i32 value, u64 size);
 
-OAPI char* get_memory_usage_str();
+OAPI char *get_memory_usage_str();
