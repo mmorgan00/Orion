@@ -1,7 +1,9 @@
 #include "vulkan_backend.h"
-#include "vulkan_swapchain.h"
 #include "vulkan_device.h"
 #include "vulkan_platform.h"
+#include "vulkan_swapchain.h"
+#include "vulkan_renderpass.h"
+
 #include "vulkan_types.inl"
 
 #include "core/logger.h"
@@ -19,8 +21,6 @@ VKAPI_ATTR VkBool32 VKAPI_CALL vk_debug_callback(
     VkDebugUtilsMessageTypeFlagsEXT message_types,
     const VkDebugUtilsMessengerCallbackDataEXT *callback_data, void *user_data);
 
-
-
 i32 find_memory_index(u32 type_filter, u32 property_flags);
 
 b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
@@ -29,7 +29,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 
   // Function pointers
   context.find_memory_index = find_memory_index;
-  
+
   context.allocator = 0;
 
   // Setup Vulkan instance.
@@ -158,16 +158,26 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   }
 
   // Swapchain
-    vulkan_swapchain_create(
-        &context,
-        context.framebuffer_width,
-        context.framebuffer_height,
-        &context.swapchain);
+  vulkan_swapchain_create(&context, context.framebuffer_width,
+                          context.framebuffer_height, &context.swapchain);
+
+  
+  vulkan_renderpass_create(
+          &context,
+          &context.main_renderpass,
+          0, 0, context.framebuffer_width, context.framebuffer_height,
+          0.0f, 0.0f, 0.2f, 1.0f,
+          1.0f,
+          0);
 
   OINFO("Vulkan renderer initialized successfully.");
   return TRUE;
 }
 void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
+
+  // renderpass
+  vulkan_renderpass_destroy(&context, &context.main_renderpass);
+
   // Swapchain
   ODEBUG("Destroying Vulkan swapchain...");
   vulkan_swapchain_destroy(&context, &context.swapchain);
@@ -226,18 +236,20 @@ vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
   return VK_FALSE;
 }
 
-
 i32 find_memory_index(u32 type_filter, u32 property_flags) {
-    VkPhysicalDeviceMemoryProperties memory_properties;
-    vkGetPhysicalDeviceMemoryProperties(context.device.physical_device, &memory_properties);
+  VkPhysicalDeviceMemoryProperties memory_properties;
+  vkGetPhysicalDeviceMemoryProperties(context.device.physical_device,
+                                      &memory_properties);
 
-    for (u32 i = 0; i < memory_properties.memoryTypeCount; ++i) {
-        // Check each memory type to see if its bit is set to 1.
-        if (type_filter & (1 << i) && (memory_properties.memoryTypes[i].propertyFlags & property_flags) == property_flags) {
-            return i;
-        }
+  for (u32 i = 0; i < memory_properties.memoryTypeCount; ++i) {
+    // Check each memory type to see if its bit is set to 1.
+    if (type_filter & (1 << i) &&
+        (memory_properties.memoryTypes[i].propertyFlags & property_flags) ==
+            property_flags) {
+      return i;
     }
+  }
 
-    OWARN("Unable to find suitable memory type!");
-    return -1;
+  OWARN("Unable to find suitable memory type!");
+  return -1;
 }
