@@ -7,4 +7,4 @@ cFilenames=$(find . -type f -name "*.c")
 
 hFilenames=$(find . -type f -name "*.h")
 
-clang-format $cFilenames $hFilenames -i
+clang-format $cFilenames $hFilenames src\\renderer\\vulkan\\vulkan_types.inl -i

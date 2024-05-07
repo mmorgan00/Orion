@@ -1,10 +1,11 @@
-/*#include "platform/platform.h"
+#include "platform/platform.h"
 
 // Check we are on windows
 #if OPLATFORM_WINDOWS
 
 #include "containers/darray.h"
 #include "core/input.h"
+#include "core/event.h"
 #include "core/logger.h"
 
 #include <stdlib.h>
@@ -44,7 +45,7 @@ b8 platform_startup (
         state->h_instance = GetModuleHandleA(0);
 
         // Setup window class
-        HICON icon = LocadIcon(state->h_instance, IDI_APPLICATION);
+        HICON icon = LoadIcon(state->h_instance, IDI_APPLICATION);
         WNDCLASSA wc;
         memset(&wc, 0, sizeof(wc));
         wc.style = CS_DBLCLKS; // handle double clicks
@@ -82,8 +83,8 @@ MB_ICONEXCLAMATION | MB_OK); return FALSE;
         window_style |= WS_THICKFRAME;
 
         // size of border
-        RECT border_rect {0, 0, 0, 0};
-        AdjustWindowRect(&border_rect, window_style, 0, window_ex_style);
+        RECT border_rect = {0, 0, 0, 0};
+        AdjustWindowRectEx(&border_rect, window_style, 0, window_ex_style);
 
         window_x += border_rect.left;
         window_y += border_rect.top;
@@ -111,8 +112,8 @@ MB_ICONEXCLAMATION | MB_OK);
         }
 
         // show Window
-        b32 should_activate = 1; // TODO: If the window should not accept input,
-set false i32 show_window_command_flags = should_activate ? SW_SHOW :
+        b32 should_activate = 1; // TODO: If the window should not accept input, set false 
+        i32 show_window_command_flags = should_activate ? SW_SHOW :
 SW_SHOWNOACTIVATE;
 
         ShowWindow(state->hwnd, show_window_command_flags);
@@ -135,7 +136,7 @@ void platform_shutdown(platform_state* plat_state) {
     }
 }
 
-b8 platform_pump_message(platform_state* plat_state) {
+b8 platform_pump_messages(platform_state* plat_state) {
     MSG message;
     while(PeekMessageA(&message, NULL, 0, 0, PM_REMOVE)) {
         TranslateMessage(&message);
@@ -150,11 +151,11 @@ void* platform_allocate(u64 size, b8 aligned) {
     return(malloc(size));
 }
 // free
-void platform_freeze(void* block, b8 aligned) {
+void platform_free(void* block, b8 aligned) {
     return (free(block));
 }
 // other operations we'll want to have
-void* platform_zero_copy(void* block, u64 size)
+void* platform_zero_memory(void* block, u64 size)
 {
     return memset(block, 0, size);
 }
@@ -207,71 +208,78 @@ void platform_sleep(u64 ms){
 }
 
 void platform_get_required_extension_names(const char ***names_darray) {
-darray_push(*Names_darray, &"VK_KHR_win32_srface");
+darray_push(*names_darray, &"VK_KHR_win32_surface");
 }
 
 b8 platform_create_vulkan_surface(platform_state* plat_state, vulkan_context
-*context) { internal_state *state = (internal_state
-*)plat_state->internal_state;
+*context) { 
+    // Simply cold-cast to the known type.
+    internal_state *state = (internal_state *)plat_state->internal_state;
 
-VkWin32SurfaceCreateInfoKHR create_info = {VK_STRUCTURE_TYPE_WIN32_SURFACE};
-create_info.hinstance = state->h_instance;
-create_info.hwnd = state->hwnd;
+    VkWin32SurfaceCreateInfoKHR create_info = {VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR};
+    create_info.hinstance = state->h_instance;
+    create_info.hwnd = state->hwnd;
 
-VkResult result = vkCreateWin32SurfaceKHR(context->instance, &create_info,
-context->allocator, &state->surface); if (result != VK_SUCCESS) { OFATAL("Vulkan
-surface creation failed."); return FALSE;
+    VkResult result = vkCreateWin32SurfaceKHR(context->instance, &create_info, context->allocator, &state->surface);
+    if (result != VK_SUCCESS) {
+        OFATAL("Vulkan surface creation failed.");
+        return FALSE;
+    }
+
+    context->surface = state->surface;
+    return TRUE;
 }
 
-context->surface = state->surface;
-return TRUE:
-
-}
 
 LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param,
-LPARAM l_param) { Switch(msg) { case WM_ERASEBKGND: return 1; case WM_CLOSE:
-            // TODO: Fire event for application to quit
-            return 0;
+LPARAM l_param) { 
+    switch (msg) {
+        case WM_ERASEBKGND:
+            // Notify the OS that erasing will be handled by the application to prevent flicker.
+            return 1;
+        case WM_CLOSE:
+            // TODO: Fire an event for the application to quit.
+            event_context data = {};
+            event_fire(EVENT_CODE_APPLICATION_QUIT, 0, data);
+            return TRUE;
         case WM_DESTROY:
             PostQuitMessage(0);
             return 0;
         case WM_SIZE: {
+            // Get the updated size.
             // RECT r;
             // GetClientRect(hwnd, &r);
             // u32 width = r.right - r.left;
             // u32 height = r.bottom - r.top;
 
-            // // TODO: Fire event for application to resize;
+            // TODO: Fire an event for window resize.
         } break;
         case WM_KEYDOWN:
         case WM_SYSKEYDOWN:
         case WM_KEYUP:
         case WM_SYSKEYUP: {
-            // // Key press/release
+            // Key pressed/released
             b8 pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
-            // // TODO: Input processing
             keys key = (u16)w_param;
 
-            // Pass to input, keys map directly
+            // Pass to the input subsystem for processing.
             input_process_key(key, pressed);
-
         } break;
         case WM_MOUSEMOVE: {
-            i32 x_position = GET_X_LPARAM(lparam);
-            i32 y_position = GET_Y_LPARAM(lparam);
-            // // TODO: input processing
+            // Mouse move
+            i32 x_position = GET_X_LPARAM(l_param);
+            i32 y_position = GET_Y_LPARAM(l_param);
+            
+            // Pass over to the input subsystem.
             input_process_mouse_move(x_position, y_position);
-
         } break;
-        case WM_MOUSEHWHEEL: {
-             i32 z_delta = GET_WHEEL_DELTA_WPARAM(w_param);
-             if(z_delta != 0)
-             {
-                 // flatten input to -1 or 1
-                 z_delta = (z_delta < 0) ? -1 : 1;
-                 // TODO: input processing
-                 input_proess_mouse_wheel(z_delta);
-             }
+        case WM_MOUSEWHEEL: {
+            i32 z_delta = GET_WHEEL_DELTA_WPARAM(w_param);
+            if (z_delta != 0) {
+                // Flatten the input to an OS-independent (-1, 1)
+                z_delta = (z_delta < 0) ? -1 : 1;
+                input_process_mouse_wheel(z_delta);
+            }
         } break;
         case WM_LBUTTONDOWN:
         case WM_MBUTTONDOWN:
@@ -279,8 +287,9 @@ LPARAM l_param) { Switch(msg) { case WM_ERASEBKGND: return 1; case WM_CLOSE:
         case WM_LBUTTONUP:
         case WM_MBUTTONUP:
         case WM_RBUTTONUP: {
-            b8 pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg
-== WM_MBUTTONDOWN; buttons mouse_button = BUTTON_MAX_BUTTONS; switch (msg) {
+            b8 pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg == WM_MBUTTONDOWN;
+            buttons mouse_button = BUTTON_MAX_BUTTONS;
+            switch (msg) {
                 case WM_LBUTTONDOWN:
                 case WM_LBUTTONUP:
                     mouse_button = BUTTON_LEFT;
@@ -298,14 +307,14 @@ LPARAM l_param) { Switch(msg) { case WM_ERASEBKGND: return 1; case WM_CLOSE:
             // Pass over to the input subsystem.
             if (mouse_button != BUTTON_MAX_BUTTONS) {
                 input_process_button(mouse_button, pressed);
-                }
-            } break;
-        }
-
+            }
+        } break;
     }
+
+    return DefWindowProcA(hwnd, msg, w_param, l_param);
 }
 
 
 #endif
 // nothing if we aren't on windows
-*/
+

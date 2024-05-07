@@ -1,12 +1,13 @@
 #include "application.h"
 #include "game_types.h"
 
-#include "core/clock.h"
+#include "logger.h"
+
+#include "platform/platform.h"
+#include "core/omemory.h"
 #include "core/event.h"
 #include "core/input.h"
-#include "core/omemory.h"
-#include "logger.h"
-#include "platform/platform.h"
+#include "core/clock.h"
 
 #include "renderer/renderer_frontend.h"
 
