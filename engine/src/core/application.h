@@ -26,3 +26,5 @@ typedef struct application_config {
 OAPI b8 application_create(struct game *game_inst);
 
 OAPI b8 application_run();
+
+OAPI void application_get_framebuffer_size(u32* width, u32* height);
