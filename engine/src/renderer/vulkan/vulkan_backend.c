@@ -434,6 +434,9 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
 
   // Wait for semaphore
   submit_info.signalSemaphoreCount = 1;
+  submit_info.pSignalSemaphores = &context.queue_complete_semaphores[context.current_frame];
+
+  submit_info.waitSemaphoreCount = 1;
   submit_info.pWaitSemaphores = &context.image_available_semaphores[context.current_frame];
 
   VkPipelineStageFlags flags[1] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};

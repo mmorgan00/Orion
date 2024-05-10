@@ -1,5 +1,4 @@
 #include "vulkan_command_buffer.h"
-
 #include "core/omemory.h"
 
 void vulkan_command_buffer_allocate(
