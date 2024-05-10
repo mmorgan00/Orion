@@ -100,3 +100,13 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 
 #define OCLAMP(value, min, max)                                                \
   (value <= min) ? min : (value >= max) ? max : value;
+
+
+// Inlining
+#ifdef _MSC_VER
+#define OINLINE __forceinline
+#define ONOINLINE __declspec(noinline)
+#else
+#define OINLINE static inline
+#define ONOINLINE
+#endif
