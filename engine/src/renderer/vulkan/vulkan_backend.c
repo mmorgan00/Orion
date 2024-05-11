@@ -311,7 +311,7 @@ void vulkan_renderer_backend_on_resized(renderer_backend *backend, u16 width,
   cached_framebuffer_height = height;
   context.framebuffer_size_generation++;
 
-  OINFO("VUlkan renderer backend->rezied: w/h/gen: %i/%i/%llu", width, height, context.framebuffer_size_generation);
+  OINFO("VUlkan renderer backend->resized: w/h/gen: %i/%i/%llu", width, height, context.framebuffer_size_generation);
 }
 
 b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
@@ -555,7 +555,7 @@ i32 find_memory_index(u32 type_filter, u32 property_flags) {
  }
 
 b8 recreate_swapchain(renderer_backend* backend) {
-    // If already being recreated, do not try again.
+// If already being recreated, do not try again.
     if (context.recreating_swapchain) {
         ODEBUG("recreate_swapchain called when already recreating. Booting.");
         return FALSE;
