@@ -48,11 +48,14 @@ b8 application_create(game *game_inst) {
     return false;
   }
 
-  game_inst->application_state = oallocate(sizeof(application_state), MEMORY_TAG_APPLICATION);
-  app_state = game_inst->application_state;
-  app_state->game_inst = game_inst;
-  app_state->is_running = false;
-  app_state->is_suspended = false;
+    game_inst->application_state = oallocate(sizeof(application_state), MEMORY_TAG_APPLICATION);
+    app_state = game_inst->application_state;
+    app_state->game_inst = game_inst;
+    app_state->is_running = false;
+    app_state->is_suspended = false;
+
+    u64 systems_allocator_total_size = 64 * 1024 * 1024;  // 64 mb
+    linear_allocator_create(systems_allocator_total_size, 0, &app_state->systems_allocator);
   // Initialize subsystems
 
   // Memory

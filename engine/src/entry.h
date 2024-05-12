@@ -2,7 +2,6 @@
 
 #include "core/application.h"
 #include "core/logger.h"
-#include "core/omemory.h"
 #include "game_types.h"
 
 // Externally defined function to create the game
@@ -13,7 +12,6 @@ extern b8 create_game(game *out_game);
  */
 int main(void) {
 
-  initialize_memory();
 
   game game_inst;
   if (!create_game(&game_inst)) {
@@ -47,6 +45,5 @@ int main(void) {
   config.start_height = 720;
   config.name = "Orion Engine Testbed";
 
-  shutdown_memory();
   return 0;
 }

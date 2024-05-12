@@ -40,3 +40,5 @@ OAPI void *ocopy_memory(void *dest, const void *source, u64 size);
 OAPI void *oset_memory(void *dest, i32 value, u64 size);
 
 OAPI char *get_memory_usage_str();
+
+OAPI u64 get_memory_alloc_count();
