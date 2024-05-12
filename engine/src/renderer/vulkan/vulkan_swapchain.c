@@ -171,7 +171,7 @@ void create(vulkan_context *context, u32 width, u32 height,
       context->device.swapchain_support.capabilities.currentTransform;
   swapchain_create_info.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
   swapchain_create_info.presentMode = present_mode;
-  swapchain_create_info.clipped = VK_true;
+  swapchain_create_info.clipped = VK_TRUE;
   swapchain_create_info.oldSwapchain = 0;
 
   VK_CHECK(vkCreateSwapchainKHR(context->device.logical_device,

@@ -80,7 +80,7 @@ b8 vulkan_device_create(vulkan_context *context) {
   // Request device features.
   // TODO: should be config driven
   VkPhysicalDeviceFeatures device_features = {};
-  device_features.samplerAnisotropy = VK_true; // Request anistrophy
+  device_features.samplerAnisotropy = VK_TRUE; // Request anistrophy
 
   VkDeviceCreateInfo device_create_info = {
       VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
@@ -401,7 +401,7 @@ b8 physical_device_meets_requirements(
     }
 
     // Present queue?
-    VkBool32 supports_present = VK_false;
+    VkBool32 supports_present = VK_FALSE;
     VK_CHECK(vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface,
                                                   &supports_present));
     if (supports_present) {

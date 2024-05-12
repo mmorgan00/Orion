@@ -504,7 +504,7 @@ vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
     OTRACE(callback_data->pMessage);
     break;
   }
-  return VK_false;
+  return VK_FALSE;
 }
 
 i32 find_memory_index(u32 type_filter, u32 property_flags) {
