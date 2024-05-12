@@ -3,11 +3,11 @@
 
 #include "logger.h"
 
-#include "platform/platform.h"
-#include "core/omemory.h"
+#include "core/clock.h"
 #include "core/event.h"
 #include "core/input.h"
-#include "core/clock.h"
+#include "core/omemory.h"
+#include "platform/platform.h"
 
 #include "renderer/renderer_frontend.h"
 
@@ -25,14 +25,14 @@ typedef struct application_state {
 static b8 initialized = FALSE;
 static application_state app_state;
 
-
 // Event handlers
 b8 application_on_event(u16 code, void *sender, void *listener_inst,
                         event_context context);
 b8 application_on_key(u16 code, void *sender, void *listener_inst,
                       event_context context);
 
-b8 application_on_resized(u16 code, void* sender, void* listener_inst, event_context context);
+b8 application_on_resized(u16 code, void *sender, void *listener_inst,
+                          event_context context);
 
 b8 application_create(game *game_inst) {
   if (initialized) {
@@ -175,9 +175,9 @@ b8 application_run() {
   return TRUE;
 }
 
-void application_get_framebuffer_size(u32* width, u32* height) {
-    *width = app_state.width;
-    *height = app_state.height;
+void application_get_framebuffer_size(u32 *width, u32 *height) {
+  *width = app_state.width;
+  *height = app_state.height;
 }
 
 b8 application_on_event(u16 code, void *sender, void *listener_inst,
@@ -223,7 +223,8 @@ b8 application_on_key(u16 code, void *sender, void *listener_inst,
   return FALSE;
 }
 
-b8 application_on_resized(u16 code, void* sender, void* listener_inst, event_context context) {
+b8 application_on_resized(u16 code, void *sender, void *listener_inst,
+                          event_context context) {
   if (code == EVENT_CODE_RESIZED) {
     u16 width = context.data.u16[0];
     u16 height = context.data.u16[1];
@@ -237,16 +238,16 @@ b8 application_on_resized(u16 code, void* sender, void* listener_inst, event_con
 
       // Handle minimization
       if (width == 0 || height == 0) {
-	OINFO("Window minimized, suspending application.");
-	app_state.is_suspended = TRUE;
-	return TRUE;
+        OINFO("Window minimized, suspending application.");
+        app_state.is_suspended = TRUE;
+        return TRUE;
       } else {
-	if (app_state.is_suspended) {
-	  OINFO("Window restored, resuming application.");
-	  app_state.is_suspended = FALSE;
-	}
-	app_state.game_inst->on_resize(app_state.game_inst, width, height);
-	renderer_on_resized(width, height);
+        if (app_state.is_suspended) {
+          OINFO("Window restored, resuming application.");
+          app_state.is_suspended = FALSE;
+        }
+        app_state.game_inst->on_resize(app_state.game_inst, width, height);
+        renderer_on_resized(width, height);
       }
     }
   }

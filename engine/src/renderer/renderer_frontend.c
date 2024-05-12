@@ -40,11 +40,12 @@ b8 renderer_end_frame(f32 delta_time) {
 }
 
 void renderer_on_resized(u16 width, u16 height) {
-    if (backend) {
-        backend->resized(backend, width, height);
-    } else {
-        OWARN("renderer backend does not exist to accept resize: %i %i", width, height);
-    }
+  if (backend) {
+    backend->resized(backend, width, height);
+  } else {
+    OWARN("renderer backend does not exist to accept resize: %i %i", width,
+          height);
+  }
 }
 
 b8 renderer_draw_frame(render_packet *packet) {

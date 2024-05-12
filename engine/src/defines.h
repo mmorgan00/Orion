@@ -18,7 +18,7 @@ typedef double f64;
 
 // Boolean types
 typedef int b32;
-typedef char b8;
+typedef _Bool b8;
 
 // Properly define static assertions.
 #if defined(__clang__) || defined(__gcc__)
@@ -100,7 +100,6 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 
 #define OCLAMP(value, min, max)                                                \
   (value <= min) ? min : (value >= max) ? max : value;
-
 
 // Inlining
 #ifdef _MSC_VER

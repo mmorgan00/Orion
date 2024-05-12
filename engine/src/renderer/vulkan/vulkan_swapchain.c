@@ -78,13 +78,15 @@ void vulkan_swapchain_present(vulkan_context *context,
   }
 
   // Increment/loop the index
-  context->current_frame = (context->current_frame + 1) % swapchain->max_frames_in_flight;
+  context->current_frame =
+      (context->current_frame + 1) % swapchain->max_frames_in_flight;
 }
 
 void create(vulkan_context *context, u32 width, u32 height,
             vulkan_swapchain *swapchain) {
   VkExtent2D swapchain_extent = {width, height};
-  swapchain->max_frames_in_flight = 2; // use triple buffering if possible, render to 2 frames while one is
+  swapchain->max_frames_in_flight =
+      2; // use triple buffering if possible, render to 2 frames while one is
          // being drawn
 
   b8 found = FALSE;
