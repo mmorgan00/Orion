@@ -115,11 +115,11 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   // Verify all required layers are available.
   for (u32 i = 0; i < required_validation_layer_count; ++i) {
     OINFO("Searching for layer: %s...", required_validation_layer_names[i]);
-    b8 found = FALSE;
+    b8 found = false;
     for (u32 j = 0; j < available_layer_count; ++j) {
       if (strings_equal(required_validation_layer_names[i],
                         available_layers[j].layerName)) {
-        found = TRUE;
+        found = true;
         OINFO("Found.");
         break;
       }
@@ -128,7 +128,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
     if (!found) {
       OFATAL("Required validation layer is missing: %s",
              required_validation_layer_names[i]);
-      return FALSE;
+      return false;
     }
   }
   OINFO("All required validation layers are present.");
@@ -171,7 +171,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   ODEBUG("Creating Vulkan surface...");
   if (!platform_create_vulkan_surface(plat_state, &context)) {
     OERROR("Failed to create platform surface!");
-    return FALSE;
+    return false;
   }
 
   ODEBUG("Vulkan surface created");
@@ -179,7 +179,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   // Create the device
   if (!vulkan_device_create(&context)) {
     OERROR("Failed to create device!");
-    return FALSE;
+    return false;
   }
 
   // Swapchain
@@ -193,6 +193,8 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   // Create command buffers.
   create_command_buffers(backend);
 
+
+  
   // Swapchain framebuffers
   context.swapchain.framebuffers =
       darray_reserve(vulkan_framebuffer, context.swapchain.image_count);
@@ -222,7 +224,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
     // already been "rendered". This will prevent the application from waiting
     // indefinitely for the first frame to render since it cannot be rendered
     // until a frame is "rendered" before it.
-    vulkan_fence_create(&context, TRUE, &context.in_flight_fences[i]);
+    vulkan_fence_create(&context, true, &context.in_flight_fences[i]);
   }
 
   // In flight fences should not yet exist at this point, so clear the list.
@@ -234,14 +236,16 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
     context.images_in_flight[i] = 0;
   }
 
+
+
   // Create builtin shaders
   if (!vulkan_object_shader_create(&context, &context.object_shader)) {
     OERROR("Error loading built-in basic_lighting shader.");
-    return FALSE;
+    return false;
   }
 
   OINFO("Vulkan renderer initialized successfully.");
-  return TRUE;
+  return true;
 }
 
 void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
@@ -338,11 +342,11 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
     if (!vulkan_result_is_success(result)) {
       OERROR("vulkan_renderer_backend_begin_frame vkDeviceWaitIdle (1) failed: "
              "'%s'",
-             vulkan_result_string(result, TRUE));
-      return FALSE;
+             vulkan_result_string(result, true));
+      return false;
     }
     OINFO("Recreatint swapchain, booting.");
-    return FALSE;
+    return false;
   }
 
   // Check if the framebuffer has been resized. If so, must make a new one
@@ -352,14 +356,14 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
     if (!vulkan_result_is_success(result)) {
       OERROR("vulkan_renderer_backend_begin_frame vkDeviceWaitIdle (2) failed: "
              "'%s'",
-             vulkan_result_string(result, TRUE));
-      return FALSE;
+             vulkan_result_string(result, true));
+      return false;
     }
     if (!recreate_swapchain(backend)) {
-      return FALSE;
+      return false;
     }
     OINFO("Resized, booting.");
-    return FALSE;
+    return false;
   }
 
   // Wait for the execution of the current frame to complete. fence being free
@@ -368,7 +372,7 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
                          &context.in_flight_fences[context.current_frame],
                          UINT64_MAX)) {
     OWARN("In-flight fence wait failure!");
-    return FALSE;
+    return false;
   }
 
   // Acquire next image from swapchain, send the semaphore that should be
@@ -378,14 +382,14 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
           &context, &context.swapchain, UINT64_MAX,
           context.image_available_semaphores[context.current_frame], 0,
           &context.image_index)) {
-    return FALSE;
+    return false;
   }
 
   // Begin recording commands
   vulkan_command_buffer *command_buffer =
       &context.graphics_command_buffers[context.image_index];
   vulkan_command_buffer_reset(command_buffer);
-  vulkan_command_buffer_begin(command_buffer, FALSE, FALSE, FALSE);
+  vulkan_command_buffer_begin(command_buffer, false, false, false);
 
   // State
   VkViewport viewport;
@@ -413,7 +417,7 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
       command_buffer, &context.main_renderpass,
       context.swapchain.framebuffers[context.image_index].handle);
 
-  return TRUE;
+  return true;
 }
 
 b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
@@ -463,8 +467,8 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
 
   if (result != VK_SUCCESS) {
     OERROR("vkQueueSubmit failed with result: %s",
-           vulkan_result_string(result, TRUE));
-    return FALSE;
+           vulkan_result_string(result, true));
+    return false;
   }
 
   vulkan_command_buffer_update_submitted(command_buffer);
@@ -477,7 +481,7 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
       context.queue_complete_semaphores[context.current_frame],
       context.image_index);
 
-  return TRUE;
+  return true;
 }
 
 VKAPI_ATTR VkBool32 VKAPI_CALL
@@ -500,7 +504,7 @@ vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
     OTRACE(callback_data->pMessage);
     break;
   }
-  return VK_FALSE;
+  return VK_false;
 }
 
 i32 find_memory_index(u32 type_filter, u32 property_flags) {
@@ -538,7 +542,7 @@ void create_command_buffers(renderer_backend *backend) {
     ozero_memory(&context.graphics_command_buffers[i],
                  sizeof(vulkan_command_buffer));
     vulkan_command_buffer_allocate(&context,
-                                   context.device.graphics_command_pool, TRUE,
+                                   context.device.graphics_command_pool, true,
                                    &context.graphics_command_buffers[i]);
   }
 
@@ -564,18 +568,18 @@ b8 recreate_swapchain(renderer_backend *backend) {
   // If already being recreated, do not try again.
   if (context.recreating_swapchain) {
     ODEBUG("recreate_swapchain called when already recreating. Booting.");
-    return FALSE;
+    return false;
   }
 
   // Detect if the window is too small to be drawn to
   if (context.framebuffer_width == 0 || context.framebuffer_height == 0) {
     ODEBUG("recreate_swapchain called when window is < 1 in a dimension. "
            "Booting.");
-    return FALSE;
+    return false;
   }
 
   // Mark as recreating if the dimensions are valid.
-  context.recreating_swapchain = TRUE;
+  context.recreating_swapchain = true;
 
   // Wait for any operations to complete.
   vkDeviceWaitIdle(context.device.logical_device);
@@ -628,7 +632,7 @@ b8 recreate_swapchain(renderer_backend *backend) {
   create_command_buffers(backend);
 
   // Clear the recreating flag.
-  context.recreating_swapchain = FALSE;
+  context.recreating_swapchain = false;
 
-  return TRUE;
+  return true;
 }

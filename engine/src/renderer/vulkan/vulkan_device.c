@@ -35,7 +35,7 @@ b8 physical_device_meets_requirements(
 
 b8 vulkan_device_create(vulkan_context *context) {
   if (!select_physical_device(context)) {
-    return FALSE;
+    return false;
   }
 
   OINFO("Creating logical device...");
@@ -53,7 +53,7 @@ b8 vulkan_device_create(vulkan_context *context) {
     index_count++;
   }
 
-  u32 indices[index_count];
+  u32 indices[32];
   u8 index = 0;
   indices[index++] = context->device.graphics_queue_index;
   if (!present_shares_graphics_queue) {
@@ -63,7 +63,7 @@ b8 vulkan_device_create(vulkan_context *context) {
     indices[index++] = context->device.transfer_queue_index;
   }
 
-  VkDeviceQueueCreateInfo queue_create_infos[index_count];
+  VkDeviceQueueCreateInfo queue_create_infos[32];
   for (u32 i = 0; i < index_count; ++i) {
     queue_create_infos[i].sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
     queue_create_infos[i].queueFamilyIndex = indices[i];
@@ -80,7 +80,7 @@ b8 vulkan_device_create(vulkan_context *context) {
   // Request device features.
   // TODO: should be config driven
   VkPhysicalDeviceFeatures device_features = {};
-  device_features.samplerAnisotropy = VK_TRUE; // Request anistrophy
+  device_features.samplerAnisotropy = VK_true; // Request anistrophy
 
   VkDeviceCreateInfo device_create_info = {
       VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
@@ -125,7 +125,7 @@ b8 vulkan_device_create(vulkan_context *context) {
                                &context->device.graphics_command_pool));
   OINFO("Graphics command pool created.");
 
-  return TRUE;
+  return true;
 }
 
 void vulkan_device_destroy(vulkan_context *context) {
@@ -226,14 +226,14 @@ b8 vulkan_device_detect_depth_format(vulkan_device *device) {
 
     if ((properties.linearTilingFeatures & flags) == flags) {
       device->depth_format = candidates[i];
-      return TRUE;
+      return true;
     } else if ((properties.optimalTilingFeatures & flags) == flags) {
       device->depth_format = candidates[i];
-      return TRUE;
+      return true;
     }
   }
 
-  return FALSE;
+  return false;
 }
 
 b8 select_physical_device(vulkan_context *context) {
@@ -243,10 +243,10 @@ b8 select_physical_device(vulkan_context *context) {
       vkEnumeratePhysicalDevices(context->instance, &physical_device_count, 0));
   if (physical_device_count == 0) {
     OFATAL("No devices which support Vulkan were found.");
-    return FALSE;
+    return false;
   }
 
-  VkPhysicalDevice physical_devices[physical_device_count];
+  VkPhysicalDevice physical_devices[32];
   VK_CHECK(vkEnumeratePhysicalDevices(context->instance, &physical_device_count,
                                       physical_devices));
   OINFO("Found %i devices", physical_device_count);
@@ -263,12 +263,12 @@ b8 select_physical_device(vulkan_context *context) {
     // TODO: Requirements driven by engine
 
     vulkan_physical_device_requirements requirements = {};
-    requirements.graphics = TRUE;
-    requirements.present = TRUE;
-    requirements.transfer = TRUE;
-    requirements.compute = TRUE;
-    requirements.sampler_anisotropy = TRUE;
-    requirements.discrete_gpu = TRUE;
+    requirements.graphics = true;
+    requirements.present = true;
+    requirements.transfer = true;
+    requirements.compute = true;
+    requirements.sampler_anisotropy = true;
+    requirements.discrete_gpu = true;
     requirements.device_extension_names = darray_create(const char *);
     darray_push(requirements.device_extension_names,
                 &VK_KHR_SWAPCHAIN_EXTENSION_NAME);
@@ -338,11 +338,11 @@ b8 select_physical_device(vulkan_context *context) {
   // Ensure a device was selected
   if (!context->device.physical_device) {
     OERROR("No physical devices were found which meet the requirements.");
-    return FALSE;
+    return false;
   }
 
   OINFO("Physical device selected.");
-  return TRUE;
+  return true;
 }
 
 b8 physical_device_meets_requirements(
@@ -362,13 +362,13 @@ b8 physical_device_meets_requirements(
   if (requirements->discrete_gpu) {
     if (properties->deviceType != VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
       OINFO("Device is not a discrete GPU, and one is required. Skipping.");
-      return FALSE;
+      return false;
     }
   }
 
   u32 queue_family_count = 0;
   vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, 0);
-  VkQueueFamilyProperties queue_families[queue_family_count];
+  VkQueueFamilyProperties queue_families[32];
   vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count,
                                            queue_families);
 
@@ -401,7 +401,7 @@ b8 physical_device_meets_requirements(
     }
 
     // Present queue?
-    VkBool32 supports_present = VK_FALSE;
+    VkBool32 supports_present = VK_false;
     VK_CHECK(vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface,
                                                   &supports_present));
     if (supports_present) {
@@ -450,7 +450,7 @@ b8 physical_device_meets_requirements(
             MEMORY_TAG_RENDERER);
     }
     OINFO("Required swapchain support not present, skipping device.");
-    return FALSE;
+    return false;
   }
 
   // Device extensions.
@@ -469,11 +469,11 @@ b8 physical_device_meets_requirements(
       u32 required_extension_count =
           darray_length(requirements->device_extension_names);
       for (u32 i = 0; i < required_extension_count; ++i) {
-        b8 found = FALSE;
+        b8 found = false;
         for (u32 j = 0; j < available_extension_count; ++j) {
           if (strings_equal(requirements->device_extension_names[i],
                             available_extensions[j].extensionName)) {
-            found = TRUE;
+            found = true;
             break;
           }
         }
@@ -484,7 +484,7 @@ b8 physical_device_meets_requirements(
           ofree(available_extensions,
                 sizeof(VkExtensionProperties) * available_extension_count,
                 MEMORY_TAG_RENDERER);
-          return FALSE;
+          return false;
         }
       }
       ofree(available_extensions,
@@ -495,12 +495,12 @@ b8 physical_device_meets_requirements(
     // Sampler anisotropy
     if (requirements->sampler_anisotropy && !features->samplerAnisotropy) {
       OINFO("Device does not support samplerAnisotropy, skipping.");
-      return FALSE;
+      return false;
     }
 
     // Device meets all requirements.
-    return TRUE;
+    return true;
   }
 
-  return FALSE;
+  return false;
 }

@@ -23,7 +23,7 @@ b8 vulkan_object_shader_create(vulkan_context *context,
   }
 
   // Descriptors
-  return TRUE;
+  return true;
 }
 
 void vulkan_object_shader_destroy(vulkan_context *context,

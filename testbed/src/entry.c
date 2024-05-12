@@ -20,7 +20,7 @@ b8 create_game(game* out_game) {
 
   
   
-  return TRUE;
+  return true;
 }
 
 

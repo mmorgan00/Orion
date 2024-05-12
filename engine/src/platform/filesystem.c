@@ -17,7 +17,7 @@ OAPI b8 filesystem_exists(const char *path) {
  */
 OAPI b8 filesystem_open(const char *path, file_modes mode, b8 binary,
                         file_handle *out_handle) {
-  out_handle->is_valid = FALSE;
+  out_handle->is_valid = false;
   out_handle->handle = 0;
   const char *mode_str;
 
@@ -29,27 +29,27 @@ OAPI b8 filesystem_open(const char *path, file_modes mode, b8 binary,
     mode_str = binary ? "wb" : "w";
   } else {
     OERROR("Invalid mode passed while trying to open file: '%s'", path);
-    return FALSE;
+    return false;
   }
 
   // Attempt to open file
   FILE *file = fopen(path, mode_str);
   if (!file) {
     OERROR("Error opening file: '%s'", path);
-    return FALSE;
+    return false;
   }
 
   out_handle->handle = file;
-  out_handle->is_valid = TRUE;
+  out_handle->is_valid = true;
 
-  return TRUE;
+  return true;
 }
 
 OAPI void filesystem_close(file_handle *handle) {
   if (handle->handle) {
     fclose((FILE *)handle->handle);
     handle->handle = 0;
-    handle->is_valid = FALSE;
+    handle->is_valid = false;
   }
 }
 
@@ -61,10 +61,10 @@ OAPI b8 filesystem_read_line(file_handle *handle, char **line_buf) {
       u64 length = strlen(buffer);
       *line_buf = oallocate((sizeof(char)) * length + 1, MEMORY_TAG_STRING);
       strcpy(*line_buf, buffer);
-      return TRUE;
+      return true;
     }
   }
-  return FALSE;
+  return false;
 }
 
 OAPI b8 filesystem_write_line(file_handle *handle, const char *text) {
@@ -79,7 +79,7 @@ OAPI b8 filesystem_write_line(file_handle *handle, const char *text) {
     fflush((FILE *)handle->handle);
     return result != EOF;
   }
-  return FALSE;
+  return false;
 }
 
 OAPI b8 filesystem_read(file_handle *handle, u64 data_size, void *out_data,
@@ -87,11 +87,11 @@ OAPI b8 filesystem_read(file_handle *handle, u64 data_size, void *out_data,
   if (handle->handle && out_data) {
     *out_bytes_read = fread(out_data, 1, data_size, (FILE *)handle->handle);
     if (*out_bytes_read != data_size) {
-      return FALSE;
+      return false;
     }
-    return TRUE;
+    return true;
   }
-  return FALSE;
+  return false;
 }
 
 OAPI b8 filesystem_read_all_bytes(file_handle *handle, u8 **out_bytes,
@@ -105,11 +105,11 @@ OAPI b8 filesystem_read_all_bytes(file_handle *handle, u8 **out_bytes,
     *out_bytes = oallocate(sizeof(u8) * size, MEMORY_TAG_STRING);
     *out_bytes_read = fread(*out_bytes, 1, size, (FILE *)handle->handle);
     if (*out_bytes_read != size) {
-      return FALSE;
+      return false;
     }
-    return TRUE;
+    return true;
   }
-  return FALSE;
+  return false;
 }
 
 OAPI b8 filesystem_write(file_handle *handle, u64 data_size, const void *data,
@@ -117,10 +117,10 @@ OAPI b8 filesystem_write(file_handle *handle, u64 data_size, const void *data,
   if (handle->handle) {
     *out_bytes_written = fwrite(data, 1, data_size, (FILE *)handle->handle);
     if (*out_bytes_written != data_size) {
-      return FALSE;
+      return false;
     }
     fflush((FILE *)handle->handle);
-    return TRUE;
+    return true;
   }
-  return FALSE;
+  return false;
 }

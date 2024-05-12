@@ -22,9 +22,9 @@ b8 create_shader_module(vulkan_context *context, const char *name,
 
   // file handle
   file_handle handle;
-  if (!filesystem_open(file_name, FILE_MODE_READ, TRUE, &handle)) {
+  if (!filesystem_open(file_name, FILE_MODE_READ, true, &handle)) {
     OERROR("Unable to read shader module: %s.", file_name);
-    return FALSE;
+    return false;
   }
 
   // Read file in entirety
@@ -32,7 +32,7 @@ b8 create_shader_module(vulkan_context *context, const char *name,
   u8 *file_buffer = 0;
   if (!filesystem_read_all_bytes(&handle, &file_buffer, &size)) {
     OERROR("Unable to binary read shader module: %s.", file_name);
-    return FALSE;
+    return false;
   }
 
   shader_stages[stage_index].create_info.codeSize = size;
@@ -60,5 +60,5 @@ b8 create_shader_module(vulkan_context *context, const char *name,
     file_buffer = 0;
   }
 
-  return TRUE;
+  return true;
 }

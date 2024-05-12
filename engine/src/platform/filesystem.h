@@ -16,7 +16,7 @@ typedef enum file_modes {
 /**
  * Checks if a file with the given path exists
  * @param path The path of the file to check
- * @returns True if exists, false if not
+ * @returns true if exists, false if not
  */
 OAPI b8 filesystem_exists(const char *path);
 

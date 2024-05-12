@@ -35,7 +35,7 @@ void *oallocate(u64 size, memory_tag tag) {
   stats.tagged_allocations[tag] += size;
 
   // TODO: Memory alignment
-  void *block = platform_allocate(size, FALSE);
+  void *block = platform_allocate(size, false);
   platform_zero_memory(block, size); // zero out the malloc
   return block;
 }
@@ -50,7 +50,7 @@ void ofree(void *block, u64 size, memory_tag tag) {
   stats.tagged_allocations[tag] -= size;
 
   // TODO: Memory alignment
-  platform_free(block, FALSE);
+  platform_free(block, false);
 }
 
 void *ozero_memory(void *block, u64 size) {
