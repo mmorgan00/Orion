@@ -115,7 +115,7 @@ void create(vulkan_context *context, u32 width, u32 height,
       break;
     }
   }
-  
+
   vulkan_device_query_swapchain_support(context->device.physical_device,
                                         context->surface,
                                         &context->device.swapchain_support);
@@ -228,7 +228,6 @@ void create(vulkan_context *context, u32 width, u32 height,
                       VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
                       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, true,
                       VK_IMAGE_ASPECT_DEPTH_BIT, &swapchain->depth_attachment);
-
 
   OINFO("Swapchain created successfully.");
 }

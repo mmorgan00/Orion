@@ -23,15 +23,17 @@ typedef enum log_level {
 } log_level;
 
 /**
- * @brief Initializes logging system. Call twice; once with state = 0 to get required memory size,
- * then a second time passing allocated memory to state.
- * 
- * @param memory_requirement A pointer to hold the required memory size of internal state.
- * @param state 0 if just requesting memory requirement, otherwise allocated block of memory.
+ * @brief Initializes logging system. Call twice; once with state = 0 to get
+ * required memory size, then a second time passing allocated memory to state.
+ *
+ * @param memory_requirement A pointer to hold the required memory size of
+ * internal state.
+ * @param state 0 if just requesting memory requirement, otherwise allocated
+ * block of memory.
  * @return b8 True on success; otherwise false.
  */
-b8 initialize_logging(u64* memory_requirement, void* state);
-void shutdown_logging(void* state);
+b8 initialize_logging(u64 *memory_requirement, void *state);
+void shutdown_logging(void *state);
 
 OAPI void log_output(log_level level, const char *message, ...);
 

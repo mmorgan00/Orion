@@ -193,8 +193,6 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   // Create command buffers.
   create_command_buffers(backend);
 
-
-  
   // Swapchain framebuffers
   context.swapchain.framebuffers =
       darray_reserve(vulkan_framebuffer, context.swapchain.image_count);
@@ -236,8 +234,6 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
     context.images_in_flight[i] = 0;
   }
 
-
-
   // Create builtin shaders
   if (!vulkan_object_shader_create(&context, &context.object_shader)) {
     OERROR("Error loading built-in basic_lighting shader.");
@@ -249,6 +245,9 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 }
 
 void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
+  // destroy shader modules
+  vulkan_object_shader_destroy(&context, &context.object_shader);
+
   vkDeviceWaitIdle(context.device.logical_device);
 
   // Opposite order of creation

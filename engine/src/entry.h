@@ -12,7 +12,6 @@ extern b8 create_game(game *out_game);
  */
 int main(void) {
 
-
   game game_inst;
   if (!create_game(&game_inst)) {
     OFATAL("Could not create game");

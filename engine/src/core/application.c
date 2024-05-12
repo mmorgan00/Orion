@@ -24,14 +24,14 @@ typedef struct application_state {
   linear_allocator systems_allocator;
 
   u64 memory_system_memory_requirement;
-  void* memory_system_state;
+  void *memory_system_state;
 
   u64 logging_system_memory_requirement;
-  void* logging_system_state;
+  void *logging_system_state;
 
 } application_state;
 
-static application_state* app_state;
+static application_state *app_state;
 
 // Event handlers
 b8 application_on_event(u16 code, void *sender, void *listener_inst,
@@ -48,29 +48,36 @@ b8 application_create(game *game_inst) {
     return false;
   }
 
-    game_inst->application_state = oallocate(sizeof(application_state), MEMORY_TAG_APPLICATION);
-    app_state = game_inst->application_state;
-    app_state->game_inst = game_inst;
-    app_state->is_running = false;
-    app_state->is_suspended = false;
+  game_inst->application_state =
+      oallocate(sizeof(application_state), MEMORY_TAG_APPLICATION);
+  app_state = game_inst->application_state;
+  app_state->game_inst = game_inst;
+  app_state->is_running = false;
+  app_state->is_suspended = false;
 
-    u64 systems_allocator_total_size = 64 * 1024 * 1024;  // 64 mb
-    linear_allocator_create(systems_allocator_total_size, 0, &app_state->systems_allocator);
+  u64 systems_allocator_total_size = 64 * 1024 * 1024; // 64 mb
+  linear_allocator_create(systems_allocator_total_size, 0,
+                          &app_state->systems_allocator);
   // Initialize subsystems
 
   // Memory
   initialize_memory(&app_state->memory_system_memory_requirement, 0);
-  app_state->memory_system_state = linear_allocator_allocate(&app_state->systems_allocator, app_state->memory_system_memory_requirement);
-  initialize_memory(&app_state->memory_system_memory_requirement, app_state->memory_system_state);
+  app_state->memory_system_state =
+      linear_allocator_allocate(&app_state->systems_allocator,
+                                app_state->memory_system_memory_requirement);
+  initialize_memory(&app_state->memory_system_memory_requirement,
+                    app_state->memory_system_state);
 
   // Logging
   initialize_logging(&app_state->logging_system_memory_requirement, 0);
-  app_state->logging_system_state = linear_allocator_allocate(&app_state->systems_allocator, app_state->logging_system_memory_requirement);
-    if (!initialize_logging(&app_state->logging_system_memory_requirement, app_state->logging_system_state)) {
-        OERROR("Failed to initialize logging system; shutting down.");
-        return false;
-    }
-
+  app_state->logging_system_state =
+      linear_allocator_allocate(&app_state->systems_allocator,
+                                app_state->logging_system_memory_requirement);
+  if (!initialize_logging(&app_state->logging_system_memory_requirement,
+                          app_state->logging_system_state)) {
+    OERROR("Failed to initialize logging system; shutting down.");
+    return false;
+  }
 
   input_initialize();
   if (!event_initialize()) {
@@ -105,7 +112,7 @@ b8 application_create(game *game_inst) {
   }
 
   app_state->game_inst->on_resize(app_state->game_inst, app_state->width,
-                                 app_state->height);
+                                  app_state->height);
 
   return true;
 }

@@ -23,6 +23,6 @@ typedef struct game {
   void *state;
 
   // Application state
-  void* application_state;
+  void *application_state;
 
 } game;

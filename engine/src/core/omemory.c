@@ -12,32 +12,30 @@ struct memory_stats {
 };
 
 static const char *memory_tag_strings[MEMORY_TAG_MAX_TAGS] = {
-    "UNKNOWN    ", "ARRAY      ", "LINEAR_ALLC", "DARRAY     ", "DICT       ", "RING_QUEUE ",
-    "BST        ", "STRING     ", "APPLICATION", "JOB        ", "TEXTURE    ",
-    "MAT_INST   ", "RENDERER   ", "GAME       ", "TRANSFORM  ", "ENTITY     ",
-    "ENTITY_NODE", "SCENE      "};
+    "UNKNOWN    ", "ARRAY      ", "LINEAR_ALLC", "DARRAY     ", "DICT       ",
+    "RING_QUEUE ", "BST        ", "STRING     ", "APPLICATION", "JOB        ",
+    "TEXTURE    ", "MAT_INST   ", "RENDERER   ", "GAME       ", "TRANSFORM  ",
+    "ENTITY     ", "ENTITY_NODE", "SCENE      "};
 
 typedef struct memory_system_state {
-    struct memory_stats stats;
-    u64 alloc_count;
+  struct memory_stats stats;
+  u64 alloc_count;
 } memory_system_state;
 
-static memory_system_state* state_ptr;
+static memory_system_state *state_ptr;
 
-void initialize_memory(u64* memory_requirement, void* state) {
-    *memory_requirement = sizeof(memory_system_state);
-    if (state == 0) {
-        return;
-    }
+void initialize_memory(u64 *memory_requirement, void *state) {
+  *memory_requirement = sizeof(memory_system_state);
+  if (state == 0) {
+    return;
+  }
 
-    state_ptr = state;
-    state_ptr->alloc_count = 0;
-    platform_zero_memory(&state_ptr->stats, sizeof(state_ptr->stats));
+  state_ptr = state;
+  state_ptr->alloc_count = 0;
+  platform_zero_memory(&state_ptr->stats, sizeof(state_ptr->stats));
 }
 
-void shutdown_memory() {
-  state_ptr = 0;
-}
+void shutdown_memory() { state_ptr = 0; }
 
 void *oallocate(u64 size, memory_tag tag) {
   if (tag == MEMORY_TAG_UNKNOWN) {
@@ -46,10 +44,10 @@ void *oallocate(u64 size, memory_tag tag) {
   }
 
   if (state_ptr) {
-        state_ptr->stats.total_allocated += size;
-        state_ptr->stats.tagged_allocations[tag] += size;
-        state_ptr->alloc_count++;
-    }
+    state_ptr->stats.total_allocated += size;
+    state_ptr->stats.tagged_allocations[tag] += size;
+    state_ptr->alloc_count++;
+  }
 
   // TODO: Memory alignment
   void *block = platform_allocate(size, false);
@@ -119,8 +117,8 @@ char *get_memory_usage_str() {
 }
 
 u64 get_memory_alloc_count() {
-    if (state_ptr) {
-        return state_ptr->alloc_count;
-    }
-    return 0;
+  if (state_ptr) {
+    return state_ptr->alloc_count;
+  }
+  return 0;
 }

@@ -1,5 +1,7 @@
 #include "logger.h"
 #include "asserts.h"
+#include "ostring.h"
+#include "platform/filesystem.h"
 #include "platform/platform.h"
 
 // TODO: temporary
@@ -8,31 +10,49 @@
 #include <string.h>
 
 typedef struct logger_system_state {
-    b8 initialized;
+  file_handle log_file_handle;
 } logger_system_state;
 
-static logger_system_state* state_ptr;
+static logger_system_state *state_ptr;
 
-b8 initialize_logging(u64* memory_requirement, void* state) {
-    *memory_requirement = sizeof(logger_system_state);
-    if (state == 0) {
-        return true;
+void append_to_log_file(const char *message) {
+  if (state_ptr && state_ptr->log_file_handle.is_valid) {
+    u64 length = string_length(message);
+    u64 written = 0;
+    if (!filesystem_write(&state_ptr->log_file_handle, length, message,
+                          &written)) {
+      platform_console_write_error("ERROR writing to console.log.",
+                                   LOG_LEVEL_ERROR);
     }
+  }
+}
 
-    state_ptr = state;
-    state_ptr->initialized = true;
+b8 initialize_logging(u64 *memory_requirement, void *state) {
+  *memory_requirement = sizeof(logger_system_state);
+  if (state == 0) {
+    return true;
+  }
 
-    // TODO: Remove this
-    OFATAL("A test message: %f", 3.14f);
-    OERROR("A test message: %f", 3.14f);
-    OWARN("A test message: %f", 3.14f);
-    OINFO("A test message: %f", 3.14f);
-    ODEBUG("A test message: %f", 3.14f);
-    OTRACE("A test message: %f", 3.14f);
+  state_ptr = state;
+
+  // Create new (wipe if needed) log file, then open it
+  if (!filesystem_open("console.log", FILE_MODE_WRITE, false,
+                       &state_ptr->log_file_handle)) {
+    platform_console_write_error(
+        "ERROR: Unable to open console.log for writing", LOG_LEVEL_ERROR);
+  }
+
+  // TODO: Remove this
+  OFATAL("A test message: %f", 3.14f);
+  OERROR("A test message: %f", 3.14f);
+  OWARN("A test message: %f", 3.14f);
+  OINFO("A test message: %f", 3.14f);
+  ODEBUG("A test message: %f", 3.14f);
+  OTRACE("A test message: %f", 3.14f);
   return true;
 }
 
-void shutdown_logging(void* state) {
+void shutdown_logging(void *state) {
   // TODO: cleanup logging/write queued entries.
   state_ptr = 0;
 }

@@ -49,23 +49,23 @@ void input_update(f64 delta_time) {
 }
 
 void input_process_key(keys key, b8 pressed) {
-      if (key == KEY_LALT) {
-        OINFO("Left alt pressed.");
-    } else if (key == KEY_RALT) {
-        OINFO("Right alt pressed.");
-    }
+  if (key == KEY_LALT) {
+    OINFO("Left alt pressed.");
+  } else if (key == KEY_RALT) {
+    OINFO("Right alt pressed.");
+  }
 
-    if (key == KEY_LCONTROL) {
-        OINFO("Left ctrl pressed.");
-    } else if (key == KEY_RCONTROL) {
-        OINFO("Right ctrl pressed.");
-    }
+  if (key == KEY_LCONTROL) {
+    OINFO("Left ctrl pressed.");
+  } else if (key == KEY_RCONTROL) {
+    OINFO("Right ctrl pressed.");
+  }
 
-    if (key == KEY_LSHIFT) {
-        OINFO("Left shift pressed.");
-    } else if (key == KEY_RSHIFT) {
-        OINFO("Right shift pressed.");
-    }
+  if (key == KEY_LSHIFT) {
+    OINFO("Left shift pressed.");
+  } else if (key == KEY_RSHIFT) {
+    OINFO("Right shift pressed.");
+  }
   // Only handle this if the state actually changed.
   if (state.keyboard_current.keys[key] != pressed) {
     // Update internal state.
@@ -80,7 +80,7 @@ void input_process_key(keys key, b8 pressed) {
 }
 
 void input_process_button(buttons button, b8 pressed) {
-  
+
   // If the state changed, fire an event.
   if (state.mouse_current.buttons[button] != pressed) {
     state.mouse_current.buttons[button] = pressed;
