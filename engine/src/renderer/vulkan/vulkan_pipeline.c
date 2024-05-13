@@ -1,8 +1,8 @@
 #include "vulkan_pipeline.h"
-#include "core/omemory.h"
 #include "core/logger.h"
-#include "vulkan_utils.h"
+#include "core/omemory.h"
 #include "math/math_types.h"
+#include "vulkan_utils.h"
 
 b8 vulkan_graphics_pipeline_create(
     vulkan_context *context, vulkan_renderpass *renderpass, u32 attribute_count,
@@ -13,7 +13,8 @@ b8 vulkan_graphics_pipeline_create(
     VkRect2D scissor, b8 is_wireframe, vulkan_pipeline *out_pipeline) {
 
   // Viewport state
-  VkPipelineViewportStateCreateInfo viewport_state = {VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
+  VkPipelineViewportStateCreateInfo viewport_state = {
+      VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
   viewport_state.viewportCount = 1;
   viewport_state.pViewports = &viewport;
   viewport_state.scissorCount = 1;
@@ -80,9 +81,9 @@ b8 vulkan_graphics_pipeline_create(
 
   // Dynamic state
   const u32 dynamic_state_count = 3;
-  VkDynamicState dynamic_states[dynamic_state_count] = {
-      VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR,
-      VK_DYNAMIC_STATE_LINE_WIDTH};
+  VkDynamicState dynamic_states[3] = {VK_DYNAMIC_STATE_VIEWPORT,
+                                      VK_DYNAMIC_STATE_SCISSOR,
+                                      VK_DYNAMIC_STATE_LINE_WIDTH};
 
   VkPipelineDynamicStateCreateInfo dynamic_state_create_info = {
       VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO};
@@ -107,7 +108,9 @@ b8 vulkan_graphics_pipeline_create(
   // Input assembly
   VkPipelineInputAssemblyStateCreateInfo input_assembly = {
       VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
-  input_assembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; //Revist if we want to not use just triangles (quads mayhaps)
+  input_assembly.topology =
+      VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Revist if we want to not use just
+                                           // triangles (quads mayhaps)
   input_assembly.primitiveRestartEnable = VK_FALSE;
 
   // Pipeline layout
