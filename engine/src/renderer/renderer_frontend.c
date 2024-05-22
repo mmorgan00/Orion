@@ -18,10 +18,10 @@ b8 renderer_initialize(const char *application_name,
 
   if (!backend->initialize(backend, application_name, plat_state)) {
     OFATAL("Renderer backend failed to initialize. Shutting down");
-    return FALSE;
+    return false;
   }
 
-  return TRUE;
+  return true;
 }
 
 void renderer_shutdown() {
@@ -40,11 +40,12 @@ b8 renderer_end_frame(f32 delta_time) {
 }
 
 void renderer_on_resized(u16 width, u16 height) {
-    if (backend) {
-        backend->resized(backend, width, height);
-    } else {
-        OWARN("renderer backend does not exist to accept resize: %i %i", width, height);
-    }
+  if (backend) {
+    backend->resized(backend, width, height);
+  } else {
+    OWARN("renderer backend does not exist to accept resize: %i %i", width,
+          height);
+  }
 }
 
 b8 renderer_draw_frame(render_packet *packet) {
@@ -55,9 +56,9 @@ b8 renderer_draw_frame(render_packet *packet) {
     // If end frame had issue, likely unrecoverable. shutdown
     if (!result) {
       OFATAL("render_end_frame failed. Application shutting down");
-      return FALSE;
+      return false;
     }
   }
 
-  return TRUE;
+  return true;
 }

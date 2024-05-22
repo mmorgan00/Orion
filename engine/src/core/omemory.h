@@ -6,6 +6,7 @@ typedef enum memory_tag {
 
   MEMORY_TAG_UNKNOWN,
   MEMORY_TAG_ARRAY,
+  MEMORY_TAG_LINEAR_ALLOCATOR,
   MEMORY_TAG_DARRAY,
   MEMORY_TAG_DICT,
   MEMORY_TAG_RING_QUEUE,
@@ -39,3 +40,5 @@ OAPI void *ocopy_memory(void *dest, const void *source, u64 size);
 OAPI void *oset_memory(void *dest, i32 value, u64 size);
 
 OAPI char *get_memory_usage_str();
+
+OAPI u64 get_memory_alloc_count();

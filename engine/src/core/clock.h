@@ -7,10 +7,10 @@ typedef struct clock {
 } clock;
 
 // updates the clock. should be called just before checking elapsed
-void clock_update(clock *clock);
+OAPI void clock_update(clock *clock);
 
 // starts the clock. Resets elapsed time.
-void clock_start(clock *clock);
+OAPI void clock_start(clock *clock);
 
 // stops the clock. does not reset elapsed
-void clock_stop(clock *clock);
+OAPI void clock_stop(clock *clock);

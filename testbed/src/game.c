@@ -1,21 +1,32 @@
 #include "game.h"
 
 #include <core/logger.h>
+#include <core/omemory.h>
+
+#include <core/input.h>
 
 
 b8 game_initialize(struct game* game_inst) {
   ODEBUG("game_initialize() called");
-  return TRUE;
+  return true;
 }
 
   // Function pointer to game's update/loop
 b8 game_update(struct game* game_inst, f32 delta_time) {
-  return TRUE;
+      static u64 alloc_count = 0;
+    u64 prev_alloc_count = alloc_count;
+    alloc_count = get_memory_alloc_count();
+    if (input_is_key_up('M') && input_was_key_down('M')) {
+        ODEBUG("Allocations: %llu (%llu this frame)", alloc_count, alloc_count - prev_alloc_count);
+    }
+
+
+  return true;
 }
 
   // Function pointer to game's render pass
 b8 game_render(struct game* game_inst, f32 delta_time) {
-  return TRUE;
+  return true;
 }
 
   // Function pointer to handle resize, if applicable

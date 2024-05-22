@@ -40,16 +40,16 @@ b8 vulkan_swapchain_acquire_next_image_index(
   if (result == VK_ERROR_OUT_OF_DATE_KHR) {
     vulkan_swapchain_recreate(context, context->framebuffer_width,
                               context->framebuffer_height, swapchain);
-    return FALSE;
+    return false;
   }
   // at present time, fatal error
   else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
     OFATAL("Failed to acquire swapchian image");
-    return FALSE;
+    return false;
   }
 
   // image will be put in the out parameter
-  return TRUE;
+  return true;
 }
 
 void vulkan_swapchain_present(vulkan_context *context,
@@ -78,27 +78,28 @@ void vulkan_swapchain_present(vulkan_context *context,
   }
 
   // Increment/loop the index
-  context->current_frame = (context->current_frame + 1) % swapchain->max_frames_in_flight;
+  context->current_frame =
+      (context->current_frame + 1) % swapchain->max_frames_in_flight;
 }
 
 void create(vulkan_context *context, u32 width, u32 height,
             vulkan_swapchain *swapchain) {
   VkExtent2D swapchain_extent = {width, height};
-  swapchain->max_frames_in_flight = 2; // use triple buffering if possible, render to 2 frames while one is
+  swapchain->max_frames_in_flight =
+      2; // use triple buffering if possible, render to 2 frames while one is
          // being drawn
 
-  b8 found = FALSE;
+  b8 found = false;
   for (u32 i = 0; i < context->device.swapchain_support.format_count; i++) {
     VkSurfaceFormatKHR format = context->device.swapchain_support.formats[i];
     // Preferred formats
     if (format.format == VK_FORMAT_B8G8R8A8_UNORM &&
         format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
       swapchain->image_format = format;
-      found = TRUE;
+      found = true;
       break;
     }
   }
-
   if (!found) {
     swapchain->image_format = context->device.swapchain_support.formats[0];
   }
@@ -225,13 +226,14 @@ void create(vulkan_context *context, u32 width, u32 height,
                       swapchain_extent.height, context->device.depth_format,
                       VK_IMAGE_TILING_OPTIMAL,
                       VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-                      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, TRUE,
+                      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, true,
                       VK_IMAGE_ASPECT_DEPTH_BIT, &swapchain->depth_attachment);
 
   OINFO("Swapchain created successfully.");
 }
 
 void destroy(vulkan_context *context, vulkan_swapchain *swapchain) {
+  vkDeviceWaitIdle(context->device.logical_device);
   vulkan_image_destroy(context, &swapchain->depth_attachment);
 
   // Only destroy the views, not the images, since those are owned by the
