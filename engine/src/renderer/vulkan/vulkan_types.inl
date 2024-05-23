@@ -4,7 +4,7 @@
 #include "defines.h"
 
 #include <vulkan/vulkan.h>
-#include "renderer_types.inl"
+#include "renderer/renderer_types.inl"
 
 #define VK_CHECK(expr)                                                         \
   { OASSERT(expr == VK_SUCCESS); }
@@ -137,15 +137,20 @@ typedef struct vulkan_object_shader {
   // vertex, fragment
   vulkan_shader_stage stages[OBJECT_SHADER_STAGE_COUNT];
 
-  vulkan_pipeline pipeline;
   
   VkDescriptorPool global_descriptor_pool;
+  VkDescriptorSetLayout global_descriptor_set_layout;
 
   // One descriptor set per frame, max of 3 since triple buffering
   VkDescriptorSet global_descriptor_sets[3];
 
-  // Global UBO
+  // Global Unimform object
   global_uniform_object global_ubo;
+
+  // Global uniform buffer
+  vulkan_buffer global_uniform_buffer;
+  
+  vulkan_pipeline pipeline;
   
 } vulkan_object_shader;
 

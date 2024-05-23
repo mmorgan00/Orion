@@ -265,17 +265,19 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
     vertex_3d verts[vert_count];
   ozero_memory(verts, sizeof(vertex_3d) * vert_count);
 
-    verts[0].position.x = 0.0;
-    verts[0].position.y = -0.5;
+  const f32 f = 10.0f;
 
-    verts[1].position.x = 0.5;
-    verts[1].position.y = 0.5;
+    verts[0].position.x = -0.5 * f;
+    verts[0].position.y = -0.5 * f;
 
-    verts[2].position.x = 0;
-    verts[2].position.y = 0.5;
+    verts[1].position.x = 0.5 * f;
+    verts[1].position.y = 0.5 * f;
 
-    verts[3].position.x = 0.5;
-    verts[3].position.y = -0.5;
+    verts[2].position.x = -0.5 * f;
+    verts[2].position.y = 0.5 * f;
+
+    verts[3].position.x = 0.5 * f;
+    verts[3].position.y = -0.5 * f;
 
     const u32 index_count = 6;
     u32 indices[index_count] = {0, 1, 2, 0, 3, 1};
@@ -457,7 +459,28 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
   context.main_renderpass.w = context.framebuffer_width;
   context.main_renderpass.h = context.framebuffer_height;
 
-  // Begin renderpass!
+ 
+
+  return true;
+}
+
+/**
+ * @brief Passes a copy of all current global state to update. 
+*/
+void vulkan_renderer_update_global_state(mat4 projection, mat4 view, vec3 view_position, vec4 ambient_color, i32 mode) {
+  vulkan_command_buffer* command_buffer = &context.graphics_command_buffers[context.image_index];
+
+  vulkan_object_shader_use(&context, &context.object_shader);
+
+  context.object_shader.global_ubo.projection = projection;
+  context.object_shader.global_ubo.view = view;
+
+  // TODO: Other properties
+
+  vulkan_object_shader_update_global_state(&context, &context.object_shader);
+
+  // TODO: Temporary as crap code
+ // Begin renderpass!
   vulkan_renderpass_begin(
       command_buffer, &context.main_renderpass,
       context.swapchain.framebuffers[context.image_index].handle);
@@ -475,8 +498,9 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
     // Issue the draw.
     vkCmdDrawIndexed(command_buffer->handle, 6, 1, 0, 0, 0);
 
-  return true;
+// TODO: End temp code
 }
+
 
 b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
                                      f32 delta_time) {
