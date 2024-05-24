@@ -47,7 +47,7 @@ OAPI void report_assertion_failed(const char *expression, const char *message,
 #endif
 
 #else
-#define OASSERT(expr)              // Does nothing at all
+#define OASSERT(expr) // Does nothing at all
 #define OASSERT_MSG(expr, message) // Does nothing at all
-#define OASSERT_DEBUG(expr)        // Does nothing at all
+#define OASSERT_DEBUG(expr) // Does nothing at all
 #endif

@@ -16,7 +16,7 @@ b8 filesystem_exists(const char *path) {
 /**
  */
 b8 filesystem_open(const char *path, file_modes mode, b8 binary,
-                        file_handle *out_handle) {
+                   file_handle *out_handle) {
   out_handle->is_valid = false;
   out_handle->handle = 0;
   const char *mode_str;
@@ -83,7 +83,7 @@ b8 filesystem_write_line(file_handle *handle, const char *text) {
 }
 
 b8 filesystem_read(file_handle *handle, u64 data_size, void *out_data,
-                        u64 *out_bytes_read) {
+                   u64 *out_bytes_read) {
   if (handle->handle && out_data) {
     *out_bytes_read = fread(out_data, 1, data_size, (FILE *)handle->handle);
     if (*out_bytes_read != data_size) {
@@ -95,7 +95,7 @@ b8 filesystem_read(file_handle *handle, u64 data_size, void *out_data,
 }
 
 b8 filesystem_read_all_bytes(file_handle *handle, u8 **out_bytes,
-                                  u64 *out_bytes_read) {
+                             u64 *out_bytes_read) {
   if (handle->handle) {
     // File size
     fseek((FILE *)handle->handle, 0, SEEK_END);
@@ -113,7 +113,7 @@ b8 filesystem_read_all_bytes(file_handle *handle, u8 **out_bytes,
 }
 
 b8 filesystem_write(file_handle *handle, u64 data_size, const void *data,
-                         u64 *out_bytes_written) {
+                    u64 *out_bytes_written) {
   if (handle->handle) {
     *out_bytes_written = fwrite(data, 1, data_size, (FILE *)handle->handle);
     if (*out_bytes_written != data_size) {

@@ -3,21 +3,20 @@
 #include "core/asserts.h"
 #include "defines.h"
 
-#include <vulkan/vulkan.h>
 #include "renderer/renderer_types.inl"
+#include <vulkan/vulkan.h>
 
 #define VK_CHECK(expr)                                                         \
   { OASSERT(expr == VK_SUCCESS); }
 
-
 typedef struct vulkan_buffer {
-    u64 total_size;
-    VkBuffer handle;
-    VkBufferUsageFlagBits usage;
-    b8 is_locked;
-    VkDeviceMemory memory;
-    i32 memory_index;
-    u32 memory_property_flags;
+  u64 total_size;
+  VkBuffer handle;
+  VkBufferUsageFlagBits usage;
+  b8 is_locked;
+  VkDeviceMemory memory;
+  i32 memory_index;
+  u32 memory_property_flags;
 } vulkan_buffer;
 
 typedef struct vulkan_swapchain_support_info {
@@ -78,10 +77,10 @@ typedef struct vulkan_renderpass {
 } vulkan_renderpass;
 
 typedef struct vulkan_framebuffer {
-    VkFramebuffer handle;
-    u32 attachment_count;
-    VkImageView* attachments;
-    vulkan_renderpass* renderpass;
+  VkFramebuffer handle;
+  u32 attachment_count;
+  VkImageView *attachments;
+  vulkan_renderpass *renderpass;
 } vulkan_framebuffer;
 
 typedef struct vulkan_swapchain {
@@ -93,8 +92,8 @@ typedef struct vulkan_swapchain {
   VkImageView *views; // images not accessed directly in Vulkan
 
   // framebuffers used for on-screen rendering
-  vulkan_framebuffer* framebuffers;
-  
+  vulkan_framebuffer *framebuffers;
+
   vulkan_image depth_attachment;
 } vulkan_swapchain;
 
@@ -114,10 +113,9 @@ typedef struct vulkan_command_buffer {
   vulkan_command_buffer_state state;
 } vulkan_command_buffer;
 
-
 typedef struct vulkan_fence {
-    VkFence handle;
-    b8 is_signaled;
+  VkFence handle;
+  b8 is_signaled;
 } vulkan_fence;
 
 typedef struct vulkan_pipeline {
@@ -137,7 +135,6 @@ typedef struct vulkan_object_shader {
   // vertex, fragment
   vulkan_shader_stage stages[OBJECT_SHADER_STAGE_COUNT];
 
-  
   VkDescriptorPool global_descriptor_pool;
   VkDescriptorSetLayout global_descriptor_set_layout;
 
@@ -149,20 +146,19 @@ typedef struct vulkan_object_shader {
 
   // Global uniform buffer
   vulkan_buffer global_uniform_buffer;
-  
-  vulkan_pipeline pipeline;
-  
-} vulkan_object_shader;
 
+  vulkan_pipeline pipeline;
+
+} vulkan_object_shader;
 
 typedef struct vulkan_context {
 
   u32 framebuffer_width;
   u32 framebuffer_height;
 
-u64 framebuffer_size_generation;
+  u64 framebuffer_size_generation;
 
-u64 framebuffer_size_last_generation;
+  u64 framebuffer_size_last_generation;
 
   VkInstance instance;
   VkAllocationCallbacks *allocator;
@@ -178,22 +174,25 @@ u64 framebuffer_size_last_generation;
 
   vulkan_buffer object_vertex_buffer;
   vulkan_buffer object_index_buffer;
+  vulkan_buffer
+      object_texture_buffer; // TODO: This is probably bad to put here, but for
+                             // now we just want to put a texture on screen
 
   // darray
-  vulkan_command_buffer* graphics_command_buffers;
+  vulkan_command_buffer *graphics_command_buffers;
 
   // darray
-  VkSemaphore* image_available_semaphores;
+  VkSemaphore *image_available_semaphores;
 
   //
-  VkSemaphore* queue_complete_semaphores;
+  VkSemaphore *queue_complete_semaphores;
 
   u32 in_flight_fence_count;
-  vulkan_fence* in_flight_fences;
+  vulkan_fence *in_flight_fences;
 
   // Poiters to fences which exist and are owned elsewhere
-  vulkan_fence** images_in_flight;
-  
+  vulkan_fence **images_in_flight;
+
   u32 image_index;
   u32 current_frame;
 
