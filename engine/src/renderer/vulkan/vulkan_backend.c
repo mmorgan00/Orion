@@ -11,7 +11,7 @@
 #include "vulkan_types.inl"
 #include "vulkan_utils.h"
 
-#include "textures/texture.h"
+#include "renderer/textures/texture.h"
 
 #include "core/application.h"
 #include "core/logger.h"
@@ -303,9 +303,9 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   //https://docs.vulkan.org/tutorial/latest/06_Texture_mapping/00_Images.html#_texture_image
   //load_texture("UvPreview.png", ); - pick up here
 
-  upload_data_range(&context, context.device.graphics_command_pool, 0,
-                    context.device.graphics_queue, &context.object_index_buffer,
-                    0, 8 * 1024 * 1024, indices);
+  //  upload_data_range(&context, context.device.graphics_command_pool, 0,
+  //                context.device.graphics_queue, &context.object_index_buffer,
+  //                0, 8 * 1024 * 1024, indices);
 
   OINFO("Vulkan renderer initialized successfully.");
   return true;
@@ -772,17 +772,17 @@ b8 create_buffers(vulkan_context *context) {
   context->geometry_index_offset = 0;
 
   // TODO: Move texture loading to a better spot
-  load_texture("UvPreview.png", 0, 0, 0);
+  //  load_texture("UvPreview.png", 0, 0, 0);
   const u64 texture_buffer_size =
       8 * 1024 * 1024; // 8 bit rgba * a 1024 x 1024 image.
   VkBuffer staging_texture_buffer;
-  if (!vulkan_buffer_create(
+  /**  if (!vulkan_buffer_create(
           context, index_buffer_size,
           VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT |
               VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
           memory_property_flags, true, &context->object_texture_buffer)) {
     OERROR("Error creating texture buffer.");
     return false;
-  }
+    } **/
   return true;
 }

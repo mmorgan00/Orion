@@ -52,7 +52,7 @@ b8 platform_startup(platform_state *plat_state, const char *application_name,
   state->display = XOpenDisplay(NULL);
 
   // Turn off key repeats.
-  XAutoRepeatOff(state->display);
+  //  XAutoRepeatOff(state->display);
 
   // Retrieve the connection from the display.
   state->connection = XGetXCBConnection(state->display);
@@ -483,8 +483,7 @@ keys translate_keycode(u32 x_keycode) {
   case XK_Control_R:
     return KEY_RCONTROL;
   // case XK_Menu: return KEY_LMENU;
-  case XK_Menu:
-    return KEY_RMENU;
+    //  case XK_Menu: return KEY_RMENU;
 
   case XK_semicolon:
     return KEY_SEMICOLON;
