@@ -303,9 +303,11 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   //https://docs.vulkan.org/tutorial/latest/06_Texture_mapping/00_Images.html#_texture_image
   //load_texture("UvPreview.png", ); - pick up here
 
+
   //  upload_data_range(&context, context.device.graphics_command_pool, 0,
   //                context.device.graphics_queue, &context.object_index_buffer,
   //                0, 8 * 1024 * 1024, indices);
+
 
   OINFO("Vulkan renderer initialized successfully.");
   return true;
