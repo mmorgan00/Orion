@@ -1,7 +1,6 @@
 #pragma once
 
 #include "renderer_types.inl"
-#include "resources/resource_types.h"
 
 struct static_mesh_data;
 struct platform_state;

@@ -45,8 +45,8 @@ b8 renderer_end_frame(f32 delta_time) {
 void renderer_on_resized(u16 width, u16 height) {
   if (backend) {
     backend->resized(backend, width, height);
-    backend->create_texture("test", false, 0, 0, 0, 0, 0, 0); // garbage, just want to check wiring
-    backend->destroy_texture(0);
+    // backend->create_texture("test", false, 0, 0, 0, 0, 0, 0); // garbage, just want to check wiring
+    // backend->destroy_texture(0);
   } else {
     OWARN("renderer backend does not exist to accept resize: %i %i", width,
           height);

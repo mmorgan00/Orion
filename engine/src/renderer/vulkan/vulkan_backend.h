@@ -1,7 +1,6 @@
 #pragma once
 
 #include "renderer/renderer_backend.h"
-#include "resources/resource_types.h"
 
 b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
                                       const char *application_name,

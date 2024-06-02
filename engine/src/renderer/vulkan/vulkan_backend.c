@@ -876,6 +876,7 @@ void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width
     }
 
     out_texture->has_transparency = has_transparency;
+    ODEBUG("Finished texture call");
 
 }
 
