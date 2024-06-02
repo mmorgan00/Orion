@@ -33,6 +33,9 @@ typedef struct renderer_backend {
   b8(*begin_frame)(struct renderer_backend* backend, f32 delta_time);
   void (*update_global_state)(mat4 projection, mat4 view, vec3 view_position, vec4 ambient_color, i32 mode);
   b8(*end_frame)(struct renderer_backend* backend, f32 delta_time);
+  
+  void (*create_texture)(const char* name, b8 auto_release, i32 width, i32 height, const u8* pixels, struct texture* out_texture);
+  void (*destroy_texture)(struct texture* texture);
 
 } renderer_backend;
 
