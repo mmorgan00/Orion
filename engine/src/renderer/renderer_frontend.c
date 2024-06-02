@@ -45,7 +45,7 @@ b8 renderer_end_frame(f32 delta_time) {
 void renderer_on_resized(u16 width, u16 height) {
   if (backend) {
     backend->resized(backend, width, height);
-    backend->create_texture("test", false, 0, 0, 0, 0); // garbage, just want to check wiring
+    backend->create_texture("test", false, 0, 0, 0, 0, 0, 0); // garbage, just want to check wiring
     backend->destroy_texture(0);
   } else {
     OWARN("renderer backend does not exist to accept resize: %i %i", width,
@@ -75,8 +75,8 @@ b8 renderer_draw_frame(render_packet *packet) {
 }
 
 
-void renderer_create_texture(const char* name, b8 auto_release, i32 width, i32 height, const u8* pixels, struct texture* out_texture){
-  backend->create_texture(name, auto_release, width, height, pixels, out_texture);
+void renderer_create_texture(const char* name, b8 auto_release, i32 width, i32 height, i32 channel_count, const u8* pixels, b8 has_transparency, struct texture* out_texture){
+  backend->create_texture(name, auto_release, width, height, channel_count, pixels, has_transparency, out_texture);
 }
 
 void destroy_texture(struct texture* texture){
