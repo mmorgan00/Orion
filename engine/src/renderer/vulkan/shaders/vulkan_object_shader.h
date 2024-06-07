@@ -13,4 +13,6 @@ void vulkan_object_shader_use(vulkan_context *context,
                               struct vulkan_object_shader *shader);
 
 void vulkan_object_shader_update_global_state(
-    vulkan_context *context, struct vulkan_object_shader *shader);
+    vulkan_context *context, struct vulkan_object_shader *shader, u32* delta_time);
+
+void vulkan_object_shader_update_object(vulkan_context* context, struct vulkan_object_shader* shader, geometry_render_data render_data);

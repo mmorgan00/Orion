@@ -1,0 +1,19 @@
+\doxysection{vulkan\+\_\+fence.\+h}
+\hypertarget{vulkan__fence_8h_source}{}\label{vulkan__fence_8h_source}\index{engine/src/renderer/vulkan/vulkan\_fence.h@{engine/src/renderer/vulkan/vulkan\_fence.h}}
+\mbox{\hyperlink{vulkan__fence_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vulkan__types_8inl}{vulkan\_types.inl}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__fence_8h_afdf5af68250b20138ac89e34c1d913bd}{vulkan\_fence\_create}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ create\_signaled,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__fence}{vulkan\_fence}}\ *out\_fence);}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__fence_8h_a6761bfc67ef7990942ab60315c2152bc}{vulkan\_fence\_destroy}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,\ \mbox{\hyperlink{structvulkan__fence}{vulkan\_fence}}\ *fence);}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ \mbox{\hyperlink{vulkan__fence_8h_a6b9eca5608aec3856d20de19fa9e3f55}{vulkan\_fence\_wait}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,\ \mbox{\hyperlink{structvulkan__fence}{vulkan\_fence}}\ *fence,}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}\ timeout\_ns);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__fence_8h_a7692eaefbda15ac834201d11d15ad664}{vulkan\_fence\_reset}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,\ \mbox{\hyperlink{structvulkan__fence}{vulkan\_fence}}\ *fence);}
+
+\end{DoxyCode}

@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['a_0',['a',['../index.html#autotoc_md6',1,'&lt;a href=&quot;https://clang.llvm.org/&quot; &gt;clang&lt;/a&gt;'],['../index.html#autotoc_md5',1,'&lt;a href=&quot;https://cmake.org/&quot; &gt;CMAKE&lt;/a&gt;'],['../index.html#autotoc_md7',1,'&lt;a href=&quot;https://www.vulkan.org/&quot; &gt;Vulkan&lt;/a&gt;'],['../unionvec4__u.html#a1cdd7ac041888304efc9c84618594a97',1,'vec4_u::a'],['../structvulkan__renderpass.html#ae54359cb78c523fff829b599c633822e',1,'vulkan_renderpass::a']]],
+  ['a_20href_20https_3a_20clang_20llvm_20org_20clang_20a_1',['&lt;a href=&quot;https://clang.llvm.org/&quot; &gt;clang&lt;/a&gt;',['../index.html#autotoc_md6',1,'']]],
+  ['a_20href_20https_3a_20cmake_20org_20cmake_20a_2',['&lt;a href=&quot;https://cmake.org/&quot; &gt;CMAKE&lt;/a&gt;',['../index.html#autotoc_md5',1,'']]],
+  ['a_20href_20https_3a_20www_20vulkan_20org_20vulkan_20a_3',['&lt;a href=&quot;https://www.vulkan.org/&quot; &gt;Vulkan&lt;/a&gt;',['../index.html#autotoc_md7',1,'']]],
+  ['alloc_5fcount_4',['alloc_count',['../structmemory__system__state.html#abcab7554a6b06b2f7ed8ee758ef417cb',1,'memory_system_state']]],
+  ['allocated_5',['allocated',['../structlinear__allocator.html#abf697b097e6ddf6ee3235dfbb7714986',1,'linear_allocator']]],
+  ['allocator_6',['allocator',['../structvulkan__context.html#a8922bfe5172973875c0420bc010344cc',1,'vulkan_context']]],
+  ['app_5fconfig_7',['app_config',['../structgame.html#a12c0bdd534b736ca685c7ef91b17c80d',1,'game']]],
+  ['append_5fto_5flog_5ffile_8',['append_to_log_file',['../logger_8c.html#ac215142da536869ac02894d0198bb88f',1,'logger.c']]],
+  ['application_2ec_9',['application.c',['../application_8c.html',1,'']]],
+  ['application_2eh_10',['application.h',['../application_8h.html',1,'']]],
+  ['application_5fconfig_11',['application_config',['../structapplication__config.html',1,'application_config'],['../application_8h.html#a0d5601d102f2aa559126417368531828',1,'application_config:&#160;application.h']]],
+  ['application_5fcreate_12',['application_create',['../application_8c.html#af0ccecbeef900f30b0b734eb020574ef',1,'application_create(game *game_inst):&#160;application.c'],['../application_8h.html#acd1b787454314d69223753e9455939f2',1,'application_create(struct game *game_inst):&#160;application.c']]],
+  ['application_5fget_5fframebuffer_5fsize_13',['application_get_framebuffer_size',['../application_8c.html#a8b27580c0175a587af977c52f49cb92f',1,'application_get_framebuffer_size(u32 *width, u32 *height):&#160;application.c'],['../application_8h.html#a975904dac97855a270ca78fa2c508c34',1,'application_get_framebuffer_size(u32 *width, u32 *height):&#160;application.c']]],
+  ['application_5fon_5fevent_14',['application_on_event',['../application_8c.html#a464af30d5e798df5a25d3c211d5c120f',1,'application.c']]],
+  ['application_5fon_5fkey_15',['application_on_key',['../application_8c.html#a193a750e12452924346788eb62a3a327',1,'application.c']]],
+  ['application_5fon_5fresized_16',['application_on_resized',['../application_8c.html#a0aadbf7eebc34521742f68cbcc97e4c6',1,'application.c']]],
+  ['application_5frun_17',['application_run',['../application_8c.html#a08c8575858e12aa5260a1cc0101df8bd',1,'application_run():&#160;application.c'],['../application_8h.html#add96d60b5a1a7ec46982471ddee28d8d',1,'application_run():&#160;application.c']]],
+  ['application_5fstate_18',['application_state',['../structapplication__state.html',1,'application_state'],['../structgame.html#abbde50654ea1c9e81c5eb9611b0dc7ee',1,'game::application_state'],['../application_8c.html#a25603a9a2e5d3bf9c73d2bd2c3428655',1,'application_state:&#160;application.c']]],
+  ['asserts_2eh_19',['asserts.h',['../asserts_8h.html',1,'']]],
+  ['attachment_5fcount_20',['attachment_count',['../structvulkan__framebuffer.html#a7a8ada2cfc9bc93f9207f5a9391cfebe',1,'vulkan_framebuffer']]],
+  ['attachments_21',['attachments',['../structvulkan__framebuffer.html#af70501dfbecf8855bf34c4ab6c91fa3e',1,'vulkan_framebuffer']]]
+];

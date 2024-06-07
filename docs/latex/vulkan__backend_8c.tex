@@ -1,0 +1,285 @@
+\doxysection{engine/src/renderer/vulkan/vulkan\+\_\+backend.c File Reference}
+\hypertarget{vulkan__backend_8c}{}\label{vulkan__backend_8c}\index{engine/src/renderer/vulkan/vulkan\_backend.c@{engine/src/renderer/vulkan/vulkan\_backend.c}}
+
+
+The Vulkan backend implementation.  
+
+
+{\ttfamily \#include "{}vulkan\+\_\+backend.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+buffer.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+command\+\_\+buffer.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+device.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+image.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+fence.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+framebuffer.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+platform.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+renderpass.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+swapchain.\+h"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+types.\+inl"{}}\newline
+{\ttfamily \#include "{}vulkan\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}core/application.\+h"{}}\newline
+{\ttfamily \#include "{}core/logger.\+h"{}}\newline
+{\ttfamily \#include "{}core/omemory.\+h"{}}\newline
+{\ttfamily \#include "{}core/ostring.\+h"{}}\newline
+{\ttfamily \#include "{}containers/darray.\+h"{}}\newline
+{\ttfamily \#include "{}platform/platform.\+h"{}}\newline
+{\ttfamily \#include "{}math/math\+\_\+types.\+h"{}}\newline
+{\ttfamily \#include "{}shaders/vulkan\+\_\+object\+\_\+shader.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+VKAPI\+\_\+\+ATTR Vk\+Bool32 VKAPI\+\_\+\+CALL \mbox{\hyperlink{vulkan__backend_8c_a2ee6f6277021f0999f1be2f92b6bd21d}{vk\+\_\+debug\+\_\+callback}} (Vk\+Debug\+Utils\+Message\+Severity\+Flag\+Bits\+EXT message\+\_\+severity, Vk\+Debug\+Utils\+Message\+Type\+Flags\+EXT message\+\_\+types, const Vk\+Debug\+Utils\+Messenger\+Callback\+Data\+EXT \texorpdfstring{$\ast$}{*}callback\+\_\+data, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Debug call back for vulkan. Uses various log levels to correspond with the vulkan ones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} \mbox{\hyperlink{vulkan__backend_8c_aada43db2d3a25f12c6511695c5d74d0a}{find\+\_\+memory\+\_\+index}} (\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} type\+\_\+filter, \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} property\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Given the certain type and property, finds the associated vulkan memory index for that generalized \textquotesingle{}type\textquotesingle{} e.\+g. An image needs a different type than a buffer, etc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_a6dfa9eb7e2169d6ab9a75cb9eb600e5e}{create\+\_\+command\+\_\+buffers}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend)
+\begin{DoxyCompactList}\small\item\em creates command buffers for each image in the swapchain \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_aeb8e5befb751f7f77dd00d3b2aafb936}{regenerate\+\_\+framebuffers}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend, \mbox{\hyperlink{structvulkan__swapchain}{vulkan\+\_\+swapchain}} \texorpdfstring{$\ast$}{*}swapchain, \mbox{\hyperlink{structvulkan__renderpass}{vulkan\+\_\+renderpass}} \texorpdfstring{$\ast$}{*}renderpass)
+\begin{DoxyCompactList}\small\item\em recreates framebuffers for the number of images needed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__backend_8c_afe660c6d3ba8621d1a7b395500e6fc02}{recreate\+\_\+swapchain}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend)
+\begin{DoxyCompactList}\small\item\em recreates the swapchain This is primarily called on resizing a window, will be helpful to have in general. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__backend_8c_af518f3f8b226671c0e27aec52faec49b}{create\+\_\+buffers}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context)
+\begin{DoxyCompactList}\small\item\em Creates the buffers needed to hold an \textquotesingle{}objects\textquotesingle{} data, currently starting with a vertex buffer and an index buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_ac31532b42a062bc57ebef2f371970719}{upload\+\_\+data\+\_\+range}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, Vk\+Command\+Pool pool, Vk\+Fence fence, Vk\+Queue queue, \mbox{\hyperlink{structvulkan__buffer}{vulkan\+\_\+buffer}} \texorpdfstring{$\ast$}{*}buffer, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} offset, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} size, void \texorpdfstring{$\ast$}{*}data)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__backend_8c_a0b90ec94f78aae6814140d684323d8d2}{vulkan\+\_\+renderer\+\_\+backend\+\_\+initialize}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend, const char \texorpdfstring{$\ast$}{*}application\+\_\+name, struct \mbox{\hyperlink{structplatform__state}{platform\+\_\+state}} \texorpdfstring{$\ast$}{*}plat\+\_\+state)
+\begin{DoxyCompactList}\small\item\em sets up the vulkan renderer with all of the items needed. TODO\+: At the end presently, the vertex and index buffers are created. This is temporary, and just to illustrate {\itshape something} for now until a proper object loading system is in place \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_aaf5c03bd71d214149e0e3e97b0d0fbca}{vulkan\+\_\+renderer\+\_\+backend\+\_\+shutdown}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend)
+\begin{DoxyCompactList}\small\item\em After waiting for the device to be idle, cleans up the resources in the reverse order they were created. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_a8eae56297e3b34f9dd52a04c24fd9730}{vulkan\+\_\+renderer\+\_\+backend\+\_\+on\+\_\+resized}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend, \mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}} width, \mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}} height)
+\begin{DoxyCompactList}\small\item\em On resize, swapchain will get recreated as a side effect. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__backend_8c_af88b430f0e8f76ff7224c6d65ff7ce14}{vulkan\+\_\+renderer\+\_\+backend\+\_\+begin\+\_\+frame}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} delta\+\_\+time)
+\begin{DoxyCompactList}\small\item\em prepares to render a frame. Checks appropriate synchronization objects, then obtains the appropriate resources to store in the context \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_a1f7c40f560fdefbde8436b00bcf5931f}{vulkan\+\_\+renderer\+\_\+update\+\_\+global\+\_\+state}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} projection, \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} view, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} view\+\_\+position, \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} ambient\+\_\+color, \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} mode)
+\begin{DoxyCompactList}\small\item\em Passes a copy of all current global state to update. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__backend_8c_aa4147f264f03182a1ae88ce189d6810d}{vulkan\+\_\+renderer\+\_\+backend\+\_\+end\+\_\+frame}} (\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}backend, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} delta\+\_\+time)
+\begin{DoxyCompactList}\small\item\em ends a frame properly by ending the rednerpass, ending the commandbuffer, then properly handlign the synchronization objects Lastly, serves the image that was created in the frame \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_a924e2aebef6ceec261a9a7c9b13c334c}{vulkan\+\_\+renderer\+\_\+create\+\_\+texture}} (const char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} auto\+\_\+release, \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} width, \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} height, \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} channel\+\_\+count, const \mbox{\hyperlink{defines_8h_aed742c436da53c1080638ce6ef7d13de}{u8}} \texorpdfstring{$\ast$}{*}pixels, \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} has\+\_\+transparency, struct \mbox{\hyperlink{structtexture}{texture}} \texorpdfstring{$\ast$}{*}out\+\_\+texture)
+\begin{DoxyCompactList}\small\item\em Creates a texture in conformity with the vulkan spec for textures. Does nothing {\itshape with} the texture, is soley responsible for creating the texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_adff90b1866df7cb6b720e123a89ab277}{vulkan\+\_\+renderer\+\_\+destroy\+\_\+texture}} (struct \mbox{\hyperlink{structtexture}{texture}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structtexture}{texture}})
+\begin{DoxyCompactList}\small\item\em Destroys the resources used fo textures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vulkan__backend_8c_a51eb4614f4be3591ce48b0f08d255703}{vulkan\+\_\+renderer\+\_\+update\+\_\+object}} (\mbox{\hyperlink{structgeometry__render__data}{geometry\+\_\+render\+\_\+data}} render\+\_\+data)
+\begin{DoxyCompactList}\small\item\em This function draws the object for the most part, and abstracts the various update calls within it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Vulkan backend implementation. 
+
+This calls a combination of wrapper functions and direct Vulkan calls, depending on what is needed. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{vulkan__backend_8c_af518f3f8b226671c0e27aec52faec49b}\index{vulkan\_backend.c@{vulkan\_backend.c}!create\_buffers@{create\_buffers}}
+\index{create\_buffers@{create\_buffers}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{create\_buffers()}{create\_buffers()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_af518f3f8b226671c0e27aec52faec49b} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} create\+\_\+buffers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Creates the buffers needed to hold an \textquotesingle{}objects\textquotesingle{} data, currently starting with a vertex buffer and an index buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em -\/} & renderer context with handles to vulkan api pieces needed to create buffers \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vulkan__backend_8c_a6dfa9eb7e2169d6ab9a75cb9eb600e5e}\index{vulkan\_backend.c@{vulkan\_backend.c}!create\_command\_buffers@{create\_command\_buffers}}
+\index{create\_command\_buffers@{create\_command\_buffers}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{create\_command\_buffers()}{create\_command\_buffers()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a6dfa9eb7e2169d6ab9a75cb9eb600e5e} 
+void create\+\_\+command\+\_\+buffers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{}\end{DoxyParamCaption})}
+
+
+
+creates command buffers for each image in the swapchain 
+
+\Hypertarget{vulkan__backend_8c_aada43db2d3a25f12c6511695c5d74d0a}\index{vulkan\_backend.c@{vulkan\_backend.c}!find\_memory\_index@{find\_memory\_index}}
+\index{find\_memory\_index@{find\_memory\_index}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{find\_memory\_index()}{find\_memory\_index()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_aada43db2d3a25f12c6511695c5d74d0a} 
+\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} find\+\_\+memory\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}}]{type\+\_\+filter}{, }\item[{\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}}]{property\+\_\+flags}{}\end{DoxyParamCaption})}
+
+
+
+Given the certain type and property, finds the associated vulkan memory index for that generalized \textquotesingle{}type\textquotesingle{} e.\+g. An image needs a different type than a buffer, etc. 
+
+\Hypertarget{vulkan__backend_8c_afe660c6d3ba8621d1a7b395500e6fc02}\index{vulkan\_backend.c@{vulkan\_backend.c}!recreate\_swapchain@{recreate\_swapchain}}
+\index{recreate\_swapchain@{recreate\_swapchain}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{recreate\_swapchain()}{recreate\_swapchain()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_afe660c6d3ba8621d1a7b395500e6fc02} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} recreate\+\_\+swapchain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{}\end{DoxyParamCaption})}
+
+
+
+recreates the swapchain This is primarily called on resizing a window, will be helpful to have in general. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em -\/} & renderer backend with context needed for when command buffers are created \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vulkan__backend_8c_aeb8e5befb751f7f77dd00d3b2aafb936}\index{vulkan\_backend.c@{vulkan\_backend.c}!regenerate\_framebuffers@{regenerate\_framebuffers}}
+\index{regenerate\_framebuffers@{regenerate\_framebuffers}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{regenerate\_framebuffers()}{regenerate\_framebuffers()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_aeb8e5befb751f7f77dd00d3b2aafb936} 
+void regenerate\+\_\+framebuffers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{, }\item[{\mbox{\hyperlink{structvulkan__swapchain}{vulkan\+\_\+swapchain}} \texorpdfstring{$\ast$}{*}}]{swapchain}{, }\item[{\mbox{\hyperlink{structvulkan__renderpass}{vulkan\+\_\+renderpass}} \texorpdfstring{$\ast$}{*}}]{renderpass}{}\end{DoxyParamCaption})}
+
+
+
+recreates framebuffers for the number of images needed 
+
+\Hypertarget{vulkan__backend_8c_ac31532b42a062bc57ebef2f371970719}\index{vulkan\_backend.c@{vulkan\_backend.c}!upload\_data\_range@{upload\_data\_range}}
+\index{upload\_data\_range@{upload\_data\_range}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{upload\_data\_range()}{upload\_data\_range()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_ac31532b42a062bc57ebef2f371970719} 
+void upload\+\_\+data\+\_\+range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{Vk\+Command\+Pool}]{pool}{, }\item[{Vk\+Fence}]{fence}{, }\item[{Vk\+Queue}]{queue}{, }\item[{\mbox{\hyperlink{structvulkan__buffer}{vulkan\+\_\+buffer}} \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}}]{offset}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}}]{size}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{vulkan__backend_8c_a2ee6f6277021f0999f1be2f92b6bd21d}\index{vulkan\_backend.c@{vulkan\_backend.c}!vk\_debug\_callback@{vk\_debug\_callback}}
+\index{vk\_debug\_callback@{vk\_debug\_callback}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vk\_debug\_callback()}{vk\_debug\_callback()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a2ee6f6277021f0999f1be2f92b6bd21d} 
+VKAPI\+\_\+\+ATTR Vk\+Bool32 VKAPI\+\_\+\+CALL vk\+\_\+debug\+\_\+callback (\begin{DoxyParamCaption}\item[{Vk\+Debug\+Utils\+Message\+Severity\+Flag\+Bits\+EXT}]{message\+\_\+severity}{, }\item[{Vk\+Debug\+Utils\+Message\+Type\+Flags\+EXT}]{message\+\_\+types}{, }\item[{const Vk\+Debug\+Utils\+Messenger\+Callback\+Data\+EXT \texorpdfstring{$\ast$}{*}}]{callback\+\_\+data}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Debug call back for vulkan. Uses various log levels to correspond with the vulkan ones. 
+
+\Hypertarget{vulkan__backend_8c_af88b430f0e8f76ff7224c6d65ff7ce14}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_backend\_begin\_frame@{vulkan\_renderer\_backend\_begin\_frame}}
+\index{vulkan\_renderer\_backend\_begin\_frame@{vulkan\_renderer\_backend\_begin\_frame}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_backend\_begin\_frame()}{vulkan\_renderer\_backend\_begin\_frame()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_af88b430f0e8f76ff7224c6d65ff7ce14} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vulkan\+\_\+renderer\+\_\+backend\+\_\+begin\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{delta\+\_\+time}{}\end{DoxyParamCaption})}
+
+
+
+prepares to render a frame. Checks appropriate synchronization objects, then obtains the appropriate resources to store in the context 
+
+\Hypertarget{vulkan__backend_8c_aa4147f264f03182a1ae88ce189d6810d}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_backend\_end\_frame@{vulkan\_renderer\_backend\_end\_frame}}
+\index{vulkan\_renderer\_backend\_end\_frame@{vulkan\_renderer\_backend\_end\_frame}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_backend\_end\_frame()}{vulkan\_renderer\_backend\_end\_frame()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_aa4147f264f03182a1ae88ce189d6810d} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vulkan\+\_\+renderer\+\_\+backend\+\_\+end\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{delta\+\_\+time}{}\end{DoxyParamCaption})}
+
+
+
+ends a frame properly by ending the rednerpass, ending the commandbuffer, then properly handlign the synchronization objects Lastly, serves the image that was created in the frame 
+
+\Hypertarget{vulkan__backend_8c_a0b90ec94f78aae6814140d684323d8d2}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_backend\_initialize@{vulkan\_renderer\_backend\_initialize}}
+\index{vulkan\_renderer\_backend\_initialize@{vulkan\_renderer\_backend\_initialize}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_backend\_initialize()}{vulkan\_renderer\_backend\_initialize()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a0b90ec94f78aae6814140d684323d8d2} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vulkan\+\_\+renderer\+\_\+backend\+\_\+initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{application\+\_\+name}{, }\item[{struct \mbox{\hyperlink{structplatform__state}{platform\+\_\+state}} \texorpdfstring{$\ast$}{*}}]{plat\+\_\+state}{}\end{DoxyParamCaption})}
+
+
+
+sets up the vulkan renderer with all of the items needed. TODO\+: At the end presently, the vertex and index buffers are created. This is temporary, and just to illustrate {\itshape something} for now until a proper object loading system is in place 
+
+\Hypertarget{vulkan__backend_8c_a8eae56297e3b34f9dd52a04c24fd9730}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_backend\_on\_resized@{vulkan\_renderer\_backend\_on\_resized}}
+\index{vulkan\_renderer\_backend\_on\_resized@{vulkan\_renderer\_backend\_on\_resized}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_backend\_on\_resized()}{vulkan\_renderer\_backend\_on\_resized()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a8eae56297e3b34f9dd52a04c24fd9730} 
+void vulkan\+\_\+renderer\+\_\+backend\+\_\+on\+\_\+resized (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{, }\item[{\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}}]{width}{, }\item[{\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}}]{height}{}\end{DoxyParamCaption})}
+
+
+
+On resize, swapchain will get recreated as a side effect. 
+
+\Hypertarget{vulkan__backend_8c_aaf5c03bd71d214149e0e3e97b0d0fbca}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_backend\_shutdown@{vulkan\_renderer\_backend\_shutdown}}
+\index{vulkan\_renderer\_backend\_shutdown@{vulkan\_renderer\_backend\_shutdown}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_backend\_shutdown()}{vulkan\_renderer\_backend\_shutdown()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_aaf5c03bd71d214149e0e3e97b0d0fbca} 
+void vulkan\+\_\+renderer\+\_\+backend\+\_\+shutdown (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrenderer__backend}{renderer\+\_\+backend}} \texorpdfstring{$\ast$}{*}}]{backend}{}\end{DoxyParamCaption})}
+
+
+
+After waiting for the device to be idle, cleans up the resources in the reverse order they were created. 
+
+\Hypertarget{vulkan__backend_8c_a924e2aebef6ceec261a9a7c9b13c334c}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_create\_texture@{vulkan\_renderer\_create\_texture}}
+\index{vulkan\_renderer\_create\_texture@{vulkan\_renderer\_create\_texture}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_create\_texture()}{vulkan\_renderer\_create\_texture()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a924e2aebef6ceec261a9a7c9b13c334c} 
+void vulkan\+\_\+renderer\+\_\+create\+\_\+texture (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}}]{auto\+\_\+release}{, }\item[{\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}}]{width}{, }\item[{\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}}]{height}{, }\item[{\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}}]{channel\+\_\+count}{, }\item[{const \mbox{\hyperlink{defines_8h_aed742c436da53c1080638ce6ef7d13de}{u8}} \texorpdfstring{$\ast$}{*}}]{pixels}{, }\item[{\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}}]{has\+\_\+transparency}{, }\item[{struct \mbox{\hyperlink{structtexture}{texture}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+texture}{}\end{DoxyParamCaption})}
+
+
+
+Creates a texture in conformity with the vulkan spec for textures. Does nothing {\itshape with} the texture, is soley responsible for creating the texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ a name for the texture \\
+\hline
+{\em auto\+\_\+release} & -\/ should the texture be automatically released/cleaned up -\/ TBD functionality \\
+\hline
+{\em width} & -\/ width of texture in pixels \\
+\hline
+{\em height} & -\/ height of texture in pixels \\
+\hline
+{\em channel\+\_\+count} & -\/ number of channels, IE RGBA is 4 channels. Might as well enable flexibility here \\
+\hline
+{\em pixels} & -\/ buffer containing pixel data \\
+\hline
+{\em out\+\_\+texture} & -\/ new texture will be created and stored in this to be returned to the caller \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vulkan__backend_8c_adff90b1866df7cb6b720e123a89ab277}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_destroy\_texture@{vulkan\_renderer\_destroy\_texture}}
+\index{vulkan\_renderer\_destroy\_texture@{vulkan\_renderer\_destroy\_texture}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_destroy\_texture()}{vulkan\_renderer\_destroy\_texture()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_adff90b1866df7cb6b720e123a89ab277} 
+void vulkan\+\_\+renderer\+\_\+destroy\+\_\+texture (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtexture}{texture}} \texorpdfstring{$\ast$}{*}}]{texture}{}\end{DoxyParamCaption})}
+
+
+
+Destroys the resources used fo textures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & -\/ the texture struct needing to be destroyed \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vulkan__backend_8c_a1f7c40f560fdefbde8436b00bcf5931f}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_update\_global\_state@{vulkan\_renderer\_update\_global\_state}}
+\index{vulkan\_renderer\_update\_global\_state@{vulkan\_renderer\_update\_global\_state}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_update\_global\_state()}{vulkan\_renderer\_update\_global\_state()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a1f7c40f560fdefbde8436b00bcf5931f} 
+void vulkan\+\_\+renderer\+\_\+update\+\_\+global\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{projection}{, }\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{view}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{view\+\_\+position}{, }\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{ambient\+\_\+color}{, }\item[{\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}}]{mode}{}\end{DoxyParamCaption})}
+
+
+
+Passes a copy of all current global state to update. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em projection} & The projection matrix. \\
+\hline
+{\em view} & The view matrix. \\
+\hline
+{\em view\+\_\+position} & The position of the view. \\
+\hline
+{\em ambient\+\_\+color} & The ambient color. \\
+\hline
+{\em mode} & Planning to use this to toggle various modes. Placeholder for now \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vulkan__backend_8c_a51eb4614f4be3591ce48b0f08d255703}\index{vulkan\_backend.c@{vulkan\_backend.c}!vulkan\_renderer\_update\_object@{vulkan\_renderer\_update\_object}}
+\index{vulkan\_renderer\_update\_object@{vulkan\_renderer\_update\_object}!vulkan\_backend.c@{vulkan\_backend.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_renderer\_update\_object()}{vulkan\_renderer\_update\_object()}}
+{\footnotesize\ttfamily \label{vulkan__backend_8c_a51eb4614f4be3591ce48b0f08d255703} 
+void vulkan\+\_\+renderer\+\_\+update\+\_\+object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgeometry__render__data}{geometry\+\_\+render\+\_\+data}}}]{render\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+This function draws the object for the most part, and abstracts the various update calls within it. 
+
+
+\begin{DoxyEnumerate}
+\item Obtains a command buffer per vulkan pattern and begins a renderpass TODO\+: The next steps are hardcoded to our single object for now. This needs to be adapted better for multiple objects/shaders/buffers This will likely go into the \doxylink{structgeometry__render__data}{geometry\+\_\+render\+\_\+data} struct but TBD
+\item Binds the appropriate shader set
+\item Binds the appropriate buffers (vertex data and index data) \texorpdfstring{$^\wedge$}{\string^} These are currently hard coded into the context, it probably should be handled differently? but it works for now while getting thigs stood up
+\item Issues the actual draw call
+\item End renderpass is called elsewhere (renderer\+\_\+frontend draw\+\_\+frame). Might be better suited here? Since we start renderpass here?
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em render\+\_\+data} & The data required to render the object presently will contain a model transformation and a texture, but those are not yet fully connected. \\
+\hline
+\end{DoxyParams}

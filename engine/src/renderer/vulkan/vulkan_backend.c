@@ -1,7 +1,17 @@
+/**
+ * @file vulkan_backend.c
+ * @brief The Vulkan backend implementation.
+ * 
+ * This calls a combination of wrapper functions and direct Vulkan calls, 
+ * depending on what is needed.
+ * 
+ */
+
 #include "vulkan_backend.h"
 #include "vulkan_buffer.h"
 #include "vulkan_command_buffer.h"
 #include "vulkan_device.h"
+#include "vulkan_image.h"
 #include "vulkan_fence.h"
 #include "vulkan_framebuffer.h"
 #include "vulkan_platform.h"
@@ -29,6 +39,8 @@
 static vulkan_context context;
 static u32 cached_framebuffer_width = 0;
 static u32 cached_framebuffer_height = 0;
+
+
 
 VKAPI_ATTR VkBool32 VKAPI_CALL vk_debug_callback(
     VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
@@ -67,6 +79,11 @@ void upload_data_range(vulkan_context *context, VkCommandPool pool,
   vulkan_buffer_destroy(context, &staging);
 }
 
+/**
+ * @brief sets up the vulkan renderer with all of the items needed. 
+ * TODO: At the end presently, the vertex and index buffers are created. This is temporary, and just to illustrate *something* for now until a
+ * proper object loading system is in place
+*/
 b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
                                       const char *application_name,
                                       struct platform_state *plat_state) {
@@ -298,21 +315,13 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
                     context.device.graphics_queue, &context.object_index_buffer,
                     0, sizeof(u32) * index_count, indices);
 
-  u32 width;
-  u32 height;
-  //https://docs.vulkan.org/tutorial/latest/06_Texture_mapping/00_Images.html#_texture_image
-  //load_texture("UvPreview.png", ); - pick up here
-
-
-  //  upload_data_range(&context, context.device.graphics_command_pool, 0,
-  //                context.device.graphics_queue, &context.object_index_buffer,
-  //                0, 8 * 1024 * 1024, indices);
-
-
   OINFO("Vulkan renderer initialized successfully.");
   return true;
 }
 
+/**
+ * @brief After waiting for the device to be idle, cleans up the resources in the reverse order they were created
+*/
 void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
 
   vkDeviceWaitIdle(context.device.logical_device);
@@ -393,19 +402,26 @@ void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
   vkDestroyInstance(context.instance, context.allocator);
 }
 
+/**
+ * @brief On resize, swapchain will get recreated as a side effect.
+*/
 void vulkan_renderer_backend_on_resized(renderer_backend *backend, u16 width,
                                         u16 height) {
   cached_framebuffer_width = width;
   cached_framebuffer_height = height;
   context.framebuffer_size_generation++;
 
-  OINFO("VUlkan renderer backend->resized: w/h/gen: %i/%i/%llu", width, height,
+  OINFO("Vulkan renderer backend->resized: w/h/gen: %i/%i/%llu", width, height,
         context.framebuffer_size_generation);
 }
 
+/**
+ * @brief prepares to render a frame. Checks appropriate synchronization objects, then obtains the appropriate resources to store in the context
+*/
 b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
                                        f32 delta_time) {
 
+                                        context.frame_delta_time = delta_time; // save this for usage elsewhere
   vulkan_device *device = &context.device;
 
   // check if we are recreating swapchain
@@ -417,7 +433,7 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
              vulkan_result_string(result, true));
       return false;
     }
-    OINFO("Recreatint swapchain, booting.");
+    OINFO("Recreating swapchain, booting.");
     return false;
   }
 
@@ -489,6 +505,13 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
 
 /**
  * @brief Passes a copy of all current global state to update.
+ * 
+ * 
+ * @param projection The projection matrix.
+ * @param view The view matrix.
+ * @param view_position The position of the view.
+ * @param ambient_color The ambient color.
+ * @param mode Planning to use this to toggle various modes. Placeholder for now
  */
 void vulkan_renderer_update_global_state(mat4 projection, mat4 view,
                                          vec3 view_position, vec4 ambient_color,
@@ -501,36 +524,17 @@ void vulkan_renderer_update_global_state(mat4 projection, mat4 view,
   context.object_shader.global_ubo.projection = projection;
   context.object_shader.global_ubo.view = view;
 
-  // TODO: Other properties
+  // TODO: Other properties - will grow as we add more global state items to the renderer
 
-  vulkan_object_shader_update_global_state(&context, &context.object_shader);
+  vulkan_object_shader_update_global_state(&context, &context.object_shader, &context.frame_delta_time);
 
-  // TODO: Temporary as crap code
-  // Begin renderpass!
-  vulkan_renderpass_begin(
-      command_buffer, &context.main_renderpass,
-      context.swapchain.framebuffers[context.image_index].handle);
-
-  // TODO: temporary test code
-  vulkan_object_shader_use(&context, &context.object_shader);
-
-  // Bind vertex buffer at offset.
-  VkDeviceSize offsets[1] = {0};
-  vkCmdBindVertexBuffers(command_buffer->handle, 0, 1,
-                         &context.object_vertex_buffer.handle,
-                         (VkDeviceSize *)offsets);
-
-  // Bind index buffer at offset.
-  vkCmdBindIndexBuffer(command_buffer->handle,
-                       context.object_index_buffer.handle, 0,
-                       VK_INDEX_TYPE_UINT32);
-
-  // Issue the draw.
-  vkCmdDrawIndexed(command_buffer->handle, 6, 1, 0, 0, 0);
-
-  // TODO: End temp code
+ 
 }
 
+/**
+ * @brief ends a frame properly by ending the rednerpass, ending the commandbuffer, then properly handlign the synchronization objects
+ * Lastly, serves the image that was created in the frame
+*/
 b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
                                      f32 delta_time) {
   vulkan_command_buffer *command_buffer =
@@ -595,6 +599,9 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
   return true;
 }
 
+/**
+ * @brief Debug call back for vulkan. Uses various log levels to correspond with the vulkan ones
+*/
 VKAPI_ATTR VkBool32 VKAPI_CALL
 vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
                   VkDebugUtilsMessageTypeFlagsEXT message_types,
@@ -618,6 +625,11 @@ vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
   return VK_FALSE;
 }
 
+
+/**
+ * @brief Given the certain type and property, finds the associated vulkan memory index for that generalized 'type'
+ * e.g. An image needs a different type than a buffer, etc
+*/
 i32 find_memory_index(u32 type_filter, u32 property_flags) {
   VkPhysicalDeviceMemoryProperties memory_properties;
   vkGetPhysicalDeviceMemoryProperties(context.device.physical_device,
@@ -636,6 +648,9 @@ i32 find_memory_index(u32 type_filter, u32 property_flags) {
   return -1;
 }
 
+/**
+ * @brief creates command buffers for each image in the swapchain
+*/
 void create_command_buffers(renderer_backend *backend) {
   if (!context.graphics_command_buffers) {
     context.graphics_command_buffers =
@@ -660,6 +675,9 @@ void create_command_buffers(renderer_backend *backend) {
   ODEBUG("Vulkan command buffers created.");
 }
 
+/**
+ * @brief recreates framebuffers for the number of images needed
+*/
 void regenerate_framebuffers(renderer_backend *backend,
                              vulkan_swapchain *swapchain,
                              vulkan_renderpass *renderpass) {
@@ -675,6 +693,12 @@ void regenerate_framebuffers(renderer_backend *backend,
   }
 }
 
+/**
+ * @brief recreates the swapchain
+ * This is primarily called on resizing a window, will be helpful to have in general.
+ * 
+ * @param - renderer backend with context needed for when command buffers are created
+*/
 b8 recreate_swapchain(renderer_backend *backend) {
   // If already being recreated, do not try again.
   if (context.recreating_swapchain) {
@@ -748,6 +772,11 @@ b8 recreate_swapchain(renderer_backend *backend) {
   return true;
 }
 
+/**
+ * @brief Creates the buffers needed to hold an 'objects' data, currently starting with a vertex buffer and an index buffer
+ * 
+ * @param - renderer context with handles to vulkan api pieces needed to create buffers
+*/
 b8 create_buffers(vulkan_context *context) {
   VkMemoryPropertyFlagBits memory_property_flags =
       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
@@ -880,8 +909,12 @@ void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width
 
 }
 
+/**
+ * @brief Destroys the resources used fo textures
+ * 
+ * @param texture - the texture struct needing to be destroyed
+*/
 void vulkan_renderer_destroy_texture(struct texture* texture){
-   OTRACE("vulkan_renderer_destroy_texture called");
 
    vulkan_texture_data* data = (vulkan_texture_data*)texture->internal_data;
    vulkan_image_destroy(&context, &data->image);
@@ -892,4 +925,50 @@ void vulkan_renderer_destroy_texture(struct texture* texture){
   ofree(texture->internal_data, sizeof(vulkan_texture_data), MEMORY_TAG_TEXTURE);
   ozero_memory(texture, sizeof(struct texture));
 
+}
+
+
+/**
+ * @brief  This function draws the object for the most part, and abstracts the various update calls within it
+ * 1. Obtains a command buffer per vulkan pattern and begins a renderpass
+ *  TODO: The next steps are hardcoded to our single object for now. This needs to be adapted better for multiple objects/shaders/buffers
+ *  This will likely go into the geometry_render_data struct but TBD
+ * 2. Binds the appropriate shader set
+ * 3. Binds the appropriate buffers (vertex data and index data) 
+ * ^ These are currently hard coded into the context, it probably should be handled differently? but it works for now while getting thigs stood up
+ * 4. Issues the actual draw call
+ * 5. End renderpass is called elsewhere (renderer_frontend draw_frame). Might be better suited here? Since we start renderpass here?
+ *
+ * @param render_data The data required to render the object presently will contain a model transformation and a texture, but those are not yet fully connected.
+ */
+void vulkan_renderer_update_object(geometry_render_data render_data){
+  // We'll be needing one of these
+  vulkan_command_buffer* command_buffer = &context.graphics_command_buffers[context.image_index];
+
+  // // Update anything on the object before we issue render calls
+  // vulkan_object_shader_update_object(&context, &context.object_shader, render_data);
+
+  //  // Begin renderpass!
+  vulkan_renderpass_begin(
+      command_buffer, &context.main_renderpass,
+      context.swapchain.framebuffers[context.image_index].handle);
+
+  // TODO: temporary test code
+  vulkan_object_shader_use(&context, &context.object_shader);
+
+  // Bind vertex buffer at offset.
+  VkDeviceSize offsets[1] = {0};
+  vkCmdBindVertexBuffers(command_buffer->handle, 0, 1,
+                         &context.object_vertex_buffer.handle,
+                         (VkDeviceSize *)offsets);
+
+  // Bind index buffer at offset.
+  vkCmdBindIndexBuffer(command_buffer->handle,
+                       context.object_index_buffer.handle, 0,
+                       VK_INDEX_TYPE_UINT32);
+
+  // Issue the draw.
+  vkCmdDrawIndexed(command_buffer->handle, 6, 1, 0, 0, 0);
+
+  // TODO: End temp code
 }

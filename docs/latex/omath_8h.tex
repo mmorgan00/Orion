@@ -1,0 +1,1692 @@
+\doxysection{engine/src/math/omath.h File Reference}
+\hypertarget{omath_8h}{}\label{omath_8h}\index{engine/src/math/omath.h@{engine/src/math/omath.h}}
+{\ttfamily \#include "{}core/omemory.\+h"{}}\newline
+{\ttfamily \#include "{}defines.\+h"{}}\newline
+{\ttfamily \#include "{}math\+\_\+types.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}~3.\+14159265358979323846f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a4493643673773e6573cb8615604948ef}{O\+\_\+\+PI\+\_\+2}}~2.\+0ff \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}
+\item 
+\#define \mbox{\hyperlink{omath_8h_acaa676479a80cda3605c40ec61455b93}{O\+\_\+\+HALF\+\_\+\+PI}}~0.\+5f \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}
+\item 
+\#define \mbox{\hyperlink{omath_8h_ae94348058fa715c3d3e2ac1ac81fe806}{O\+\_\+\+QUARTER\+\_\+\+PI}}~0.\+25f \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}
+\item 
+\#define \mbox{\hyperlink{omath_8h_ac044bad40a94f0b7e36cee691f60d6f2}{O\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+PI}}~1.\+0f / \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}
+\item 
+\#define \mbox{\hyperlink{omath_8h_adde4040839050162a16e14c4b4ed0edc}{O\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+TWO\+\_\+\+PI}}~1.\+0f / \mbox{\hyperlink{omath_8h_a4493643673773e6573cb8615604948ef}{O\+\_\+\+PI\+\_\+2}}
+\item 
+\#define \mbox{\hyperlink{omath_8h_aa300365bb5b132ece57e2bde807497db}{O\+\_\+\+SQRT\+\_\+\+TWO}}~1.\+41421356237309504880f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a5acc411d6744a0deb5c59ac9760ef521}{O\+\_\+\+SQRT\+\_\+\+THREE}}~1.\+73205080756887729352f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a6825232f82dbb0e2d7e0674bb6d4e394}{O\+\_\+\+SQRT\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+TWO}}~0.\+70710678118654752440f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a27577e51447b9b70b573a1d9e8f3288f}{O\+\_\+\+SQRT\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+THREE}}~0.\+57735026918962576450f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a13c297203de1ea9240aca95bbd558783}{O\+\_\+\+DEG2\+RAD\+\_\+\+MULTIPLIER}}~\mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}} / 180.\+0f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a84a0271092ebd716e68b02f30b7f27e2}{O\+\_\+\+RAD2\+DEG\+\_\+\+MULTIPLIER}}~180.f / \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}
+\item 
+\#define \mbox{\hyperlink{omath_8h_a2bf760f6dc48f44a670c534082365d35}{O\+\_\+\+SEC\+\_\+\+TO\+\_\+\+MS\+\_\+\+MULTI}}~1000.\+0f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a7dc3436a21a4e30d3ec51fe36015daee}{O\+\_\+\+MS\+\_\+\+TO\+\_\+\+SEC\+\_\+\+MULTI}}~0.\+001f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a4ab301c8f97d42d9dba9f99177279b67}{O\+\_\+\+INFINITY}}~1e30f
+\item 
+\#define \mbox{\hyperlink{omath_8h_a4a9a098766d374d92b60e0045601f329}{O\+\_\+\+FLOAT\+\_\+\+EPSILON}}~1.\+192092896e-\/07f
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_af4be5bf39771c6e510e1f6165fcc4635}{osin}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_add7ac8f298cfcbc2eb6249afcfbac531}{ocos}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a54c6900b4213326c7ccbd1873d124a8b}{otan}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a9e4092bc4e459672707ace9bdee7bf17}{oacos}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_aa4efa741e5dca026d649394dd8f0f88c}{osqrt}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_aa36523b4342d0736ae0bc81baf52a35c}{oabs}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{omath_8h_a37f19d1d6629edfeaa5c18701c521f0f}{is\+\_\+power\+\_\+of\+\_\+2}} (\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} value)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} \mbox{\hyperlink{omath_8h_adc6ba05b608e55418d85677df945b253}{orandom}} ()
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} \mbox{\hyperlink{omath_8h_af9d7d7fc879236010468eb48cf019ca9}{orandom\+\_\+in\+\_\+range}} (\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} min, \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} max)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a8b4ead59bb584b8466841e995a3ec460}{forandom}} ()
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a38f9352af2db29b14cc997ff2e32e70d}{forandom\+\_\+in\+\_\+range}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} min, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} max)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_a4cee3183aaa44de2ee20d23697b20415}{vec2\+\_\+create}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} y)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_afa608bbef764388a30269c47608ec22f}{vec2\+\_\+zero}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 2-\/component vector with all components set to 0.\+0f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_ab07ef7b8e563513454ea4ae2c3c631f7}{vec2\+\_\+one}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 2-\/component vector with all components set to 1.\+0f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_a9081f1297c0553f296f798a7d33459ad}{vec2\+\_\+up}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 2-\/component vector pointing up (0, 1). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_ae8c3ff2ad0b2f8c9a60ec736d443f9ca}{vec2\+\_\+down}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 2-\/component vector pointing down (0, -\/1). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_a97944abf31f4e0082bbd1d5082991766}{vec2\+\_\+left}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 2-\/component vector pointing left (-\/1, 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_a05e2e8fb43c04cd3b4a1556127634366}{vec2\+\_\+right}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 2-\/component vector pointing right (1, 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_ad0aa3196c198e7cf6f0ae7dd8fd22f45}{vec2\+\_\+add}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Adds vector\+\_\+1 to vector\+\_\+0 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_ab039d76c49416588d3c278898f3c37f3}{vec2\+\_\+sub}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Subtracts vector\+\_\+1 from vector\+\_\+0 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_ae0b8a5264deaa7711fa8a4974648f8ed}{vec2\+\_\+mul}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Multiplies vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a27a4f3ad72b64fc5c874b620960c2b4a}{vec2\+\_\+length\+\_\+squared}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector)
+\begin{DoxyCompactList}\small\item\em Returns the squared length of the provided vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a00a58cd802639cc72ca7364dea0ff959}{vec2\+\_\+length}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector)
+\begin{DoxyCompactList}\small\item\em Returns the length of the provided vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} void \mbox{\hyperlink{omath_8h_afe61f59906043809e032133ed8f14480}{vec2\+\_\+normalize}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \texorpdfstring{$\ast$}{*}vector)
+\begin{DoxyCompactList}\small\item\em Normalizes the provided vector in place to a unit vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \mbox{\hyperlink{omath_8h_ac31281d39c11b81d111c2b83d0ec9d1c}{vec2\+\_\+normalized}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector)
+\begin{DoxyCompactList}\small\item\em Returns a normalized copy of the supplied vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{omath_8h_a33de65fc3b384b1932ddc37e3a8e6956}{vec2\+\_\+compare}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+1, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} tolerance)
+\begin{DoxyCompactList}\small\item\em Compares all elements of vector\+\_\+0 and vector\+\_\+1 and ensures the difference is less than tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a05c1e4ac5b00e863a12b8fb8d8c40566}{vec2\+\_\+distance}} (\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Returns the distance between vector\+\_\+0 and vector\+\_\+1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a60562f3040d16ffd847b88f50fb6d77e}{vec3\+\_\+create}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} y, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} z)
+\begin{DoxyCompactList}\small\item\em Creates and returns a new 3-\/element vector using the supplied values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_aa077b88e2c7b7a3ee4ba191f9d187b47}{vec3\+\_\+from\+\_\+vec4}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector)
+\begin{DoxyCompactList}\small\item\em Returns a new vec3 containing the x, y and z components of the supplied vec4, essentially dropping the w component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a54456c86d36652215292a6039c106f88}{vec3\+\_\+to\+\_\+vec4}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} w)
+\begin{DoxyCompactList}\small\item\em Returns a new vec4 using vector as the x, y and z components and w for w. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a733dab81a0f800c919bc4fb360f36df1}{vec3\+\_\+zero}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector with all components set to 0.\+0f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a2560efab1a1d61e74561478b935f4846}{vec3\+\_\+one}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector with all components set to 1.\+0f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_ad2b8f074686aa50156d4ef80e44c2fb2}{vec3\+\_\+up}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector pointing up (0, 1, 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_aa380d4d0bb68a17cd3404c45a6a5e142}{vec3\+\_\+down}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector pointing down (0, -\/1, 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a61b3b358487f805a15fc9f23874b0875}{vec3\+\_\+left}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector pointing left (-\/1, 0, 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a5e510a79d7a235f2cefd11fef74d100b}{vec3\+\_\+right}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector pointing right (1, 0, 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_ae4a0388227015340ad1678fd66806288}{vec3\+\_\+forward}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector pointing forward (0, 0, -\/1). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_acbb5cbbfcddcf127e304ae6bdcb95ff0}{vec3\+\_\+back}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector pointing backward (0, 0, 1). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a2463a9b7876cc42cafef6b73e5a08f60}{vec3\+\_\+add}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Adds vector\+\_\+1 to vector\+\_\+0 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_ab26dc32431c3c36f1149e6d0e2e7c928}{vec3\+\_\+sub}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Subtracts vector\+\_\+1 from vector\+\_\+0 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_ab19236d830af54451a028232f3bec40b}{vec3\+\_\+mul}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Multiplies vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a55214c662aee8fa106967d3270e51513}{vec3\+\_\+mul\+\_\+scalar}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} scalar)
+\begin{DoxyCompactList}\small\item\em Multiplies all elements of vector\+\_\+0 by scalar and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_aa83b8b886cb514bc7abbcc947ddca06c}{vec3\+\_\+div}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Divides vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a9b66d538f8fafbea104a80fb847881d6}{vec3\+\_\+length\+\_\+squared}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector)
+\begin{DoxyCompactList}\small\item\em Returns the squared length of the provided vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_aa459c1a32f332f209f70770c7edb4502}{vec3\+\_\+length}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector)
+\begin{DoxyCompactList}\small\item\em Returns the length of the provided vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} void \mbox{\hyperlink{omath_8h_ab4774dd4f2b80faa85312bfbda604076}{vec3\+\_\+normalize}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \texorpdfstring{$\ast$}{*}vector)
+\begin{DoxyCompactList}\small\item\em Normalizes the provided vector in place to a unit vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a6a2c01f912a307f9bb9010ca735beb74}{vec3\+\_\+normalized}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector)
+\begin{DoxyCompactList}\small\item\em Returns a normalized copy of the supplied vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a8e195954403bd3d572c450881070f5bc}{vec3\+\_\+dot}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Returns the dot product between the provided vectors. Typically used to calculate the difference in direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a68c3f15a790bcac12e8b1c6aeb9dcc31}{vec3\+\_\+cross}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Calculates and returns the cross product of the supplied vectors. The cross product is a new vector which is orthoganal to both provided vectors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} const \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{omath_8h_a92e5fc1d0b669ad4632181fa4101942c}{vec3\+\_\+compare}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} tolerance)
+\begin{DoxyCompactList}\small\item\em Compares all elements of vector\+\_\+0 and vector\+\_\+1 and ensures the difference is less than tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a87654febfacf2fa4a62ab9e6a1fb71c7}{vec3\+\_\+distance}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Returns the distance between vector\+\_\+0 and vector\+\_\+1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_ae79c03c2686e912608640b75e62f1350}{vec4\+\_\+create}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} y, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} z, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} w)
+\begin{DoxyCompactList}\small\item\em Creates and returns a new 4-\/element vector using the supplied values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a8aee2ea18a4edbd86af96c6edf4d5af5}{vec4\+\_\+to\+\_\+vec3}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector)
+\begin{DoxyCompactList}\small\item\em Returns a new vec3 containing the x, y and z components of the supplied vec4, essentially dropping the w component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a3be7ee02ed4b0513ea39f79421276422}{vec4\+\_\+from\+\_\+vec3}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vector, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} w)
+\begin{DoxyCompactList}\small\item\em Returns a new vec4 using vector as the x, y and z components and w for w. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a65567a2fffadaf8a1bd23720c234a8c9}{vec4\+\_\+zero}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector with all components set to 0.\+0f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a231ba93a9e5cda01728ce979a1ff89e5}{vec4\+\_\+one}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a 3-\/component vector with all components set to 1.\+0f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a6fe3d760283ffeb95f3ba330124a2e9e}{vec4\+\_\+add}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Adds vector\+\_\+1 to vector\+\_\+0 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a9de13b1e7571d40679c8e8588d78f912}{vec4\+\_\+sub}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Subtracts vector\+\_\+1 from vector\+\_\+0 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_af8919bf2831a55b1d4e708bbb48ac458}{vec4\+\_\+mul}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Multiplies vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a7d8af6224132e0a59f9ac4cad3f4a5bf}{vec4\+\_\+div}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+0, \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector\+\_\+1)
+\begin{DoxyCompactList}\small\item\em Divides vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a4b846c636f5c1d061649055af38c2c44}{vec4\+\_\+length\+\_\+squared}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector)
+\begin{DoxyCompactList}\small\item\em Returns the squared length of the provided vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a3e0a5215133ab952dbb56b23fb32333f}{vec4\+\_\+length}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector)
+\begin{DoxyCompactList}\small\item\em Returns the length of the provided vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} void \mbox{\hyperlink{omath_8h_a4ec7f0e49052a2e817be956b3db94226}{vec4\+\_\+normalize}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \texorpdfstring{$\ast$}{*}vector)
+\begin{DoxyCompactList}\small\item\em Normalizes the provided vector in place to a unit vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \mbox{\hyperlink{omath_8h_a32deda686fc980864541c3113fb7fd62}{vec4\+\_\+normalized}} (\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vector)
+\begin{DoxyCompactList}\small\item\em Returns a normalized copy of the supplied vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a6ad236ff3c3a20753ba272e1bc45960e}{vec4\+\_\+dot\+\_\+f32}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} a0, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} a1, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} a2, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} a3, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} b0, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} b1, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} b2, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} b3)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_aa56ce6c2819c994de89b05c813183ff4}{mat4\+\_\+identity}} ()
+\begin{DoxyCompactList}\small\item\em creates an identity matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_ad0216439b6655817fe5da3340b42f375}{mat4\+\_\+mul}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix\+\_\+0, \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix\+\_\+1)
+\begin{DoxyCompactList}\small\item\em performs matrix multiplication on matrix\+\_\+0 from matrix\+\_\+1 Pulling from the Doom engine\textquotesingle{}s approach \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a85a34084ed9e974f04aef46844b4c96b}{mat4\+\_\+orthographic}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} left, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} right, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} bottom, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} top, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} near, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} far)
+\begin{DoxyCompactList}\small\item\em Creates and returns an orthgraphic projection matrix. Used to render 2D/flat scenes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a45c097723294bc5a5cd0c28d12982dc8}{mat4\+\_\+perspective}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} fov\+\_\+radians, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} aspect\+\_\+ratio, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} near, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} far)
+\begin{DoxyCompactList}\small\item\em Creates and returns a perspective matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a279c6490c27d7ae3562e76eaf21484cf}{mat4\+\_\+look\+\_\+at}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} position, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} target, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} up)
+\begin{DoxyCompactList}\small\item\em Creates and returns a look-\/at matrix, or a matrix looking at target from the perspective of position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_aa914840d407c11ec44272611b1ae198a}{mat4\+\_\+transposed}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Returns a transposed copy of the provided matrix (rows-\/\texorpdfstring{$>$}{>}colums) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a1455b837f1e47f21972176f636f21945}{mat4\+\_\+inverse}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Creates and returns an inverse of the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a75b97128dd2ca6b9625e201a60d382c7}{mat4\+\_\+translation}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} position)
+\begin{DoxyCompactList}\small\item\em creates a translation matrix of the provided position \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_ab8e6f59585c72e8677bfbb215e1247ab}{mat4\+\_\+scale}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} scale)
+\begin{DoxyCompactList}\small\item\em Returns a scale matrix using the provided scale. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_ad6ed23858ee7aac8736112c179466371}{mat4\+\_\+euler\+\_\+x}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} angle\+\_\+radians)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_ad9e6bc6e5825e6b7405963422dd1144e}{mat4\+\_\+euler\+\_\+y}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} angle\+\_\+radians)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a568b0bdfc1ed563bb265c7b39b8bb911}{mat4\+\_\+euler\+\_\+z}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} angle\+\_\+radians)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a56de5c2d33be60476ac98cc31539442a}{mat4\+\_\+euler\+\_\+xyz}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} x\+\_\+radians, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} y\+\_\+radians, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} z\+\_\+radians)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a548ba39f391504b6f60d38b841932ff4}{mat4\+\_\+forward}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Gets the forward vector relative to the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a352e097258c0d51db8fdba8edaae0c5b}{mat4\+\_\+backward}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Returns a backward vector relative to the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a1a2480b018c27ab8c1072cb1319d91c1}{mat4\+\_\+up}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Returns a upward vector relative to the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_aab7cfb402bbf49158d92f6b6f8862dc7}{mat4\+\_\+down}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Returns a downward vector relative to the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a3f2b97d6d85213db6bd7316d717f57f2}{mat4\+\_\+left}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Returns a left vector relative to the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \mbox{\hyperlink{omath_8h_a5e899555607c33d91d534d9fc91e47eb}{mat4\+\_\+right}} (\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} matrix)
+\begin{DoxyCompactList}\small\item\em Returns a right vector relative to the provided matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_afdbe8c61c13ed9373a4f9ae3f223611b}{quat\+\_\+identity}} ()
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_ab1ef60f0f6d7cb73dd44a045756303d8}{quat\+\_\+normal}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_adddd8f638d3ccea04329e036772c39b5}{quat\+\_\+normalize}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_a89cd2a67461ccc4380d520220504536f}{quat\+\_\+conjugate}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_acfa30b76ffb82d1177696803510f797e}{quat\+\_\+inverse}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_a2847b0eedcde74a40e9a56b78ba5974d}{quat\+\_\+mul}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q\+\_\+0, \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q\+\_\+1)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a4574c39977d414bdd3ebf2e45a990c26}{quat\+\_\+dot}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q\+\_\+0, \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q\+\_\+1)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_a8702ae952cbe279a9c847b99b272311d}{quat\+\_\+to\+\_\+mat4}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} \mbox{\hyperlink{omath_8h_aaff52c16a299da5cb03c87a586fc9807}{quat\+\_\+to\+\_\+rotation\+\_\+matrix}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q, \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} center)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_a932fb1e3950eb362208a31a16adadeba}{quat\+\_\+from\+\_\+axis\+\_\+angle}} (\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} axis, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} angle, \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} normalize)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} \mbox{\hyperlink{omath_8h_a5e70667ea70a41cf30b642c98b1dc1a2}{quat\+\_\+slerp}} (\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q\+\_\+0, \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} q\+\_\+1, \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} percentage)
+\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_a003b5a79bef2fac31d138e0e263c6e23}{deg\+\_\+to\+\_\+rad}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} degrees)
+\begin{DoxyCompactList}\small\item\em Converts provided degrees to radians. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} \mbox{\hyperlink{omath_8h_ad9e76cd628d80cd686876c6bced501a1}{rad\+\_\+to\+\_\+deg}} (\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} radians)
+\begin{DoxyCompactList}\small\item\em Converts provided radians to degrees. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{omath_8h_a13c297203de1ea9240aca95bbd558783}\index{omath.h@{omath.h}!O\_DEG2RAD\_MULTIPLIER@{O\_DEG2RAD\_MULTIPLIER}}
+\index{O\_DEG2RAD\_MULTIPLIER@{O\_DEG2RAD\_MULTIPLIER}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_DEG2RAD\_MULTIPLIER}{O\_DEG2RAD\_MULTIPLIER}}
+{\footnotesize\ttfamily \label{omath_8h_a13c297203de1ea9240aca95bbd558783} 
+\#define O\+\_\+\+DEG2\+RAD\+\_\+\+MULTIPLIER~\mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}} / 180.\+0f}
+
+\Hypertarget{omath_8h_a4a9a098766d374d92b60e0045601f329}\index{omath.h@{omath.h}!O\_FLOAT\_EPSILON@{O\_FLOAT\_EPSILON}}
+\index{O\_FLOAT\_EPSILON@{O\_FLOAT\_EPSILON}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_FLOAT\_EPSILON}{O\_FLOAT\_EPSILON}}
+{\footnotesize\ttfamily \label{omath_8h_a4a9a098766d374d92b60e0045601f329} 
+\#define O\+\_\+\+FLOAT\+\_\+\+EPSILON~1.\+192092896e-\/07f}
+
+\Hypertarget{omath_8h_acaa676479a80cda3605c40ec61455b93}\index{omath.h@{omath.h}!O\_HALF\_PI@{O\_HALF\_PI}}
+\index{O\_HALF\_PI@{O\_HALF\_PI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_HALF\_PI}{O\_HALF\_PI}}
+{\footnotesize\ttfamily \label{omath_8h_acaa676479a80cda3605c40ec61455b93} 
+\#define O\+\_\+\+HALF\+\_\+\+PI~0.\+5f \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}}
+
+\Hypertarget{omath_8h_a4ab301c8f97d42d9dba9f99177279b67}\index{omath.h@{omath.h}!O\_INFINITY@{O\_INFINITY}}
+\index{O\_INFINITY@{O\_INFINITY}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_INFINITY}{O\_INFINITY}}
+{\footnotesize\ttfamily \label{omath_8h_a4ab301c8f97d42d9dba9f99177279b67} 
+\#define O\+\_\+\+INFINITY~1e30f}
+
+\Hypertarget{omath_8h_a7dc3436a21a4e30d3ec51fe36015daee}\index{omath.h@{omath.h}!O\_MS\_TO\_SEC\_MULTI@{O\_MS\_TO\_SEC\_MULTI}}
+\index{O\_MS\_TO\_SEC\_MULTI@{O\_MS\_TO\_SEC\_MULTI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_MS\_TO\_SEC\_MULTI}{O\_MS\_TO\_SEC\_MULTI}}
+{\footnotesize\ttfamily \label{omath_8h_a7dc3436a21a4e30d3ec51fe36015daee} 
+\#define O\+\_\+\+MS\+\_\+\+TO\+\_\+\+SEC\+\_\+\+MULTI~0.\+001f}
+
+\Hypertarget{omath_8h_ac044bad40a94f0b7e36cee691f60d6f2}\index{omath.h@{omath.h}!O\_ONE\_OVER\_PI@{O\_ONE\_OVER\_PI}}
+\index{O\_ONE\_OVER\_PI@{O\_ONE\_OVER\_PI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_ONE\_OVER\_PI}{O\_ONE\_OVER\_PI}}
+{\footnotesize\ttfamily \label{omath_8h_ac044bad40a94f0b7e36cee691f60d6f2} 
+\#define O\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+PI~1.\+0f / \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}}
+
+\Hypertarget{omath_8h_adde4040839050162a16e14c4b4ed0edc}\index{omath.h@{omath.h}!O\_ONE\_OVER\_TWO\_PI@{O\_ONE\_OVER\_TWO\_PI}}
+\index{O\_ONE\_OVER\_TWO\_PI@{O\_ONE\_OVER\_TWO\_PI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_ONE\_OVER\_TWO\_PI}{O\_ONE\_OVER\_TWO\_PI}}
+{\footnotesize\ttfamily \label{omath_8h_adde4040839050162a16e14c4b4ed0edc} 
+\#define O\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+TWO\+\_\+\+PI~1.\+0f / \mbox{\hyperlink{omath_8h_a4493643673773e6573cb8615604948ef}{O\+\_\+\+PI\+\_\+2}}}
+
+\Hypertarget{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}\index{omath.h@{omath.h}!O\_PI@{O\_PI}}
+\index{O\_PI@{O\_PI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_PI}{O\_PI}}
+{\footnotesize\ttfamily \label{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e} 
+\#define O\+\_\+\+PI~3.\+14159265358979323846f}
+
+\Hypertarget{omath_8h_a4493643673773e6573cb8615604948ef}\index{omath.h@{omath.h}!O\_PI\_2@{O\_PI\_2}}
+\index{O\_PI\_2@{O\_PI\_2}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_PI\_2}{O\_PI\_2}}
+{\footnotesize\ttfamily \label{omath_8h_a4493643673773e6573cb8615604948ef} 
+\#define O\+\_\+\+PI\+\_\+2~2.\+0ff \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}}
+
+\Hypertarget{omath_8h_ae94348058fa715c3d3e2ac1ac81fe806}\index{omath.h@{omath.h}!O\_QUARTER\_PI@{O\_QUARTER\_PI}}
+\index{O\_QUARTER\_PI@{O\_QUARTER\_PI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_QUARTER\_PI}{O\_QUARTER\_PI}}
+{\footnotesize\ttfamily \label{omath_8h_ae94348058fa715c3d3e2ac1ac81fe806} 
+\#define O\+\_\+\+QUARTER\+\_\+\+PI~0.\+25f \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}}
+
+\Hypertarget{omath_8h_a84a0271092ebd716e68b02f30b7f27e2}\index{omath.h@{omath.h}!O\_RAD2DEG\_MULTIPLIER@{O\_RAD2DEG\_MULTIPLIER}}
+\index{O\_RAD2DEG\_MULTIPLIER@{O\_RAD2DEG\_MULTIPLIER}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_RAD2DEG\_MULTIPLIER}{O\_RAD2DEG\_MULTIPLIER}}
+{\footnotesize\ttfamily \label{omath_8h_a84a0271092ebd716e68b02f30b7f27e2} 
+\#define O\+\_\+\+RAD2\+DEG\+\_\+\+MULTIPLIER~180.f / \mbox{\hyperlink{omath_8h_aa9630e9d52f582b1717ad70d7e03c10e}{O\+\_\+\+PI}}}
+
+\Hypertarget{omath_8h_a2bf760f6dc48f44a670c534082365d35}\index{omath.h@{omath.h}!O\_SEC\_TO\_MS\_MULTI@{O\_SEC\_TO\_MS\_MULTI}}
+\index{O\_SEC\_TO\_MS\_MULTI@{O\_SEC\_TO\_MS\_MULTI}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_SEC\_TO\_MS\_MULTI}{O\_SEC\_TO\_MS\_MULTI}}
+{\footnotesize\ttfamily \label{omath_8h_a2bf760f6dc48f44a670c534082365d35} 
+\#define O\+\_\+\+SEC\+\_\+\+TO\+\_\+\+MS\+\_\+\+MULTI~1000.\+0f}
+
+\Hypertarget{omath_8h_a27577e51447b9b70b573a1d9e8f3288f}\index{omath.h@{omath.h}!O\_SQRT\_ONE\_OVER\_THREE@{O\_SQRT\_ONE\_OVER\_THREE}}
+\index{O\_SQRT\_ONE\_OVER\_THREE@{O\_SQRT\_ONE\_OVER\_THREE}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_SQRT\_ONE\_OVER\_THREE}{O\_SQRT\_ONE\_OVER\_THREE}}
+{\footnotesize\ttfamily \label{omath_8h_a27577e51447b9b70b573a1d9e8f3288f} 
+\#define O\+\_\+\+SQRT\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+THREE~0.\+57735026918962576450f}
+
+\Hypertarget{omath_8h_a6825232f82dbb0e2d7e0674bb6d4e394}\index{omath.h@{omath.h}!O\_SQRT\_ONE\_OVER\_TWO@{O\_SQRT\_ONE\_OVER\_TWO}}
+\index{O\_SQRT\_ONE\_OVER\_TWO@{O\_SQRT\_ONE\_OVER\_TWO}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_SQRT\_ONE\_OVER\_TWO}{O\_SQRT\_ONE\_OVER\_TWO}}
+{\footnotesize\ttfamily \label{omath_8h_a6825232f82dbb0e2d7e0674bb6d4e394} 
+\#define O\+\_\+\+SQRT\+\_\+\+ONE\+\_\+\+OVER\+\_\+\+TWO~0.\+70710678118654752440f}
+
+\Hypertarget{omath_8h_a5acc411d6744a0deb5c59ac9760ef521}\index{omath.h@{omath.h}!O\_SQRT\_THREE@{O\_SQRT\_THREE}}
+\index{O\_SQRT\_THREE@{O\_SQRT\_THREE}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_SQRT\_THREE}{O\_SQRT\_THREE}}
+{\footnotesize\ttfamily \label{omath_8h_a5acc411d6744a0deb5c59ac9760ef521} 
+\#define O\+\_\+\+SQRT\+\_\+\+THREE~1.\+73205080756887729352f}
+
+\Hypertarget{omath_8h_aa300365bb5b132ece57e2bde807497db}\index{omath.h@{omath.h}!O\_SQRT\_TWO@{O\_SQRT\_TWO}}
+\index{O\_SQRT\_TWO@{O\_SQRT\_TWO}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{O\_SQRT\_TWO}{O\_SQRT\_TWO}}
+{\footnotesize\ttfamily \label{omath_8h_aa300365bb5b132ece57e2bde807497db} 
+\#define O\+\_\+\+SQRT\+\_\+\+TWO~1.\+41421356237309504880f}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{omath_8h_a003b5a79bef2fac31d138e0e263c6e23}\index{omath.h@{omath.h}!deg\_to\_rad@{deg\_to\_rad}}
+\index{deg\_to\_rad@{deg\_to\_rad}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{deg\_to\_rad()}{deg\_to\_rad()}}
+{\footnotesize\ttfamily \label{omath_8h_a003b5a79bef2fac31d138e0e263c6e23} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} deg\+\_\+to\+\_\+rad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{degrees}{}\end{DoxyParamCaption})}
+
+
+
+Converts provided degrees to radians. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degrees} & The degrees to be converted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The amount in radians. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a8b4ead59bb584b8466841e995a3ec460}\index{omath.h@{omath.h}!forandom@{forandom}}
+\index{forandom@{forandom}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{forandom()}{forandom()}}
+{\footnotesize\ttfamily \label{omath_8h_a8b4ead59bb584b8466841e995a3ec460} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} forandom (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a38f9352af2db29b14cc997ff2e32e70d}\index{omath.h@{omath.h}!forandom\_in\_range@{forandom\_in\_range}}
+\index{forandom\_in\_range@{forandom\_in\_range}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{forandom\_in\_range()}{forandom\_in\_range()}}
+{\footnotesize\ttfamily \label{omath_8h_a38f9352af2db29b14cc997ff2e32e70d} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} forandom\+\_\+in\+\_\+range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{min}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{max}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a37f19d1d6629edfeaa5c18701c521f0f}\index{omath.h@{omath.h}!is\_power\_of\_2@{is\_power\_of\_2}}
+\index{is\_power\_of\_2@{is\_power\_of\_2}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{is\_power\_of\_2()}{is\_power\_of\_2()}}
+{\footnotesize\ttfamily \label{omath_8h_a37f19d1d6629edfeaa5c18701c521f0f} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} is\+\_\+power\+\_\+of\+\_\+2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a352e097258c0d51db8fdba8edaae0c5b}\index{omath.h@{omath.h}!mat4\_backward@{mat4\_backward}}
+\index{mat4\_backward@{mat4\_backward}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_backward()}{mat4\_backward()}}
+{\footnotesize\ttfamily \label{omath_8h_a352e097258c0d51db8fdba8edaae0c5b} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} mat4\+\_\+backward (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Returns a backward vector relative to the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix from which to base the vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 3-\/component directional vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_aab7cfb402bbf49158d92f6b6f8862dc7}\index{omath.h@{omath.h}!mat4\_down@{mat4\_down}}
+\index{mat4\_down@{mat4\_down}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_down()}{mat4\_down()}}
+{\footnotesize\ttfamily \label{omath_8h_aab7cfb402bbf49158d92f6b6f8862dc7} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} mat4\+\_\+down (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Returns a downward vector relative to the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix from which to base the vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 3-\/component directional vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ad6ed23858ee7aac8736112c179466371}\index{omath.h@{omath.h}!mat4\_euler\_x@{mat4\_euler\_x}}
+\index{mat4\_euler\_x@{mat4\_euler\_x}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_euler\_x()}{mat4\_euler\_x()}}
+{\footnotesize\ttfamily \label{omath_8h_ad6ed23858ee7aac8736112c179466371} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+euler\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{angle\+\_\+radians}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a56de5c2d33be60476ac98cc31539442a}\index{omath.h@{omath.h}!mat4\_euler\_xyz@{mat4\_euler\_xyz}}
+\index{mat4\_euler\_xyz@{mat4\_euler\_xyz}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_euler\_xyz()}{mat4\_euler\_xyz()}}
+{\footnotesize\ttfamily \label{omath_8h_a56de5c2d33be60476ac98cc31539442a} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+euler\+\_\+xyz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x\+\_\+radians}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{y\+\_\+radians}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{z\+\_\+radians}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_ad9e6bc6e5825e6b7405963422dd1144e}\index{omath.h@{omath.h}!mat4\_euler\_y@{mat4\_euler\_y}}
+\index{mat4\_euler\_y@{mat4\_euler\_y}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_euler\_y()}{mat4\_euler\_y()}}
+{\footnotesize\ttfamily \label{omath_8h_ad9e6bc6e5825e6b7405963422dd1144e} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+euler\+\_\+y (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{angle\+\_\+radians}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a568b0bdfc1ed563bb265c7b39b8bb911}\index{omath.h@{omath.h}!mat4\_euler\_z@{mat4\_euler\_z}}
+\index{mat4\_euler\_z@{mat4\_euler\_z}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_euler\_z()}{mat4\_euler\_z()}}
+{\footnotesize\ttfamily \label{omath_8h_a568b0bdfc1ed563bb265c7b39b8bb911} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+euler\+\_\+z (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{angle\+\_\+radians}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a548ba39f391504b6f60d38b841932ff4}\index{omath.h@{omath.h}!mat4\_forward@{mat4\_forward}}
+\index{mat4\_forward@{mat4\_forward}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_forward()}{mat4\_forward()}}
+{\footnotesize\ttfamily \label{omath_8h_a548ba39f391504b6f60d38b841932ff4} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} mat4\+\_\+forward (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Gets the forward vector relative to the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix to base the vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 3-\/component directional vector 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_aa56ce6c2819c994de89b05c813183ff4}\index{omath.h@{omath.h}!mat4\_identity@{mat4\_identity}}
+\index{mat4\_identity@{mat4\_identity}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_identity()}{mat4\_identity()}}
+{\footnotesize\ttfamily \label{omath_8h_aa56ce6c2819c994de89b05c813183ff4} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+identity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+creates an identity matrix 
+
+\{ \{1, 0, 0, 0\} \{0, 1, 0, 0\} \{0, 0, 1, 0\} \{0, 0, 0, 1\} \}
+
+\begin{DoxyReturn}{Returns}
+the identity matrix 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a1455b837f1e47f21972176f636f21945}\index{omath.h@{omath.h}!mat4\_inverse@{mat4\_inverse}}
+\index{mat4\_inverse@{mat4\_inverse}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_inverse()}{mat4\_inverse()}}
+{\footnotesize\ttfamily \label{omath_8h_a1455b837f1e47f21972176f636f21945} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+inverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns an inverse of the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix to be inverted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A inverted copy of the provided matrix. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a3f2b97d6d85213db6bd7316d717f57f2}\index{omath.h@{omath.h}!mat4\_left@{mat4\_left}}
+\index{mat4\_left@{mat4\_left}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_left()}{mat4\_left()}}
+{\footnotesize\ttfamily \label{omath_8h_a3f2b97d6d85213db6bd7316d717f57f2} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} mat4\+\_\+left (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Returns a left vector relative to the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix from which to base the vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 3-\/component directional vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a279c6490c27d7ae3562e76eaf21484cf}\index{omath.h@{omath.h}!mat4\_look\_at@{mat4\_look\_at}}
+\index{mat4\_look\_at@{mat4\_look\_at}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_look\_at()}{mat4\_look\_at()}}
+{\footnotesize\ttfamily \label{omath_8h_a279c6490c27d7ae3562e76eaf21484cf} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+look\+\_\+at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{position}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{target}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{up}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a look-\/at matrix, or a matrix looking at target from the perspective of position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position of the matrix. \\
+\hline
+{\em target} & The position to "{}look at"{}. \\
+\hline
+{\em up} & The up vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A matrix looking at target from the perspective of position. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ad0216439b6655817fe5da3340b42f375}\index{omath.h@{omath.h}!mat4\_mul@{mat4\_mul}}
+\index{mat4\_mul@{mat4\_mul}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_mul()}{mat4\_mul()}}
+{\footnotesize\ttfamily \label{omath_8h_ad0216439b6655817fe5da3340b42f375} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+performs matrix multiplication on matrix\+\_\+0 from matrix\+\_\+1 Pulling from the Doom engine\textquotesingle{}s approach 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix\+\_\+0} & the first matrix to be multiplied \\
+\hline
+{\em matrix\+\_\+1} & the second matrix to be multiplied \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the result of the matrix multiplication 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a85a34084ed9e974f04aef46844b4c96b}\index{omath.h@{omath.h}!mat4\_orthographic@{mat4\_orthographic}}
+\index{mat4\_orthographic@{mat4\_orthographic}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_orthographic()}{mat4\_orthographic()}}
+{\footnotesize\ttfamily \label{omath_8h_a85a34084ed9e974f04aef46844b4c96b} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+orthographic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{left}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{right}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{bottom}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{top}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{near}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{far}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns an orthgraphic projection matrix. Used to render 2D/flat scenes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
+return 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & left side of the view frustum \\
+\hline
+{\em right} & the right side of the view frustum \\
+\hline
+{\em bottom} & The bottom side of the view frustum \\
+\hline
+{\em top} & The top side of the view frustum \\
+\hline
+{\em near} & The near clipping plane distance \\
+\hline
+{\em far} & The far clipping plane distance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new orthographic projection matrix 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a45c097723294bc5a5cd0c28d12982dc8}\index{omath.h@{omath.h}!mat4\_perspective@{mat4\_perspective}}
+\index{mat4\_perspective@{mat4\_perspective}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_perspective()}{mat4\_perspective()}}
+{\footnotesize\ttfamily \label{omath_8h_a45c097723294bc5a5cd0c28d12982dc8} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+perspective (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{fov\+\_\+radians}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{aspect\+\_\+ratio}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{near}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{far}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a perspective matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fov\+\_\+radians} & The field of view in radians. \\
+\hline
+{\em aspect\+\_\+ratio} & The aspect ratio. \\
+\hline
+{\em near} & The near clipping plane distance. \\
+\hline
+{\em far} & The far clipping plane distance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new perspective matrix. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a5e899555607c33d91d534d9fc91e47eb}\index{omath.h@{omath.h}!mat4\_right@{mat4\_right}}
+\index{mat4\_right@{mat4\_right}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_right()}{mat4\_right()}}
+{\footnotesize\ttfamily \label{omath_8h_a5e899555607c33d91d534d9fc91e47eb} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} mat4\+\_\+right (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Returns a right vector relative to the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix from which to base the vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 3-\/component directional vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ab8e6f59585c72e8677bfbb215e1247ab}\index{omath.h@{omath.h}!mat4\_scale@{mat4\_scale}}
+\index{mat4\_scale@{mat4\_scale}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_scale()}{mat4\_scale()}}
+{\footnotesize\ttfamily \label{omath_8h_ab8e6f59585c72e8677bfbb215e1247ab} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{scale}{}\end{DoxyParamCaption})}
+
+
+
+Returns a scale matrix using the provided scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & The 3-\/component scale. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A scale matrix. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a75b97128dd2ca6b9625e201a60d382c7}\index{omath.h@{omath.h}!mat4\_translation@{mat4\_translation}}
+\index{mat4\_translation@{mat4\_translation}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_translation()}{mat4\_translation()}}
+{\footnotesize\ttfamily \label{omath_8h_a75b97128dd2ca6b9625e201a60d382c7} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+translation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{position}{}\end{DoxyParamCaption})}
+
+
+
+creates a translation matrix of the provided position 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The 3-\/component position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a translation matrix 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_aa914840d407c11ec44272611b1ae198a}\index{omath.h@{omath.h}!mat4\_transposed@{mat4\_transposed}}
+\index{mat4\_transposed@{mat4\_transposed}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_transposed()}{mat4\_transposed()}}
+{\footnotesize\ttfamily \label{omath_8h_aa914840d407c11ec44272611b1ae198a} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} mat4\+\_\+transposed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Returns a transposed copy of the provided matrix (rows-\/\texorpdfstring{$>$}{>}colums) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix to be transposed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A transposed copy of of the provided matrix. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a1a2480b018c27ab8c1072cb1319d91c1}\index{omath.h@{omath.h}!mat4\_up@{mat4\_up}}
+\index{mat4\_up@{mat4\_up}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{mat4\_up()}{mat4\_up()}}
+{\footnotesize\ttfamily \label{omath_8h_a1a2480b018c27ab8c1072cb1319d91c1} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} mat4\+\_\+up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}}}]{matrix}{}\end{DoxyParamCaption})}
+
+
+
+Returns a upward vector relative to the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix from which to base the vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 3-\/component directional vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_aa36523b4342d0736ae0bc81baf52a35c}\index{omath.h@{omath.h}!oabs@{oabs}}
+\index{oabs@{oabs}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{oabs()}{oabs()}}
+{\footnotesize\ttfamily \label{omath_8h_aa36523b4342d0736ae0bc81baf52a35c} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} oabs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a9e4092bc4e459672707ace9bdee7bf17}\index{omath.h@{omath.h}!oacos@{oacos}}
+\index{oacos@{oacos}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{oacos()}{oacos()}}
+{\footnotesize\ttfamily \label{omath_8h_a9e4092bc4e459672707ace9bdee7bf17} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} oacos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_add7ac8f298cfcbc2eb6249afcfbac531}\index{omath.h@{omath.h}!ocos@{ocos}}
+\index{ocos@{ocos}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{ocos()}{ocos()}}
+{\footnotesize\ttfamily \label{omath_8h_add7ac8f298cfcbc2eb6249afcfbac531} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} ocos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_adc6ba05b608e55418d85677df945b253}\index{omath.h@{omath.h}!orandom@{orandom}}
+\index{orandom@{orandom}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{orandom()}{orandom()}}
+{\footnotesize\ttfamily \label{omath_8h_adc6ba05b608e55418d85677df945b253} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} orandom (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_af9d7d7fc879236010468eb48cf019ca9}\index{omath.h@{omath.h}!orandom\_in\_range@{orandom\_in\_range}}
+\index{orandom\_in\_range@{orandom\_in\_range}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{orandom\_in\_range()}{orandom\_in\_range()}}
+{\footnotesize\ttfamily \label{omath_8h_af9d7d7fc879236010468eb48cf019ca9} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} orandom\+\_\+in\+\_\+range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}}]{min}{, }\item[{\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}}]{max}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_af4be5bf39771c6e510e1f6165fcc4635}\index{omath.h@{omath.h}!osin@{osin}}
+\index{osin@{osin}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{osin()}{osin()}}
+{\footnotesize\ttfamily \label{omath_8h_af4be5bf39771c6e510e1f6165fcc4635} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} osin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{}\end{DoxyParamCaption})}
+
+Note that these are here in order to prevent having to import the entire \texorpdfstring{$<$}{<}math.\+h\texorpdfstring{$>$}{>} everywhere. \Hypertarget{omath_8h_aa4efa741e5dca026d649394dd8f0f88c}\index{omath.h@{omath.h}!osqrt@{osqrt}}
+\index{osqrt@{osqrt}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{osqrt()}{osqrt()}}
+{\footnotesize\ttfamily \label{omath_8h_aa4efa741e5dca026d649394dd8f0f88c} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} osqrt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a54c6900b4213326c7ccbd1873d124a8b}\index{omath.h@{omath.h}!otan@{otan}}
+\index{otan@{otan}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{otan()}{otan()}}
+{\footnotesize\ttfamily \label{omath_8h_a54c6900b4213326c7ccbd1873d124a8b} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} otan (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a89cd2a67461ccc4380d520220504536f}\index{omath.h@{omath.h}!quat\_conjugate@{quat\_conjugate}}
+\index{quat\_conjugate@{quat\_conjugate}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_conjugate()}{quat\_conjugate()}}
+{\footnotesize\ttfamily \label{omath_8h_a89cd2a67461ccc4380d520220504536f} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+conjugate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a4574c39977d414bdd3ebf2e45a990c26}\index{omath.h@{omath.h}!quat\_dot@{quat\_dot}}
+\index{quat\_dot@{quat\_dot}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_dot()}{quat\_dot()}}
+{\footnotesize\ttfamily \label{omath_8h_a4574c39977d414bdd3ebf2e45a990c26} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} quat\+\_\+dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q\+\_\+1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a932fb1e3950eb362208a31a16adadeba}\index{omath.h@{omath.h}!quat\_from\_axis\_angle@{quat\_from\_axis\_angle}}
+\index{quat\_from\_axis\_angle@{quat\_from\_axis\_angle}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_from\_axis\_angle()}{quat\_from\_axis\_angle()}}
+{\footnotesize\ttfamily \label{omath_8h_a932fb1e3950eb362208a31a16adadeba} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+from\+\_\+axis\+\_\+angle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{axis}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{angle}{, }\item[{\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}}]{normalize}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_afdbe8c61c13ed9373a4f9ae3f223611b}\index{omath.h@{omath.h}!quat\_identity@{quat\_identity}}
+\index{quat\_identity@{quat\_identity}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_identity()}{quat\_identity()}}
+{\footnotesize\ttfamily \label{omath_8h_afdbe8c61c13ed9373a4f9ae3f223611b} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+identity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_acfa30b76ffb82d1177696803510f797e}\index{omath.h@{omath.h}!quat\_inverse@{quat\_inverse}}
+\index{quat\_inverse@{quat\_inverse}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_inverse()}{quat\_inverse()}}
+{\footnotesize\ttfamily \label{omath_8h_acfa30b76ffb82d1177696803510f797e} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+inverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a2847b0eedcde74a40e9a56b78ba5974d}\index{omath.h@{omath.h}!quat\_mul@{quat\_mul}}
+\index{quat\_mul@{quat\_mul}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_mul()}{quat\_mul()}}
+{\footnotesize\ttfamily \label{omath_8h_a2847b0eedcde74a40e9a56b78ba5974d} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q\+\_\+1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_ab1ef60f0f6d7cb73dd44a045756303d8}\index{omath.h@{omath.h}!quat\_normal@{quat\_normal}}
+\index{quat\_normal@{quat\_normal}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_normal()}{quat\_normal()}}
+{\footnotesize\ttfamily \label{omath_8h_ab1ef60f0f6d7cb73dd44a045756303d8} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} quat\+\_\+normal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_adddd8f638d3ccea04329e036772c39b5}\index{omath.h@{omath.h}!quat\_normalize@{quat\_normalize}}
+\index{quat\_normalize@{quat\_normalize}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_normalize()}{quat\_normalize()}}
+{\footnotesize\ttfamily \label{omath_8h_adddd8f638d3ccea04329e036772c39b5} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+normalize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a5e70667ea70a41cf30b642c98b1dc1a2}\index{omath.h@{omath.h}!quat\_slerp@{quat\_slerp}}
+\index{quat\_slerp@{quat\_slerp}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_slerp()}{quat\_slerp()}}
+{\footnotesize\ttfamily \label{omath_8h_a5e70667ea70a41cf30b642c98b1dc1a2} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}} quat\+\_\+slerp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q\+\_\+1}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{percentage}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a8702ae952cbe279a9c847b99b272311d}\index{omath.h@{omath.h}!quat\_to\_mat4@{quat\_to\_mat4}}
+\index{quat\_to\_mat4@{quat\_to\_mat4}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_to\_mat4()}{quat\_to\_mat4()}}
+{\footnotesize\ttfamily \label{omath_8h_a8702ae952cbe279a9c847b99b272311d} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} quat\+\_\+to\+\_\+mat4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_aaff52c16a299da5cb03c87a586fc9807}\index{omath.h@{omath.h}!quat\_to\_rotation\_matrix@{quat\_to\_rotation\_matrix}}
+\index{quat\_to\_rotation\_matrix@{quat\_to\_rotation\_matrix}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{quat\_to\_rotation\_matrix()}{quat\_to\_rotation\_matrix()}}
+{\footnotesize\ttfamily \label{omath_8h_aaff52c16a299da5cb03c87a586fc9807} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a858329ffda7b5fe4913cca7ff8f34f30}{mat4}} quat\+\_\+to\+\_\+rotation\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_af5f140c7cfd64fec8b5126ae20ca327f}{quat}}}]{q}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{center}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_ad9e76cd628d80cd686876c6bced501a1}\index{omath.h@{omath.h}!rad\_to\_deg@{rad\_to\_deg}}
+\index{rad\_to\_deg@{rad\_to\_deg}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{rad\_to\_deg()}{rad\_to\_deg()}}
+{\footnotesize\ttfamily \label{omath_8h_ad9e76cd628d80cd686876c6bced501a1} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} rad\+\_\+to\+\_\+deg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{radians}{}\end{DoxyParamCaption})}
+
+
+
+Converts provided radians to degrees. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radians} & The radians to be converted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The amount in degrees. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ad0aa3196c198e7cf6f0ae7dd8fd22f45}\index{omath.h@{omath.h}!vec2\_add@{vec2\_add}}
+\index{vec2\_add@{vec2\_add}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_add()}{vec2\_add()}}
+{\footnotesize\ttfamily \label{omath_8h_ad0aa3196c198e7cf6f0ae7dd8fd22f45} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Adds vector\+\_\+1 to vector\+\_\+0 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a33de65fc3b384b1932ddc37e3a8e6956}\index{omath.h@{omath.h}!vec2\_compare@{vec2\_compare}}
+\index{vec2\_compare@{vec2\_compare}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_compare()}{vec2\_compare()}}
+{\footnotesize\ttfamily \label{omath_8h_a33de65fc3b384b1932ddc37e3a8e6956} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vec2\+\_\+compare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+1}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{tolerance}{}\end{DoxyParamCaption})}
+
+
+
+Compares all elements of vector\+\_\+0 and vector\+\_\+1 and ensures the difference is less than tolerance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+{\em tolerance} & The difference tolerance. Typically O\+\_\+\+FLOAT\+\_\+\+EPSILON or similar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if within tolerance; otherwise false. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a4cee3183aaa44de2ee20d23697b20415}\index{omath.h@{omath.h}!vec2\_create@{vec2\_create}}
+\index{vec2\_create@{vec2\_create}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_create()}{vec2\_create()}}
+{\footnotesize\ttfamily \label{omath_8h_a4cee3183aaa44de2ee20d23697b20415} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{y}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a05c1e4ac5b00e863a12b8fb8d8c40566}\index{omath.h@{omath.h}!vec2\_distance@{vec2\_distance}}
+\index{vec2\_distance@{vec2\_distance}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_distance()}{vec2\_distance()}}
+{\footnotesize\ttfamily \label{omath_8h_a05c1e4ac5b00e863a12b8fb8d8c40566} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec2\+\_\+distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Returns the distance between vector\+\_\+0 and vector\+\_\+1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance between vector\+\_\+0 and vector\+\_\+1. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ae8c3ff2ad0b2f8c9a60ec736d443f9ca}\index{omath.h@{omath.h}!vec2\_down@{vec2\_down}}
+\index{vec2\_down@{vec2\_down}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_down()}{vec2\_down()}}
+{\footnotesize\ttfamily \label{omath_8h_ae8c3ff2ad0b2f8c9a60ec736d443f9ca} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+down (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 2-\/component vector pointing down (0, -\/1). 
+
+\Hypertarget{omath_8h_a97944abf31f4e0082bbd1d5082991766}\index{omath.h@{omath.h}!vec2\_left@{vec2\_left}}
+\index{vec2\_left@{vec2\_left}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_left()}{vec2\_left()}}
+{\footnotesize\ttfamily \label{omath_8h_a97944abf31f4e0082bbd1d5082991766} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+left (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 2-\/component vector pointing left (-\/1, 0). 
+
+\Hypertarget{omath_8h_a00a58cd802639cc72ca7364dea0ff959}\index{omath.h@{omath.h}!vec2\_length@{vec2\_length}}
+\index{vec2\_length@{vec2\_length}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_length()}{vec2\_length()}}
+{\footnotesize\ttfamily \label{omath_8h_a00a58cd802639cc72ca7364dea0ff959} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec2\+\_\+length (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns the length of the provided vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to retrieve the length of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The length. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a27a4f3ad72b64fc5c874b620960c2b4a}\index{omath.h@{omath.h}!vec2\_length\_squared@{vec2\_length\_squared}}
+\index{vec2\_length\_squared@{vec2\_length\_squared}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_length\_squared()}{vec2\_length\_squared()}}
+{\footnotesize\ttfamily \label{omath_8h_a27a4f3ad72b64fc5c874b620960c2b4a} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec2\+\_\+length\+\_\+squared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns the squared length of the provided vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to retrieve the squared length of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The squared length. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ae0b8a5264deaa7711fa8a4974648f8ed}\index{omath.h@{omath.h}!vec2\_mul@{vec2\_mul}}
+\index{vec2\_mul@{vec2\_mul}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_mul()}{vec2\_mul()}}
+{\footnotesize\ttfamily \label{omath_8h_ae0b8a5264deaa7711fa8a4974648f8ed} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_afe61f59906043809e032133ed8f14480}\index{omath.h@{omath.h}!vec2\_normalize@{vec2\_normalize}}
+\index{vec2\_normalize@{vec2\_normalize}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_normalize()}{vec2\_normalize()}}
+{\footnotesize\ttfamily \label{omath_8h_afe61f59906043809e032133ed8f14480} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} void vec2\+\_\+normalize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} \texorpdfstring{$\ast$}{*}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes the provided vector in place to a unit vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & A pointer to the vector to be normalized. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{omath_8h_ac31281d39c11b81d111c2b83d0ec9d1c}\index{omath.h@{omath.h}!vec2\_normalized@{vec2\_normalized}}
+\index{vec2\_normalized@{vec2\_normalized}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_normalized()}{vec2\_normalized()}}
+{\footnotesize\ttfamily \label{omath_8h_ac31281d39c11b81d111c2b83d0ec9d1c} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+normalized (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns a normalized copy of the supplied vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to be normalized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A normalized copy of the supplied vector 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ab07ef7b8e563513454ea4ae2c3c631f7}\index{omath.h@{omath.h}!vec2\_one@{vec2\_one}}
+\index{vec2\_one@{vec2\_one}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_one()}{vec2\_one()}}
+{\footnotesize\ttfamily \label{omath_8h_ab07ef7b8e563513454ea4ae2c3c631f7} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+one (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 2-\/component vector with all components set to 1.\+0f. 
+
+\Hypertarget{omath_8h_a05e2e8fb43c04cd3b4a1556127634366}\index{omath.h@{omath.h}!vec2\_right@{vec2\_right}}
+\index{vec2\_right@{vec2\_right}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_right()}{vec2\_right()}}
+{\footnotesize\ttfamily \label{omath_8h_a05e2e8fb43c04cd3b4a1556127634366} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+right (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 2-\/component vector pointing right (1, 0). 
+
+\Hypertarget{omath_8h_ab039d76c49416588d3c278898f3c37f3}\index{omath.h@{omath.h}!vec2\_sub@{vec2\_sub}}
+\index{vec2\_sub@{vec2\_sub}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_sub()}{vec2\_sub()}}
+{\footnotesize\ttfamily \label{omath_8h_ab039d76c49416588d3c278898f3c37f3} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Subtracts vector\+\_\+1 from vector\+\_\+0 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a9081f1297c0553f296f798a7d33459ad}\index{omath.h@{omath.h}!vec2\_up@{vec2\_up}}
+\index{vec2\_up@{vec2\_up}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_up()}{vec2\_up()}}
+{\footnotesize\ttfamily \label{omath_8h_a9081f1297c0553f296f798a7d33459ad} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 2-\/component vector pointing up (0, 1). 
+
+\Hypertarget{omath_8h_afa608bbef764388a30269c47608ec22f}\index{omath.h@{omath.h}!vec2\_zero@{vec2\_zero}}
+\index{vec2\_zero@{vec2\_zero}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_zero()}{vec2\_zero()}}
+{\footnotesize\ttfamily \label{omath_8h_afa608bbef764388a30269c47608ec22f} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a4403515b5f13a3b84dafb1667a1f9d88}{vec2}} vec2\+\_\+zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 2-\/component vector with all components set to 0.\+0f. 
+
+\Hypertarget{omath_8h_a2463a9b7876cc42cafef6b73e5a08f60}\index{omath.h@{omath.h}!vec3\_add@{vec3\_add}}
+\index{vec3\_add@{vec3\_add}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_add()}{vec3\_add()}}
+{\footnotesize\ttfamily \label{omath_8h_a2463a9b7876cc42cafef6b73e5a08f60} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Adds vector\+\_\+1 to vector\+\_\+0 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_acbb5cbbfcddcf127e304ae6bdcb95ff0}\index{omath.h@{omath.h}!vec3\_back@{vec3\_back}}
+\index{vec3\_back@{vec3\_back}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_back()}{vec3\_back()}}
+{\footnotesize\ttfamily \label{omath_8h_acbb5cbbfcddcf127e304ae6bdcb95ff0} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+back (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector pointing backward (0, 0, 1). 
+
+\Hypertarget{omath_8h_a92e5fc1d0b669ad4632181fa4101942c}\index{omath.h@{omath.h}!vec3\_compare@{vec3\_compare}}
+\index{vec3\_compare@{vec3\_compare}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_compare()}{vec3\_compare()}}
+{\footnotesize\ttfamily \label{omath_8h_a92e5fc1d0b669ad4632181fa4101942c} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} const \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vec3\+\_\+compare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{tolerance}{}\end{DoxyParamCaption})}
+
+
+
+Compares all elements of vector\+\_\+0 and vector\+\_\+1 and ensures the difference is less than tolerance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+{\em tolerance} & The difference tolerance. Typically O\+\_\+\+FLOAT\+\_\+\+EPSILON or similar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if within tolerance; otherwise false. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a60562f3040d16ffd847b88f50fb6d77e}\index{omath.h@{omath.h}!vec3\_create@{vec3\_create}}
+\index{vec3\_create@{vec3\_create}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_create()}{vec3\_create()}}
+{\footnotesize\ttfamily \label{omath_8h_a60562f3040d16ffd847b88f50fb6d77e} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{y}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{z}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a new 3-\/element vector using the supplied values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x value. \\
+\hline
+{\em y} & The y value. \\
+\hline
+{\em z} & The z value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new 3-\/element vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a68c3f15a790bcac12e8b1c6aeb9dcc31}\index{omath.h@{omath.h}!vec3\_cross@{vec3\_cross}}
+\index{vec3\_cross@{vec3\_cross}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_cross()}{vec3\_cross()}}
+{\footnotesize\ttfamily \label{omath_8h_a68c3f15a790bcac12e8b1c6aeb9dcc31} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+cross (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Calculates and returns the cross product of the supplied vectors. The cross product is a new vector which is orthoganal to both provided vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cross product. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a87654febfacf2fa4a62ab9e6a1fb71c7}\index{omath.h@{omath.h}!vec3\_distance@{vec3\_distance}}
+\index{vec3\_distance@{vec3\_distance}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_distance()}{vec3\_distance()}}
+{\footnotesize\ttfamily \label{omath_8h_a87654febfacf2fa4a62ab9e6a1fb71c7} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec3\+\_\+distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Returns the distance between vector\+\_\+0 and vector\+\_\+1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance between vector\+\_\+0 and vector\+\_\+1. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_aa83b8b886cb514bc7abbcc947ddca06c}\index{omath.h@{omath.h}!vec3\_div@{vec3\_div}}
+\index{vec3\_div@{vec3\_div}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_div()}{vec3\_div()}}
+{\footnotesize\ttfamily \label{omath_8h_aa83b8b886cb514bc7abbcc947ddca06c} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+div (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Divides vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a8e195954403bd3d572c450881070f5bc}\index{omath.h@{omath.h}!vec3\_dot@{vec3\_dot}}
+\index{vec3\_dot@{vec3\_dot}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_dot()}{vec3\_dot()}}
+{\footnotesize\ttfamily \label{omath_8h_a8e195954403bd3d572c450881070f5bc} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec3\+\_\+dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Returns the dot product between the provided vectors. Typically used to calculate the difference in direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dot product. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_aa380d4d0bb68a17cd3404c45a6a5e142}\index{omath.h@{omath.h}!vec3\_down@{vec3\_down}}
+\index{vec3\_down@{vec3\_down}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_down()}{vec3\_down()}}
+{\footnotesize\ttfamily \label{omath_8h_aa380d4d0bb68a17cd3404c45a6a5e142} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+down (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector pointing down (0, -\/1, 0). 
+
+\Hypertarget{omath_8h_ae4a0388227015340ad1678fd66806288}\index{omath.h@{omath.h}!vec3\_forward@{vec3\_forward}}
+\index{vec3\_forward@{vec3\_forward}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_forward()}{vec3\_forward()}}
+{\footnotesize\ttfamily \label{omath_8h_ae4a0388227015340ad1678fd66806288} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+forward (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector pointing forward (0, 0, -\/1). 
+
+\Hypertarget{omath_8h_aa077b88e2c7b7a3ee4ba191f9d187b47}\index{omath.h@{omath.h}!vec3\_from\_vec4@{vec3\_from\_vec4}}
+\index{vec3\_from\_vec4@{vec3\_from\_vec4}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_from\_vec4()}{vec3\_from\_vec4()}}
+{\footnotesize\ttfamily \label{omath_8h_aa077b88e2c7b7a3ee4ba191f9d187b47} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+from\+\_\+vec4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns a new vec3 containing the x, y and z components of the supplied vec4, essentially dropping the w component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 4-\/component vector to extract from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new vec3 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a61b3b358487f805a15fc9f23874b0875}\index{omath.h@{omath.h}!vec3\_left@{vec3\_left}}
+\index{vec3\_left@{vec3\_left}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_left()}{vec3\_left()}}
+{\footnotesize\ttfamily \label{omath_8h_a61b3b358487f805a15fc9f23874b0875} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+left (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector pointing left (-\/1, 0, 0). 
+
+\Hypertarget{omath_8h_aa459c1a32f332f209f70770c7edb4502}\index{omath.h@{omath.h}!vec3\_length@{vec3\_length}}
+\index{vec3\_length@{vec3\_length}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_length()}{vec3\_length()}}
+{\footnotesize\ttfamily \label{omath_8h_aa459c1a32f332f209f70770c7edb4502} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec3\+\_\+length (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns the length of the provided vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to retrieve the length of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The length. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a9b66d538f8fafbea104a80fb847881d6}\index{omath.h@{omath.h}!vec3\_length\_squared@{vec3\_length\_squared}}
+\index{vec3\_length\_squared@{vec3\_length\_squared}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_length\_squared()}{vec3\_length\_squared()}}
+{\footnotesize\ttfamily \label{omath_8h_a9b66d538f8fafbea104a80fb847881d6} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec3\+\_\+length\+\_\+squared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns the squared length of the provided vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to retrieve the squared length of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The squared length. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ab19236d830af54451a028232f3bec40b}\index{omath.h@{omath.h}!vec3\_mul@{vec3\_mul}}
+\index{vec3\_mul@{vec3\_mul}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_mul()}{vec3\_mul()}}
+{\footnotesize\ttfamily \label{omath_8h_ab19236d830af54451a028232f3bec40b} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a55214c662aee8fa106967d3270e51513}\index{omath.h@{omath.h}!vec3\_mul\_scalar@{vec3\_mul\_scalar}}
+\index{vec3\_mul\_scalar@{vec3\_mul\_scalar}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_mul\_scalar()}{vec3\_mul\_scalar()}}
+{\footnotesize\ttfamily \label{omath_8h_a55214c662aee8fa106967d3270e51513} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+mul\+\_\+scalar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{scalar}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies all elements of vector\+\_\+0 by scalar and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The vector to be multiplied. \\
+\hline
+{\em scalar} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A copy of the resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ab4774dd4f2b80faa85312bfbda604076}\index{omath.h@{omath.h}!vec3\_normalize@{vec3\_normalize}}
+\index{vec3\_normalize@{vec3\_normalize}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_normalize()}{vec3\_normalize()}}
+{\footnotesize\ttfamily \label{omath_8h_ab4774dd4f2b80faa85312bfbda604076} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} void vec3\+\_\+normalize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} \texorpdfstring{$\ast$}{*}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes the provided vector in place to a unit vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & A pointer to the vector to be normalized. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{omath_8h_a6a2c01f912a307f9bb9010ca735beb74}\index{omath.h@{omath.h}!vec3\_normalized@{vec3\_normalized}}
+\index{vec3\_normalized@{vec3\_normalized}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_normalized()}{vec3\_normalized()}}
+{\footnotesize\ttfamily \label{omath_8h_a6a2c01f912a307f9bb9010ca735beb74} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+normalized (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns a normalized copy of the supplied vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to be normalized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A normalized copy of the supplied vector 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a2560efab1a1d61e74561478b935f4846}\index{omath.h@{omath.h}!vec3\_one@{vec3\_one}}
+\index{vec3\_one@{vec3\_one}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_one()}{vec3\_one()}}
+{\footnotesize\ttfamily \label{omath_8h_a2560efab1a1d61e74561478b935f4846} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+one (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector with all components set to 1.\+0f. 
+
+\Hypertarget{omath_8h_a5e510a79d7a235f2cefd11fef74d100b}\index{omath.h@{omath.h}!vec3\_right@{vec3\_right}}
+\index{vec3\_right@{vec3\_right}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_right()}{vec3\_right()}}
+{\footnotesize\ttfamily \label{omath_8h_a5e510a79d7a235f2cefd11fef74d100b} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+right (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector pointing right (1, 0, 0). 
+
+\Hypertarget{omath_8h_ab26dc32431c3c36f1149e6d0e2e7c928}\index{omath.h@{omath.h}!vec3\_sub@{vec3\_sub}}
+\index{vec3\_sub@{vec3\_sub}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_sub()}{vec3\_sub()}}
+{\footnotesize\ttfamily \label{omath_8h_ab26dc32431c3c36f1149e6d0e2e7c928} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Subtracts vector\+\_\+1 from vector\+\_\+0 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a54456c86d36652215292a6039c106f88}\index{omath.h@{omath.h}!vec3\_to\_vec4@{vec3\_to\_vec4}}
+\index{vec3\_to\_vec4@{vec3\_to\_vec4}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_to\_vec4()}{vec3\_to\_vec4()}}
+{\footnotesize\ttfamily \label{omath_8h_a54456c86d36652215292a6039c106f88} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec3\+\_\+to\+\_\+vec4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{w}{}\end{DoxyParamCaption})}
+
+
+
+Returns a new vec4 using vector as the x, y and z components and w for w. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 3-\/component vector. \\
+\hline
+{\em w} & The w component. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new vec4 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ad2b8f074686aa50156d4ef80e44c2fb2}\index{omath.h@{omath.h}!vec3\_up@{vec3\_up}}
+\index{vec3\_up@{vec3\_up}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_up()}{vec3\_up()}}
+{\footnotesize\ttfamily \label{omath_8h_ad2b8f074686aa50156d4ef80e44c2fb2} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector pointing up (0, 1, 0). 
+
+\Hypertarget{omath_8h_a733dab81a0f800c919bc4fb360f36df1}\index{omath.h@{omath.h}!vec3\_zero@{vec3\_zero}}
+\index{vec3\_zero@{vec3\_zero}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec3\_zero()}{vec3\_zero()}}
+{\footnotesize\ttfamily \label{omath_8h_a733dab81a0f800c919bc4fb360f36df1} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec3\+\_\+zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector with all components set to 0.\+0f. 
+
+\Hypertarget{omath_8h_a6fe3d760283ffeb95f3ba330124a2e9e}\index{omath.h@{omath.h}!vec4\_add@{vec4\_add}}
+\index{vec4\_add@{vec4\_add}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_add()}{vec4\_add()}}
+{\footnotesize\ttfamily \label{omath_8h_a6fe3d760283ffeb95f3ba330124a2e9e} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Adds vector\+\_\+1 to vector\+\_\+0 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_ae79c03c2686e912608640b75e62f1350}\index{omath.h@{omath.h}!vec4\_create@{vec4\_create}}
+\index{vec4\_create@{vec4\_create}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_create()}{vec4\_create()}}
+{\footnotesize\ttfamily \label{omath_8h_ae79c03c2686e912608640b75e62f1350} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{x}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{y}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{z}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{w}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a new 4-\/element vector using the supplied values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x value. \\
+\hline
+{\em y} & The y value. \\
+\hline
+{\em z} & The z value. \\
+\hline
+{\em w} & The w value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new 4-\/element vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a7d8af6224132e0a59f9ac4cad3f4a5bf}\index{omath.h@{omath.h}!vec4\_div@{vec4\_div}}
+\index{vec4\_div@{vec4\_div}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_div()}{vec4\_div()}}
+{\footnotesize\ttfamily \label{omath_8h_a7d8af6224132e0a59f9ac4cad3f4a5bf} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+div (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Divides vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a6ad236ff3c3a20753ba272e1bc45960e}\index{omath.h@{omath.h}!vec4\_dot\_f32@{vec4\_dot\_f32}}
+\index{vec4\_dot\_f32@{vec4\_dot\_f32}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_dot\_f32()}{vec4\_dot\_f32()}}
+{\footnotesize\ttfamily \label{omath_8h_a6ad236ff3c3a20753ba272e1bc45960e} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec4\+\_\+dot\+\_\+f32 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{a0}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{a1}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{a2}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{a3}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{b0}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{b1}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{b2}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{b3}{}\end{DoxyParamCaption})}
+
+\Hypertarget{omath_8h_a3be7ee02ed4b0513ea39f79421276422}\index{omath.h@{omath.h}!vec4\_from\_vec3@{vec4\_from\_vec3}}
+\index{vec4\_from\_vec3@{vec4\_from\_vec3}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_from\_vec3()}{vec4\_from\_vec3()}}
+{\footnotesize\ttfamily \label{omath_8h_a3be7ee02ed4b0513ea39f79421276422} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+from\+\_\+vec3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}}}]{vector}{, }\item[{\mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}}]{w}{}\end{DoxyParamCaption})}
+
+
+
+Returns a new vec4 using vector as the x, y and z components and w for w. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 3-\/component vector. \\
+\hline
+{\em w} & The w component. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new vec4 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a3e0a5215133ab952dbb56b23fb32333f}\index{omath.h@{omath.h}!vec4\_length@{vec4\_length}}
+\index{vec4\_length@{vec4\_length}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_length()}{vec4\_length()}}
+{\footnotesize\ttfamily \label{omath_8h_a3e0a5215133ab952dbb56b23fb32333f} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec4\+\_\+length (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns the length of the provided vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to retrieve the length of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The length. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a4b846c636f5c1d061649055af38c2c44}\index{omath.h@{omath.h}!vec4\_length\_squared@{vec4\_length\_squared}}
+\index{vec4\_length\_squared@{vec4\_length\_squared}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_length\_squared()}{vec4\_length\_squared()}}
+{\footnotesize\ttfamily \label{omath_8h_a4b846c636f5c1d061649055af38c2c44} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}} vec4\+\_\+length\+\_\+squared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns the squared length of the provided vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to retrieve the squared length of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The squared length. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_af8919bf2831a55b1d4e708bbb48ac458}\index{omath.h@{omath.h}!vec4\_mul@{vec4\_mul}}
+\index{vec4\_mul@{vec4\_mul}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_mul()}{vec4\_mul()}}
+{\footnotesize\ttfamily \label{omath_8h_af8919bf2831a55b1d4e708bbb48ac458} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies vector\+\_\+0 by vector\+\_\+1 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a4ec7f0e49052a2e817be956b3db94226}\index{omath.h@{omath.h}!vec4\_normalize@{vec4\_normalize}}
+\index{vec4\_normalize@{vec4\_normalize}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_normalize()}{vec4\_normalize()}}
+{\footnotesize\ttfamily \label{omath_8h_a4ec7f0e49052a2e817be956b3db94226} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} void vec4\+\_\+normalize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} \texorpdfstring{$\ast$}{*}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes the provided vector in place to a unit vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & A pointer to the vector to be normalized. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{omath_8h_a32deda686fc980864541c3113fb7fd62}\index{omath.h@{omath.h}!vec4\_normalized@{vec4\_normalized}}
+\index{vec4\_normalized@{vec4\_normalized}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_normalized()}{vec4\_normalized()}}
+{\footnotesize\ttfamily \label{omath_8h_a32deda686fc980864541c3113fb7fd62} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+normalized (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns a normalized copy of the supplied vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector to be normalized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A normalized copy of the supplied vector 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a231ba93a9e5cda01728ce979a1ff89e5}\index{omath.h@{omath.h}!vec4\_one@{vec4\_one}}
+\index{vec4\_one@{vec4\_one}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_one()}{vec4\_one()}}
+{\footnotesize\ttfamily \label{omath_8h_a231ba93a9e5cda01728ce979a1ff89e5} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+one (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector with all components set to 1.\+0f. 
+
+\Hypertarget{omath_8h_a9de13b1e7571d40679c8e8588d78f912}\index{omath.h@{omath.h}!vec4\_sub@{vec4\_sub}}
+\index{vec4\_sub@{vec4\_sub}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_sub()}{vec4\_sub()}}
+{\footnotesize\ttfamily \label{omath_8h_a9de13b1e7571d40679c8e8588d78f912} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+0}{, }\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector\+\_\+1}{}\end{DoxyParamCaption})}
+
+
+
+Subtracts vector\+\_\+1 from vector\+\_\+0 and returns a copy of the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+0} & The first vector. \\
+\hline
+{\em vector\+\_\+1} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector. 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a8aee2ea18a4edbd86af96c6edf4d5af5}\index{omath.h@{omath.h}!vec4\_to\_vec3@{vec4\_to\_vec3}}
+\index{vec4\_to\_vec3@{vec4\_to\_vec3}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_to\_vec3()}{vec4\_to\_vec3()}}
+{\footnotesize\ttfamily \label{omath_8h_a8aee2ea18a4edbd86af96c6edf4d5af5} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a291ce5191b34b920d576c84fd970b9ef}{vec3}} vec4\+\_\+to\+\_\+vec3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}}}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Returns a new vec3 containing the x, y and z components of the supplied vec4, essentially dropping the w component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 4-\/component vector to extract from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new vec3 
+\end{DoxyReturn}
+\Hypertarget{omath_8h_a65567a2fffadaf8a1bd23720c234a8c9}\index{omath.h@{omath.h}!vec4\_zero@{vec4\_zero}}
+\index{vec4\_zero@{vec4\_zero}!omath.h@{omath.h}}
+\doxysubsubsection{\texorpdfstring{vec4\_zero()}{vec4\_zero()}}
+{\footnotesize\ttfamily \label{omath_8h_a65567a2fffadaf8a1bd23720c234a8c9} 
+\mbox{\hyperlink{defines_8h_aaa3b230824d77263a6ce0871adb33a4a}{OINLINE}} \mbox{\hyperlink{math__types_8h_a6d07267a855fd8e0194ffcb3128396cd}{vec4}} vec4\+\_\+zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates and returns a 3-\/component vector with all components set to 0.\+0f. 
+

@@ -170,7 +170,7 @@ void vulkan_object_shader_use(vulkan_context *context,
 }
 
 void vulkan_object_shader_update_global_state(
-    vulkan_context *context, struct vulkan_object_shader *shader) {
+    vulkan_context *context, struct vulkan_object_shader *shader, u32* delta_time) {
   u32 image_index = context->image_index;
   VkCommandBuffer command_buffer =
       context->graphics_command_buffers[image_index].handle;
@@ -207,4 +207,12 @@ void vulkan_object_shader_update_global_state(
 
   vkUpdateDescriptorSets(context->device.logical_device, 1, &descriptor_write,
                          0, 0);
+}
+
+
+void vulkan_object_shader_update_object(vulkan_context* context, struct vulkan_object_shader* shader, geometry_render_data render_data) {
+    u32 image_index = context->image_index;
+    VkCommandBuffer command_buffer = context->graphics_command_buffers[image_index].handle;
+
+    vkCmdPushConstants(command_buffer, shader->pipeline.pipeline_layout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(mat4), &render_data.model);
 }

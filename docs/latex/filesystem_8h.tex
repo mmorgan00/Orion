@@ -1,0 +1,134 @@
+\doxysection{engine/src/platform/filesystem.h File Reference}
+\hypertarget{filesystem_8h}{}\label{filesystem_8h}\index{engine/src/platform/filesystem.h@{engine/src/platform/filesystem.h}}
+{\ttfamily \#include "{}defines.\+h"{}}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfile__handle}{file\+\_\+handle}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct file\+\_\+handle \mbox{\hyperlink{filesystem_8h_a7476969a55c37c65e7364842e81b93d7}{file\+\_\+handle}}
+\item 
+typedef enum \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}} \mbox{\hyperlink{filesystem_8h_a260a6f6af9275cf2bfbc28e6a687710b}{file\+\_\+modes}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}} \{ \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dca89cf567f3e692c97873d7a795c17feca}{FILE\+\_\+\+MODE\+\_\+\+READ}} = 0x1
+, \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dca12eb77a5f1206154eb9f5adc219c9d5b}{FILE\+\_\+\+MODE\+\_\+\+WRITE}} = 0x2
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_a425da45cde9dd4d59c174b66d0875a42}{filesystem\+\_\+exists}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_a4e0b03c8ddb78e8d057ae4f0ff894a74}{filesystem\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}} mode, \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} binary, \mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}out\+\_\+handle)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} void \mbox{\hyperlink{filesystem_8h_ac6560ff188bdff077084297539c29520}{filesystem\+\_\+close}} (\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_a8f21e54f2b95f2d9efb90ea03b389c02}{filesystem\+\_\+read\+\_\+line}} (\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}handle, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}line\+\_\+buf)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_abcbf7dbcdad275f62e5cfa7f6c8be6ea}{filesystem\+\_\+write\+\_\+line}} (\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}handle, const char \texorpdfstring{$\ast$}{*}text)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_adecf0f136fc2365c164b6c6b43ef192d}{filesystem\+\_\+read}} (\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}handle, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} data\+\_\+size, void \texorpdfstring{$\ast$}{*}out\+\_\+data, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \texorpdfstring{$\ast$}{*}out\+\_\+bytes\+\_\+read)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_a40637a071e24606249987927596da049}{filesystem\+\_\+read\+\_\+all\+\_\+bytes}} (\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}handle, \mbox{\hyperlink{defines_8h_aed742c436da53c1080638ce6ef7d13de}{u8}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}out\+\_\+bytes, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \texorpdfstring{$\ast$}{*}out\+\_\+bytes\+\_\+read)
+\item 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{filesystem_8h_ad3e0f95e2a7007d97b89d8d1016fcb61}{filesystem\+\_\+write}} (\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}handle, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} data\+\_\+size, const void \texorpdfstring{$\ast$}{*}data, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \texorpdfstring{$\ast$}{*}out\+\_\+bytes\+\_\+written)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{filesystem_8h_a7476969a55c37c65e7364842e81b93d7}\index{filesystem.h@{filesystem.h}!file\_handle@{file\_handle}}
+\index{file\_handle@{file\_handle}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{file\_handle}{file\_handle}}
+{\footnotesize\ttfamily \label{filesystem_8h_a7476969a55c37c65e7364842e81b93d7} 
+typedef struct file\+\_\+handle file\+\_\+handle}
+
+\Hypertarget{filesystem_8h_a260a6f6af9275cf2bfbc28e6a687710b}\index{filesystem.h@{filesystem.h}!file\_modes@{file\_modes}}
+\index{file\_modes@{file\_modes}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{file\_modes}{file\_modes}}
+{\footnotesize\ttfamily \label{filesystem_8h_a260a6f6af9275cf2bfbc28e6a687710b} 
+typedef enum \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}} \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}\index{filesystem.h@{filesystem.h}!file\_modes@{file\_modes}}
+\index{file\_modes@{file\_modes}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{file\_modes}{file\_modes}}
+{\footnotesize\ttfamily \label{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc} 
+enum \mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILE\_MODE\_READ@{FILE\_MODE\_READ}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!FILE\_MODE\_READ@{FILE\_MODE\_READ}}}\Hypertarget{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dca89cf567f3e692c97873d7a795c17feca}\label{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc} 
+FILE\+\_\+\+MODE\+\_\+\+READ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILE\_MODE\_WRITE@{FILE\_MODE\_WRITE}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!FILE\_MODE\_WRITE@{FILE\_MODE\_WRITE}}}\Hypertarget{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dca12eb77a5f1206154eb9f5adc219c9d5b}\label{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc} 
+FILE\+\_\+\+MODE\+\_\+\+WRITE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{filesystem_8h_ac6560ff188bdff077084297539c29520}\index{filesystem.h@{filesystem.h}!filesystem\_close@{filesystem\_close}}
+\index{filesystem\_close@{filesystem\_close}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_close()}{filesystem\_close()}}
+{\footnotesize\ttfamily \label{filesystem_8h_ac6560ff188bdff077084297539c29520} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} void filesystem\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_a425da45cde9dd4d59c174b66d0875a42}\index{filesystem.h@{filesystem.h}!filesystem\_exists@{filesystem\_exists}}
+\index{filesystem\_exists@{filesystem\_exists}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_exists()}{filesystem\_exists()}}
+{\footnotesize\ttfamily \label{filesystem_8h_a425da45cde9dd4d59c174b66d0875a42} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+exists (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+Checks if a file with the given path exists 
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of the file to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if exists, false if not 
+\end{DoxyReturn}
+\Hypertarget{filesystem_8h_a4e0b03c8ddb78e8d057ae4f0ff894a74}\index{filesystem.h@{filesystem.h}!filesystem\_open@{filesystem\_open}}
+\index{filesystem\_open@{filesystem\_open}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_open()}{filesystem\_open()}}
+{\footnotesize\ttfamily \label{filesystem_8h_a4e0b03c8ddb78e8d057ae4f0ff894a74} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{\mbox{\hyperlink{filesystem_8h_a65ff8d4f12985f7d5210a0688be998dc}{file\+\_\+modes}}}]{mode}{, }\item[{\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}}]{binary}{, }\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+handle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_adecf0f136fc2365c164b6c6b43ef192d}\index{filesystem.h@{filesystem.h}!filesystem\_read@{filesystem\_read}}
+\index{filesystem\_read@{filesystem\_read}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_read()}{filesystem\_read()}}
+{\footnotesize\ttfamily \label{filesystem_8h_adecf0f136fc2365c164b6c6b43ef192d} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}}]{data\+\_\+size}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{out\+\_\+data}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+bytes\+\_\+read}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_a40637a071e24606249987927596da049}\index{filesystem.h@{filesystem.h}!filesystem\_read\_all\_bytes@{filesystem\_read\_all\_bytes}}
+\index{filesystem\_read\_all\_bytes@{filesystem\_read\_all\_bytes}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_read\_all\_bytes()}{filesystem\_read\_all\_bytes()}}
+{\footnotesize\ttfamily \label{filesystem_8h_a40637a071e24606249987927596da049} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+read\+\_\+all\+\_\+bytes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\mbox{\hyperlink{defines_8h_aed742c436da53c1080638ce6ef7d13de}{u8}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{out\+\_\+bytes}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+bytes\+\_\+read}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_a8f21e54f2b95f2d9efb90ea03b389c02}\index{filesystem.h@{filesystem.h}!filesystem\_read\_line@{filesystem\_read\_line}}
+\index{filesystem\_read\_line@{filesystem\_read\_line}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_read\_line()}{filesystem\_read\_line()}}
+{\footnotesize\ttfamily \label{filesystem_8h_a8f21e54f2b95f2d9efb90ea03b389c02} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+read\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{line\+\_\+buf}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_ad3e0f95e2a7007d97b89d8d1016fcb61}\index{filesystem.h@{filesystem.h}!filesystem\_write@{filesystem\_write}}
+\index{filesystem\_write@{filesystem\_write}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_write()}{filesystem\_write()}}
+{\footnotesize\ttfamily \label{filesystem_8h_ad3e0f95e2a7007d97b89d8d1016fcb61} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}}]{data\+\_\+size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+bytes\+\_\+written}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_abcbf7dbcdad275f62e5cfa7f6c8be6ea}\index{filesystem.h@{filesystem.h}!filesystem\_write\_line@{filesystem\_write\_line}}
+\index{filesystem\_write\_line@{filesystem\_write\_line}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{filesystem\_write\_line()}{filesystem\_write\_line()}}
+{\footnotesize\ttfamily \label{filesystem_8h_abcbf7dbcdad275f62e5cfa7f6c8be6ea} 
+\mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}} \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} filesystem\+\_\+write\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfile__handle}{file\+\_\+handle}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{}\end{DoxyParamCaption})}
+

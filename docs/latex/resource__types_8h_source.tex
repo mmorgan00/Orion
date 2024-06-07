@@ -1,0 +1,22 @@
+\doxysection{resource\+\_\+types.\+h}
+\hypertarget{resource__types_8h_source}{}\label{resource__types_8h_source}\index{engine/src/resources/resource\_types.h@{engine/src/resources/resource\_types.h}}
+\mbox{\hyperlink{resource__types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{math__types_8h}{math/math\_types.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structtexture}{texture}}\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{comment}{//\ future\ proofing\ -\/\ this\ should\ be\ helpful\ of\ 'which\ texture\ an\ object\ in\ game\ needs'}}
+\DoxyCodeLine{00007\ \ \ \ \ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ \mbox{\hyperlink{structtexture_a80d0e2a9d244ce65a29cb87e5db5c695}{id}};}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{//\ standard\ details\ needed}}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ \mbox{\hyperlink{structtexture_ae54857884dad86252f0615066be9990f}{width}};}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ \mbox{\hyperlink{structtexture_ab135b895ef0f58fde3dfbdf840692e2d}{height}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//\ channel/transparency\ seems\ like\ something\ that\ will\ be\ helpful\ later\ based\ on\ referencing\ unreal}}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{defines_8h_aed742c436da53c1080638ce6ef7d13de}{u8}}\ \mbox{\hyperlink{structtexture_ae00b4c6fc1add9e080a13fff260c01ca}{channel\_count}};}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ \mbox{\hyperlink{structtexture_ab9b61470d021bc2e7d8a4ee544f4ffe6}{has\_transparency}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ void\ pointer\ to\ be\ flexible\ of\ different\ renderer\ backends}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structtexture_a2a635d43b6e8cde4581d47b1f3945677}{internal\_data}};}
+\DoxyCodeLine{00016\ \}\ \mbox{\hyperlink{resource__types_8h_a69d9ace16ce6a6b0a69cdbce7b88ceed}{texture}};}
+
+\end{DoxyCode}

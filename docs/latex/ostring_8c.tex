@@ -1,0 +1,65 @@
+\doxysection{engine/src/core/ostring.c File Reference}
+\hypertarget{ostring_8c}{}\label{ostring_8c}\index{engine/src/core/ostring.c@{engine/src/core/ostring.c}}
+{\ttfamily \#include "{}core/ostring.\+h"{}}\newline
+{\ttfamily \#include "{}core/omemory.\+h"{}}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} \mbox{\hyperlink{ostring_8c_a3ac8f7f54a3429135da71637d268e6c9}{string\+\_\+length}} (const char \texorpdfstring{$\ast$}{*}str)
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{ostring_8c_ae4d2c3111ca8e06cce31d32a7928f320}{string\+\_\+duplicate}} (const char \texorpdfstring{$\ast$}{*}str)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{ostring_8c_a4088fb073177638c470fee72f8f2180a}{strings\+\_\+equal}} (const char \texorpdfstring{$\ast$}{*}str0, const char \texorpdfstring{$\ast$}{*}str1)
+\item 
+\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} \mbox{\hyperlink{ostring_8c_a86babd936b82eaf4229e77406968f74d}{string\+\_\+format}} (char \texorpdfstring{$\ast$}{*}dest, const char \texorpdfstring{$\ast$}{*}format,...)
+\item 
+\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} \mbox{\hyperlink{ostring_8c_a8cae02ae95f76915f2f34954f56f3105}{string\+\_\+format\+\_\+v}} (char \texorpdfstring{$\ast$}{*}dest, const char \texorpdfstring{$\ast$}{*}format, void \texorpdfstring{$\ast$}{*}va\+\_\+listp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ostring_8c_ae4d2c3111ca8e06cce31d32a7928f320}\index{ostring.c@{ostring.c}!string\_duplicate@{string\_duplicate}}
+\index{string\_duplicate@{string\_duplicate}!ostring.c@{ostring.c}}
+\doxysubsubsection{\texorpdfstring{string\_duplicate()}{string\_duplicate()}}
+{\footnotesize\ttfamily \label{ostring_8c_ae4d2c3111ca8e06cce31d32a7928f320} 
+char \texorpdfstring{$\ast$}{*} string\+\_\+duplicate (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ostring_8c_a86babd936b82eaf4229e77406968f74d}\index{ostring.c@{ostring.c}!string\_format@{string\_format}}
+\index{string\_format@{string\_format}!ostring.c@{ostring.c}}
+\doxysubsubsection{\texorpdfstring{string\_format()}{string\_format()}}
+{\footnotesize\ttfamily \label{ostring_8c_a86babd936b82eaf4229e77406968f74d} 
+\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} string\+\_\+format (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{format}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ostring_8c_a8cae02ae95f76915f2f34954f56f3105}\index{ostring.c@{ostring.c}!string\_format\_v@{string\_format\_v}}
+\index{string\_format\_v@{string\_format\_v}!ostring.c@{ostring.c}}
+\doxysubsubsection{\texorpdfstring{string\_format\_v()}{string\_format\_v()}}
+{\footnotesize\ttfamily \label{ostring_8c_a8cae02ae95f76915f2f34954f56f3105} 
+\mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}} string\+\_\+format\+\_\+v (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{format}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{va\+\_\+list}{}\end{DoxyParamCaption})}
+
+Performs variadic string formatting to dest given format string and va\+\_\+list. 
+\begin{DoxyParams}{Parameters}
+{\em dest} & The destination for the formatted string. \\
+\hline
+{\em format} & The string to be formatted. \\
+\hline
+{\em va\+\_\+list} & The variadic argument list. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The size of the data written. 
+\end{DoxyReturn}
+\Hypertarget{ostring_8c_a3ac8f7f54a3429135da71637d268e6c9}\index{ostring.c@{ostring.c}!string\_length@{string\_length}}
+\index{string\_length@{string\_length}!ostring.c@{ostring.c}}
+\doxysubsubsection{\texorpdfstring{string\_length()}{string\_length()}}
+{\footnotesize\ttfamily \label{ostring_8c_a3ac8f7f54a3429135da71637d268e6c9} 
+\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} string\+\_\+length (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ostring_8c_a4088fb073177638c470fee72f8f2180a}\index{ostring.c@{ostring.c}!strings\_equal@{strings\_equal}}
+\index{strings\_equal@{strings\_equal}!ostring.c@{ostring.c}}
+\doxysubsubsection{\texorpdfstring{strings\_equal()}{strings\_equal()}}
+{\footnotesize\ttfamily \label{ostring_8c_a4088fb073177638c470fee72f8f2180a} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} strings\+\_\+equal (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str0}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{str1}{}\end{DoxyParamCaption})}
+

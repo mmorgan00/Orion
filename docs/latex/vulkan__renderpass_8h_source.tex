@@ -1,0 +1,25 @@
+\doxysection{vulkan\+\_\+renderpass.\+h}
+\hypertarget{vulkan__renderpass_8h_source}{}\label{vulkan__renderpass_8h_source}\index{engine/src/renderer/vulkan/vulkan\_renderpass.h@{engine/src/renderer/vulkan/vulkan\_renderpass.h}}
+\mbox{\hyperlink{vulkan__renderpass_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vulkan__types_8inl}{vulkan\_types.inl}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__renderpass_8h_a6cb37ba96525608948661a9a41a15506}{vulkan\_renderpass\_create}}(}
+\DoxyCodeLine{00006\ \ \ \ \ \mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,\ \mbox{\hyperlink{structvulkan__renderpass}{vulkan\_renderpass}}\ *out\_renderpass,}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{comment}{//\ TODO:\ Replace\ with\ proper\ struct\ when\ we\ implement\ math\ library}}
+\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ x,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ y,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ w,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ h,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ r,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ g,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ b,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ a,\ \mbox{\hyperlink{defines_8h_a5f6906312a689f27d70e9d086649d3fd}{f32}}\ depth,}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ stencil);}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__renderpass_8h_a2656c53811b44888152b5a19f7ece679}{vulkan\_renderpass\_destroy}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__renderpass}{vulkan\_renderpass}}\ *renderpass);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__renderpass_8h_ad41d3572b06fd3a6973d84b7362243e9}{vulkan\_renderpass\_begin}}(\mbox{\hyperlink{structvulkan__command__buffer}{vulkan\_command\_buffer}}\ *command\_buffer,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__renderpass}{vulkan\_renderpass}}\ *renderpass,}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkFramebuffer\ frame\_buffer);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__renderpass_8h_afc8178f17adfad94842efd1ec0f74d83}{vulkan\_renderpass\_end}}(\mbox{\hyperlink{structvulkan__command__buffer}{vulkan\_command\_buffer}}\ *command\_buffer,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__renderpass}{vulkan\_renderpass}}\ *renderpass);}
+
+\end{DoxyCode}

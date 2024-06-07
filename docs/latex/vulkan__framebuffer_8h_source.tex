@@ -1,0 +1,18 @@
+\doxysection{vulkan\+\_\+framebuffer.\+h}
+\hypertarget{vulkan__framebuffer_8h_source}{}\label{vulkan__framebuffer_8h_source}\index{engine/src/renderer/vulkan/vulkan\_framebuffer.h@{engine/src/renderer/vulkan/vulkan\_framebuffer.h}}
+\mbox{\hyperlink{vulkan__framebuffer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vulkan__types_8inl}{vulkan\_types.inl}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__framebuffer_8h_af32d3dc7e47a5b215d7908a41cb0b0b8}{vulkan\_framebuffer\_create}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__renderpass}{vulkan\_renderpass}}\ *renderpass,\ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ width,}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ height,\ \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}\ attachment\_count,}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkImageView\ *attachments,}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__framebuffer}{vulkan\_framebuffer}}\ *out\_framebuffer);}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vulkan__framebuffer_8h_aea0d3009ee4fb379695399f666332691}{vulkan\_framebuffer\_destroy}}(\mbox{\hyperlink{structvulkan__context}{vulkan\_context}}\ *context,}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structvulkan__framebuffer}{vulkan\_framebuffer}}\ *framebuffer);}
+
+\end{DoxyCode}

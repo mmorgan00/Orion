@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['s_0',['s',['../unionvec2__u.html#a7f7d6696b7c77ae7331260852380b603',1,'vec2_u::s'],['../structvec3__u.html#a42b8186f8d017cfa2d1127d3c5526696',1,'vec3_u::s'],['../unionvec4__u.html#a915df9a2f0520e4601079e70f9d210fa',1,'vec4_u::s']]],
+  ['sampler_1',['sampler',['../structvulkan__texture__data.html#a71b1bac3abe1fcd78504d46ccf1dde56',1,'vulkan_texture_data']]],
+  ['sampler_5fanisotropy_2',['sampler_anisotropy',['../structvulkan__physical__device__requirements.html#afbd2891e580f96fc355eb1d62167a5cf',1,'vulkan_physical_device_requirements']]],
+  ['shader_5fstage_5fcreate_5finfo_3',['shader_stage_create_info',['../structvulkan__shader__stage.html#a8fd95ae69efdd2a0d0e9a55642ad8204',1,'vulkan_shader_stage']]],
+  ['shutdown_4',['shutdown',['../structrenderer__backend.html#a2f44c742255595a34292c03c0f5c3129',1,'renderer_backend']]],
+  ['skip_5',['skip',['../structstbi__io__callbacks.html#a257aac5480a90a6c4b8fbe86c1b01068',1,'stbi_io_callbacks']]],
+  ['stages_6',['stages',['../structvulkan__object__shader.html#a57d6656d05b3f7f0d86cda09e8646b6e',1,'vulkan_object_shader']]],
+  ['start_5fheight_7',['start_height',['../structapplication__config.html#ac68f9a14ef59ea92736d708a91ee90d6',1,'application_config']]],
+  ['start_5fpos_5fx_8',['start_pos_x',['../structapplication__config.html#abdaa5a7e7c0115c3c6d84ebcd052279c',1,'application_config']]],
+  ['start_5fpos_5fy_9',['start_pos_y',['../structapplication__config.html#a40adc567d6986c0cb0e67ffd3ca95aa1',1,'application_config']]],
+  ['start_5ftime_10',['start_time',['../structclock.html#a139887730e22bc3797ec70e49a6b9e6d',1,'clock']]],
+  ['start_5fwidth_11',['start_width',['../structapplication__config.html#a0fc9a6f3ed272fd04205fba11bb6545a',1,'application_config']]],
+  ['state_12',['state',['../structgame.html#aa77684f4c43b2aafcaa57421159f5d03',1,'game::state'],['../structvulkan__renderpass.html#a75bac178ff0c36ea29e4d458563d3b2e',1,'vulkan_renderpass::state'],['../structvulkan__command__buffer.html#ae5f14e0e69c6df7a2c7405c7adc1bd60',1,'vulkan_command_buffer::state']]],
+  ['stats_13',['stats',['../structmemory__system__state.html#a531467e3ef52d68219f7def5e3302433',1,'memory_system_state']]],
+  ['stencil_14',['stencil',['../structvulkan__renderpass.html#a58060b19ec2e550c27aaa934c66639cf',1,'vulkan_renderpass']]],
+  ['surface_15',['surface',['../structvulkan__context.html#ad0cd4ef188f905064d59bb918b69eb38',1,'vulkan_context']]],
+  ['swapchain_16',['swapchain',['../structvulkan__context.html#a847e3b9f7c19d2dc9a623bc84403ee8e',1,'vulkan_context']]],
+  ['swapchain_5fsupport_17',['swapchain_support',['../structvulkan__device.html#ac69198592baf1a03fe628b88b1774193',1,'vulkan_device']]],
+  ['systems_5fallocator_18',['systems_allocator',['../structapplication__state.html#a213ee353f6a3fbc499d583c79f369b9a',1,'application_state']]]
+];

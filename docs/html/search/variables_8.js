@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['i16_0',['i16',['../structevent__context.html#a70758089e3b68639ffb63ace3516f695',1,'event_context']]],
+  ['i32_1',['i32',['../structevent__context.html#a6e226e5e8fff23cda36d2c3a09f59c2e',1,'event_context']]],
+  ['i64_2',['i64',['../structevent__context.html#a31a4610e1961d5333e6e0be776da62be',1,'event_context']]],
+  ['i8_3',['i8',['../structevent__context.html#a56f10070bb73660cfec58b51ec157414',1,'event_context']]],
+  ['id_4',['id',['../structtexture.html#a80d0e2a9d244ce65a29cb87e5db5c695',1,'texture']]],
+  ['image_5',['image',['../structvulkan__texture__data.html#a1c078092f7886da81b35b98155df91f1',1,'vulkan_texture_data']]],
+  ['image_5favailable_5fsemaphores_6',['image_available_semaphores',['../structvulkan__context.html#a8c5785218cb8df87943aa9392f895350',1,'vulkan_context']]],
+  ['image_5fcount_7',['image_count',['../structvulkan__swapchain.html#a28ddf97149aa479a7f4aa6ca6db16673',1,'vulkan_swapchain']]],
+  ['image_5fformat_8',['image_format',['../structvulkan__swapchain.html#af3fe0932b272203467d455b9b28e388f',1,'vulkan_swapchain']]],
+  ['image_5findex_9',['image_index',['../structvulkan__context.html#aa6a4941f42c210b9972650276df61972',1,'vulkan_context']]],
+  ['images_10',['images',['../structvulkan__swapchain.html#aeeb53b817379b14610d0dc392648a022',1,'vulkan_swapchain']]],
+  ['images_5fin_5fflight_11',['images_in_flight',['../structvulkan__context.html#af80f587ada76d90f71c0d7d62b6a4497',1,'vulkan_context']]],
+  ['in_5fflight_5ffence_5fcount_12',['in_flight_fence_count',['../structvulkan__context.html#a0f57ba68ce37990bdfde83b351c45747',1,'vulkan_context']]],
+  ['in_5fflight_5ffences_13',['in_flight_fences',['../structvulkan__context.html#a0149196e55e4efd1f146256ceee1ebcb',1,'vulkan_context']]],
+  ['initialize_14',['initialize',['../structgame.html#a5466af7e15d158c9a30a2c733514bc13',1,'game::initialize'],['../structrenderer__backend.html#acc42c40cad3f39ec3ae645b64d596c11',1,'renderer_backend::initialize']]],
+  ['instance_15',['instance',['../structvulkan__context.html#a71e13564f2111dafcda6c332918c196f',1,'vulkan_context']]],
+  ['internal_5fdata_16',['internal_data',['../structtexture.html#a2a635d43b6e8cde4581d47b1f3945677',1,'texture']]],
+  ['internal_5fstate_17',['internal_state',['../structplatform__state.html#ac902a69fe12cf6868862aad5a57b15d5',1,'platform_state']]],
+  ['is_5flocked_18',['is_locked',['../structvulkan__buffer.html#a36ecf49f62a41c58115355afef1d92a2',1,'vulkan_buffer']]],
+  ['is_5frunning_19',['is_running',['../structapplication__state.html#a7c10d54c29174a16313dfc1992ccabde',1,'application_state']]],
+  ['is_5fsignaled_20',['is_signaled',['../structvulkan__fence.html#a3212fc43aec63d5786bb60f89451a834',1,'vulkan_fence']]],
+  ['is_5fsuspended_21',['is_suspended',['../structapplication__state.html#a4e7125d95754ef0c0166479931eafcd1',1,'application_state']]],
+  ['is_5fvalid_22',['is_valid',['../structfile__handle.html#a35a655c6d44306eb8d36f3e313822d7d',1,'file_handle']]]
+];

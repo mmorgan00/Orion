@@ -1,0 +1,78 @@
+\doxysection{logger.\+h}
+\hypertarget{logger_8h_source}{}\label{logger_8h_source}\index{engine/src/core/logger.h@{engine/src/core/logger.h}}
+\mbox{\hyperlink{logger_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{defines_8h}{defines.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ LOG\_WARN\_ENABLED\ 1}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ LOG\_INFO\_ENABLED\ 1}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ LOG\_DEBUG\_ENABLED\ 1}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ LOG\_TRACE\_ENABLED\ 1}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Disable\ debug\ and\ trace\ logging\ for\ release\ builds.}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#if\ ORELEASE\ ==\ 1}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ LOG\_DEBUG\_ENABLED\ 0}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ LOG\_TRACE\_ENABLED\ 0}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748e}{log\_level}}\ \{}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748ea779dc8dd26898fb0f88cd5f6e02ba1e5}{LOG\_LEVEL\_FATAL}}\ =\ 0,}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748ea5b40f003febbc3b535649d63f4b8a44f}{LOG\_LEVEL\_ERROR}}\ =\ 1,}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748ea99c1e5c8e6d557f3993b9ab54a0107f4}{LOG\_LEVEL\_WARN}}\ =\ 2,}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748eaedee1e3159bfe7d918b6e29873c5aee4}{LOG\_LEVEL\_INFO}}\ =\ 3,}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748ea538b2b6e011479d408ecd2be0f6d6177}{LOG\_LEVEL\_DEBUG}}\ =\ 4,}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748ea8fa9f12103da446ab4f3d3dc2fcf7f5d}{LOG\_LEVEL\_TRACE}}\ =\ 5}
+\DoxyCodeLine{00023\ \}\ \mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748e}{log\_level}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00035\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ \mbox{\hyperlink{logger_8h_a124a9e558949da0e8f11f6929992a5c8}{initialize\_logging}}(\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}\ *memory\_requirement,\ \textcolor{keywordtype}{void}\ *state);}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logger_8h_aa19340b3c2c2f8f90a5c40d08b7919c7}{shutdown\_logging}}(\textcolor{keywordtype}{void}\ *state);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \mbox{\hyperlink{defines_8h_a7396f39b8604d8ae0f526d74a48343cd}{OAPI}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logger_8h_a168f294ba3a4f65afb4ed539efb44d1b}{log\_output}}(\mbox{\hyperlink{logger_8h_ac91d55174d383848b976a34de843748e}{log\_level}}\ level,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *message,\ ...);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Logs\ a\ fatal-\/level\ message.}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ OFATAL(message,\ ...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ log\_output(LOG\_LEVEL\_FATAL,\ message,\ \#\#\_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#ifndef\ OERROR}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ Logs\ an\ error-\/level\ message.}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ OERROR(message,\ ...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ log\_output(LOG\_LEVEL\_ERROR,\ message,\ \#\#\_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#if\ LOG\_WARN\_ENABLED\ ==\ 1}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ Logs\ a\ warning-\/level\ message.}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ OWARN(message,\ ...)\ log\_output(LOG\_LEVEL\_WARN,\ message,\ \#\#\_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ Does\ nothing\ when\ LOG\_WARN\_ENABLED\ !=\ 1}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ OWARN(message,\ ...)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#if\ LOG\_INFO\_ENABLED\ ==\ 1}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ Logs\ a\ info-\/level\ message.}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ OINFO(message,\ ...)\ log\_output(LOG\_LEVEL\_INFO,\ message,\ \#\#\_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ Does\ nothing\ when\ LOG\_INFO\_ENABLED\ !=\ 1}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ OINFO(message,\ ...)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#if\ LOG\_DEBUG\_ENABLED\ ==\ 1}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ Logs\ a\ debug-\/level\ message.}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ ODEBUG(message,\ ...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ log\_output(LOG\_LEVEL\_DEBUG,\ message,\ \#\#\_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ Does\ nothing\ when\ LOG\_DEBUG\_ENABLED\ !=\ 1}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ ODEBUG(message,\ ...)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#if\ LOG\_TRACE\_ENABLED\ ==\ 1}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ Logs\ a\ trace-\/level\ message.}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ OTRACE(message,\ ...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ log\_output(LOG\_LEVEL\_TRACE,\ message,\ \#\#\_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ Does\ nothing\ when\ LOG\_TRACE\_ENABLED\ !=\ 1}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ OTRACE(message,\ ...)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

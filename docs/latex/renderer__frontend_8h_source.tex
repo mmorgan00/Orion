@@ -1,0 +1,25 @@
+\doxysection{renderer\+\_\+frontend.\+h}
+\hypertarget{renderer__frontend_8h_source}{}\label{renderer__frontend_8h_source}\index{engine/src/renderer/renderer\_frontend.h@{engine/src/renderer/renderer\_frontend.h}}
+\mbox{\hyperlink{renderer__frontend_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{renderer__types_8inl}{renderer\_types.inl}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{struct\ }static\_mesh\_data;}
+\DoxyCodeLine{00006\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplatform__state}{platform\_state}};}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ \mbox{\hyperlink{renderer__frontend_8h_a22086f105bc3ec5fdad7381f76b5efb5}{renderer\_initialize}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *application\_name,}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structplatform__state}{platform\_state}}\ *plat\_state);}
+\DoxyCodeLine{00010\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{renderer__frontend_8h_a52882bf7ed3f35fe0593d1715edaa0b8}{renderer\_shutdown}}();}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{renderer__frontend_8h_a344ab27f3e341fd7b45eb38eafea2e00}{renderer\_on\_resized}}(\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}\ width,\ \mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}\ height);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ \mbox{\hyperlink{renderer__frontend_8h_aa1a64974ce989cb8a822d5910e45eeec}{renderer\_draw\_frame}}(\mbox{\hyperlink{structrender__packet}{render\_packet}}\ *packet);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{renderer__frontend_8h_a5b117e7a85c3c42da466c84b6a6e6efa}{renderer\_create\_texture}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ auto\_release,\ \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}\ width,\ \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}\ height,\ \mbox{\hyperlink{defines_8h_a9e3ad5f8e752f01d926ce122d5a5285e}{i32}}\ channel\_count,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{defines_8h_aed742c436da53c1080638ce6ef7d13de}{u8}}*\ pixels,\ \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}\ has\_transparency,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structtexture}{texture}}*\ out\_texture);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{renderer__frontend_8h_a07cb43f363df0240af713c483b72308f}{renderer\_destroy\_texture}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structtexture}{texture}}*\ \mbox{\hyperlink{structtexture}{texture}});}
+
+\end{DoxyCode}

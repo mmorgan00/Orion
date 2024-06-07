@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['g_0',['g',['../unionvec2__u.html#aff0ae00bf7a12746b464e98aa9d13b72',1,'vec2_u::g'],['../structvec3__u.html#acbca58fd977d801b8df9c5609d2874dd',1,'vec3_u::g'],['../unionvec4__u.html#a1357aa5045eab0c3a2d5703b9c418f91',1,'vec4_u::g'],['../structvulkan__renderpass.html#a8577b3c4a55889616408d366cecee327',1,'vulkan_renderpass::g']]],
+  ['game_1',['game',['../structgame.html',1,'game'],['../game__types_8h.html#a6b088197c03368f264f33c989d4f271b',1,'game:&#160;game_types.h']]],
+  ['game_20engine_20project_2',['Game Engine Project',['../index.html',1,'']]],
+  ['game_5finst_3',['game_inst',['../structapplication__state.html#ae224fcec4853d590c4068314f75196c2',1,'application_state']]],
+  ['game_5ftypes_2eh_4',['game_types.h',['../game__types_8h.html',1,'']]],
+  ['generations_5',['generations',['../structvulkan__descriptor__state.html#a23a6f33aad226b703f3b57fbec15e653',1,'vulkan_descriptor_state']]],
+  ['geometry_5findex_5foffset_6',['geometry_index_offset',['../structvulkan__context.html#ad610c646751b6a6c2296c6e0b67d26ad',1,'vulkan_context']]],
+  ['geometry_5frender_5fdata_7',['geometry_render_data',['../structgeometry__render__data.html',1,'geometry_render_data'],['../renderer__types_8inl.html#ab3456a4071cbefe6925390af55387301',1,'geometry_render_data:&#160;renderer_types.inl']]],
+  ['geometry_5fvertex_5foffset_8',['geometry_vertex_offset',['../structvulkan__context.html#a71f372a14660580b2b1ec234f2db6ed8',1,'vulkan_context']]],
+  ['get_5fmemory_5falloc_5fcount_9',['get_memory_alloc_count',['../omemory_8c.html#a856be2ba72d23a3da0f6720e8e29f281',1,'get_memory_alloc_count():&#160;omemory.c'],['../omemory_8h.html#aa554a779a23634000132e9b4695dfda1',1,'get_memory_alloc_count():&#160;omemory.c']]],
+  ['get_5fmemory_5fusage_5fstr_10',['get_memory_usage_str',['../omemory_8c.html#a952570f1b67855783413d2a0d4b0503a',1,'get_memory_usage_str():&#160;omemory.c'],['../omemory_8h.html#abce1db39c77d7e38d2fd57f1360ff193',1,'get_memory_usage_str():&#160;omemory.c']]],
+  ['getting_20started_11',['Getting Started',['../index.html#autotoc_md4',1,'']]],
+  ['global_5fdescriptor_5fpool_12',['global_descriptor_pool',['../structvulkan__object__shader.html#af1a9e91c927524b9aa4c5edc591f7fdd',1,'vulkan_object_shader']]],
+  ['global_5fdescriptor_5fset_5flayout_13',['global_descriptor_set_layout',['../structvulkan__object__shader.html#a2e2a42648b61a413af96ee559c45cb24',1,'vulkan_object_shader']]],
+  ['global_5fdescriptor_5fsets_14',['global_descriptor_sets',['../structvulkan__object__shader.html#a85ac958654baf9656e5d28173e00ac3e',1,'vulkan_object_shader']]],
+  ['global_5fubo_15',['global_ubo',['../structvulkan__object__shader.html#a6e890efdc676ae64999026d696249375',1,'vulkan_object_shader']]],
+  ['global_5funiform_5fbuffer_16',['global_uniform_buffer',['../structvulkan__object__shader.html#ade619ec2f4259292aa468f73cd460996',1,'vulkan_object_shader']]],
+  ['global_5funiform_5fobject_17',['global_uniform_object',['../structglobal__uniform__object.html',1,'global_uniform_object'],['../renderer__types_8inl.html#ad6ce7fe6860d2aff79b7eb0cd797254f',1,'global_uniform_object:&#160;renderer_types.inl']]],
+  ['graphics_18',['graphics',['../structvulkan__physical__device__requirements.html#a0d60ecb3ea4f8cf40a7f31781785b867',1,'vulkan_physical_device_requirements']]],
+  ['graphics_5fcommand_5fbuffers_19',['graphics_command_buffers',['../structvulkan__context.html#ada97681614808238c130037d71d38dca',1,'vulkan_context']]],
+  ['graphics_5fcommand_5fpool_20',['graphics_command_pool',['../structvulkan__device.html#a07e54130446cbf987c768bd47ce48c1c',1,'vulkan_device']]],
+  ['graphics_5ffamily_5findex_21',['graphics_family_index',['../structvulkan__physical__device__queue__family__info.html#a3e0af6aee700c3bfa0c29b971272154d',1,'vulkan_physical_device_queue_family_info']]],
+  ['graphics_5fqueue_22',['graphics_queue',['../structvulkan__device.html#a32d7146222dd894f4d4ddaf43238e588',1,'vulkan_device']]],
+  ['graphics_5fqueue_5findex_23',['graphics_queue_index',['../structvulkan__device.html#ac448e3e2e449538bbb592e9282b10535',1,'vulkan_device']]]
+];

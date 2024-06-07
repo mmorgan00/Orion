@@ -1,0 +1,85 @@
+\doxysection{engine/src/core/application.c File Reference}
+\hypertarget{application_8c}{}\label{application_8c}\index{engine/src/core/application.c@{engine/src/core/application.c}}
+{\ttfamily \#include "{}application.\+h"{}}\newline
+{\ttfamily \#include "{}game\+\_\+types.\+h"{}}\newline
+{\ttfamily \#include "{}logger.\+h"{}}\newline
+{\ttfamily \#include "{}core/clock.\+h"{}}\newline
+{\ttfamily \#include "{}core/event.\+h"{}}\newline
+{\ttfamily \#include "{}core/input.\+h"{}}\newline
+{\ttfamily \#include "{}core/omemory.\+h"{}}\newline
+{\ttfamily \#include "{}memory/linear\+\_\+allocator.\+h"{}}\newline
+{\ttfamily \#include "{}platform/platform.\+h"{}}\newline
+{\ttfamily \#include "{}renderer/renderer\+\_\+frontend.\+h"{}}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structapplication__state}{application\+\_\+state}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct application\+\_\+state \mbox{\hyperlink{application_8c_a25603a9a2e5d3bf9c73d2bd2c3428655}{application\+\_\+state}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{application_8c_a464af30d5e798df5a25d3c211d5c120f}{application\+\_\+on\+\_\+event}} (\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}} code, void \texorpdfstring{$\ast$}{*}sender, void \texorpdfstring{$\ast$}{*}listener\+\_\+inst, \mbox{\hyperlink{structevent__context}{event\+\_\+context}} context)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{application_8c_a193a750e12452924346788eb62a3a327}{application\+\_\+on\+\_\+key}} (\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}} code, void \texorpdfstring{$\ast$}{*}sender, void \texorpdfstring{$\ast$}{*}listener\+\_\+inst, \mbox{\hyperlink{structevent__context}{event\+\_\+context}} context)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{application_8c_a0aadbf7eebc34521742f68cbcc97e4c6}{application\+\_\+on\+\_\+resized}} (\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}} code, void \texorpdfstring{$\ast$}{*}sender, void \texorpdfstring{$\ast$}{*}listener\+\_\+inst, \mbox{\hyperlink{structevent__context}{event\+\_\+context}} context)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{application_8c_af0ccecbeef900f30b0b734eb020574ef}{application\+\_\+create}} (\mbox{\hyperlink{structgame}{game}} \texorpdfstring{$\ast$}{*}game\+\_\+inst)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{application_8c_a08c8575858e12aa5260a1cc0101df8bd}{application\+\_\+run}} ()
+\item 
+void \mbox{\hyperlink{application_8c_a8b27580c0175a587af977c52f49cb92f}{application\+\_\+get\+\_\+framebuffer\+\_\+size}} (\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}width, \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}height)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{application_8c_a25603a9a2e5d3bf9c73d2bd2c3428655}\index{application.c@{application.c}!application\_state@{application\_state}}
+\index{application\_state@{application\_state}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_state}{application\_state}}
+{\footnotesize\ttfamily \label{application_8c_a25603a9a2e5d3bf9c73d2bd2c3428655} 
+typedef struct application\+\_\+state application\+\_\+state}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{application_8c_af0ccecbeef900f30b0b734eb020574ef}\index{application.c@{application.c}!application\_create@{application\_create}}
+\index{application\_create@{application\_create}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_create()}{application\_create()}}
+{\footnotesize\ttfamily \label{application_8c_af0ccecbeef900f30b0b734eb020574ef} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} application\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgame}{game}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+inst}{}\end{DoxyParamCaption})}
+
+\Hypertarget{application_8c_a8b27580c0175a587af977c52f49cb92f}\index{application.c@{application.c}!application\_get\_framebuffer\_size@{application\_get\_framebuffer\_size}}
+\index{application\_get\_framebuffer\_size@{application\_get\_framebuffer\_size}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_get\_framebuffer\_size()}{application\_get\_framebuffer\_size()}}
+{\footnotesize\ttfamily \label{application_8c_a8b27580c0175a587af977c52f49cb92f} 
+void application\+\_\+get\+\_\+framebuffer\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}}]{width}{, }\item[{\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}}]{height}{}\end{DoxyParamCaption})}
+
+\Hypertarget{application_8c_a464af30d5e798df5a25d3c211d5c120f}\index{application.c@{application.c}!application\_on\_event@{application\_on\_event}}
+\index{application\_on\_event@{application\_on\_event}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_on\_event()}{application\_on\_event()}}
+{\footnotesize\ttfamily \label{application_8c_a464af30d5e798df5a25d3c211d5c120f} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} application\+\_\+on\+\_\+event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}}]{code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{sender}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{listener\+\_\+inst}{, }\item[{\mbox{\hyperlink{structevent__context}{event\+\_\+context}}}]{context}{}\end{DoxyParamCaption})}
+
+\Hypertarget{application_8c_a193a750e12452924346788eb62a3a327}\index{application.c@{application.c}!application\_on\_key@{application\_on\_key}}
+\index{application\_on\_key@{application\_on\_key}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_on\_key()}{application\_on\_key()}}
+{\footnotesize\ttfamily \label{application_8c_a193a750e12452924346788eb62a3a327} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} application\+\_\+on\+\_\+key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}}]{code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{sender}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{listener\+\_\+inst}{, }\item[{\mbox{\hyperlink{structevent__context}{event\+\_\+context}}}]{context}{}\end{DoxyParamCaption})}
+
+\Hypertarget{application_8c_a0aadbf7eebc34521742f68cbcc97e4c6}\index{application.c@{application.c}!application\_on\_resized@{application\_on\_resized}}
+\index{application\_on\_resized@{application\_on\_resized}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_on\_resized()}{application\_on\_resized()}}
+{\footnotesize\ttfamily \label{application_8c_a0aadbf7eebc34521742f68cbcc97e4c6} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} application\+\_\+on\+\_\+resized (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines_8h_a9e6c91d77e24643b888dbd1a1a590054}{u16}}}]{code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{sender}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{listener\+\_\+inst}{, }\item[{\mbox{\hyperlink{structevent__context}{event\+\_\+context}}}]{context}{}\end{DoxyParamCaption})}
+
+\Hypertarget{application_8c_a08c8575858e12aa5260a1cc0101df8bd}\index{application.c@{application.c}!application\_run@{application\_run}}
+\index{application\_run@{application\_run}!application.c@{application.c}}
+\doxysubsubsection{\texorpdfstring{application\_run()}{application\_run()}}
+{\footnotesize\ttfamily \label{application_8c_a08c8575858e12aa5260a1cc0101df8bd} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} application\+\_\+run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+

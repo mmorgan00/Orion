@@ -44,6 +44,13 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #define true 1
 #define false 0
 
+
+/*
+* @brief Invalid ID since we use u32's for ids. Any ID with this should be considered not a real object
+  * u32 overflow. Update this if we change from u32 for id's
+*/ 
+#define invalid_id 4294967295U 
+
 // Platform detection
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
 #define OPLATFORM_WINDOWS 1

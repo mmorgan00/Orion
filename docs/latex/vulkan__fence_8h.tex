@@ -1,0 +1,41 @@
+\doxysection{engine/src/renderer/vulkan/vulkan\+\_\+fence.h File Reference}
+\hypertarget{vulkan__fence_8h}{}\label{vulkan__fence_8h}\index{engine/src/renderer/vulkan/vulkan\_fence.h@{engine/src/renderer/vulkan/vulkan\_fence.h}}
+{\ttfamily \#include "{}vulkan\+\_\+types.\+inl"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{vulkan__fence_8h_afdf5af68250b20138ac89e34c1d913bd}{vulkan\+\_\+fence\+\_\+create}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, \mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} create\+\_\+signaled, \mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}out\+\_\+fence)
+\item 
+void \mbox{\hyperlink{vulkan__fence_8h_a6761bfc67ef7990942ab60315c2152bc}{vulkan\+\_\+fence\+\_\+destroy}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, \mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}fence)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__fence_8h_a6b9eca5608aec3856d20de19fa9e3f55}{vulkan\+\_\+fence\+\_\+wait}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, \mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}fence, \mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}} timeout\+\_\+ns)
+\item 
+void \mbox{\hyperlink{vulkan__fence_8h_a7692eaefbda15ac834201d11d15ad664}{vulkan\+\_\+fence\+\_\+reset}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, \mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}fence)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{vulkan__fence_8h_afdf5af68250b20138ac89e34c1d913bd}\index{vulkan\_fence.h@{vulkan\_fence.h}!vulkan\_fence\_create@{vulkan\_fence\_create}}
+\index{vulkan\_fence\_create@{vulkan\_fence\_create}!vulkan\_fence.h@{vulkan\_fence.h}}
+\doxysubsubsection{\texorpdfstring{vulkan\_fence\_create()}{vulkan\_fence\_create()}}
+{\footnotesize\ttfamily \label{vulkan__fence_8h_afdf5af68250b20138ac89e34c1d913bd} 
+void vulkan\+\_\+fence\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}}}]{create\+\_\+signaled}{, }\item[{\mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+fence}{}\end{DoxyParamCaption})}
+
+\Hypertarget{vulkan__fence_8h_a6761bfc67ef7990942ab60315c2152bc}\index{vulkan\_fence.h@{vulkan\_fence.h}!vulkan\_fence\_destroy@{vulkan\_fence\_destroy}}
+\index{vulkan\_fence\_destroy@{vulkan\_fence\_destroy}!vulkan\_fence.h@{vulkan\_fence.h}}
+\doxysubsubsection{\texorpdfstring{vulkan\_fence\_destroy()}{vulkan\_fence\_destroy()}}
+{\footnotesize\ttfamily \label{vulkan__fence_8h_a6761bfc67ef7990942ab60315c2152bc} 
+void vulkan\+\_\+fence\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{\mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}}]{fence}{}\end{DoxyParamCaption})}
+
+\Hypertarget{vulkan__fence_8h_a7692eaefbda15ac834201d11d15ad664}\index{vulkan\_fence.h@{vulkan\_fence.h}!vulkan\_fence\_reset@{vulkan\_fence\_reset}}
+\index{vulkan\_fence\_reset@{vulkan\_fence\_reset}!vulkan\_fence.h@{vulkan\_fence.h}}
+\doxysubsubsection{\texorpdfstring{vulkan\_fence\_reset()}{vulkan\_fence\_reset()}}
+{\footnotesize\ttfamily \label{vulkan__fence_8h_a7692eaefbda15ac834201d11d15ad664} 
+void vulkan\+\_\+fence\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{\mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}}]{fence}{}\end{DoxyParamCaption})}
+
+\Hypertarget{vulkan__fence_8h_a6b9eca5608aec3856d20de19fa9e3f55}\index{vulkan\_fence.h@{vulkan\_fence.h}!vulkan\_fence\_wait@{vulkan\_fence\_wait}}
+\index{vulkan\_fence\_wait@{vulkan\_fence\_wait}!vulkan\_fence.h@{vulkan\_fence.h}}
+\doxysubsubsection{\texorpdfstring{vulkan\_fence\_wait()}{vulkan\_fence\_wait()}}
+{\footnotesize\ttfamily \label{vulkan__fence_8h_a6b9eca5608aec3856d20de19fa9e3f55} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vulkan\+\_\+fence\+\_\+wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{\mbox{\hyperlink{structvulkan__fence}{vulkan\+\_\+fence}} \texorpdfstring{$\ast$}{*}}]{fence}{, }\item[{\mbox{\hyperlink{defines_8h_ad758b7a5c3f18ed79d2fcd23d9f16357}{u64}}}]{timeout\+\_\+ns}{}\end{DoxyParamCaption})}
+
