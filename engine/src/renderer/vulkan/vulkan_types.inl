@@ -168,6 +168,16 @@ typedef struct vulkan_object_shader {
 
   vulkan_pipeline pipeline;
 
+  VkDescriptorPool object_descriptor_pool;
+  VkDescriptorSetLayout object_descriptor_set_layout;
+
+  vulkan_buffer object_uniform_buffer;
+  // TODO: Should be better managed, free list of some kind, etc
+  u32 object_uniform_buffer_index;
+
+  // TODO: Should be dynamic
+  vulkan_object_shader_object_state object_states[VULKAN_OBJECT_MAX_OBJECT_COUNT];
+
 } vulkan_object_shader;
 
 typedef struct vulkan_context {

@@ -315,6 +315,15 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
                     context.device.graphics_queue, &context.object_index_buffer,
                     0, sizeof(u32) * index_count, indices);
 
+  // TODO: Temp object
+  u32 object_id = 0;
+  if (!vulkan_object_shader_acquire_resources(&context, &context.object_shader, &object_id)) {
+    OERROR("Failed to acquire shader resources.");
+    return false;
+  }
+
+  // TODO: End temp object
+
   OINFO("Vulkan renderer initialized successfully.");
   return true;
 }
@@ -819,11 +828,13 @@ b8 create_buffers(vulkan_context *context) {
  * @param out_texture - new texture will be created and stored in this to be returned to the caller
 */
 void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width, i32 height, i32 channel_count, const u8* pixels, b8 has_transparency, struct texture* out_texture){
-  OTRACE("vulkan_renderer_create_texture called");
+  OINFO("Creating vulkan renderer texture");
   
-  // Copy sizing
+  // Copy details over
   out_texture->height = height;
   out_texture->width = width;
+  out_texture->channel_count = channel_count;
+  out_texture->generation = INVALID_ID; // auto invalidate this every time so it needs to be recreated
 
   // Following steps from vulkan spec...
 
@@ -868,6 +879,9 @@ void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width
     // Copy the data from the buffer.
     vulkan_image_copy_from_buffer(&context, &texture_data->image, staging_texture_buffer.handle, &temp_buffer);
 
+    // Done with staging, destroy now
+    vulkan_buffer_destroy(&context, &staging_texture_buffer);
+
     // Transition from optimal for data reciept to shader-read-only optimal layout.
     vulkan_image_transition_layout(
         &context,
@@ -910,11 +924,12 @@ void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width
 }
 
 /**
- * @brief Destroys the resources used fo textures
+ * @brief Destroys the resources used for textures
  * 
  * @param texture - the texture struct needing to be destroyed
 */
 void vulkan_renderer_destroy_texture(struct texture* texture){
+  vkDeviceWaitIdle(context.device.logical_device); // Synchronization
 
    vulkan_texture_data* data = (vulkan_texture_data*)texture->internal_data;
    vulkan_image_destroy(&context, &data->image);
