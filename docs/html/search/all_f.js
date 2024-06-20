@@ -35,7 +35,6 @@ var searchData=
   ['present_5fqueue_32',['present_queue',['../structvulkan__device.html#a1f3222a8df689be9f596282bf73e1d54',1,'vulkan_device']]],
   ['present_5fqueue_5findex_33',['present_queue_index',['../structvulkan__device.html#aa58482326b315f8543f7cf5e51bb22b8',1,'vulkan_device']]],
   ['print_5fint_34',['print_int',['../test_8c.html#a59707e966f756b5c3878f56951a06af8',1,'print_int(i32 i):&#160;test.c'],['../test_8h.html#a077d1cea7566db2462105c4122754689',1,'print_int(i32 i):&#160;test.c']]],
-  ['project_35',['Game Engine Project',['../index.html',1,'']]],
-  ['projection_36',['projection',['../structglobal__uniform__object.html#af8cbdc5853c43275aca7debd19a6cc49',1,'global_uniform_object']]],
-  ['properties_37',['properties',['../structvulkan__device.html#a968a7f405c1ec7cc7893561f61b0241a',1,'vulkan_device']]]
+  ['projection_35',['projection',['../structglobal__uniform__object.html#af8cbdc5853c43275aca7debd19a6cc49',1,'global_uniform_object']]],
+  ['properties_36',['properties',['../structvulkan__device.html#a968a7f405c1ec7cc7893561f61b0241a',1,'vulkan_device']]]
 ];

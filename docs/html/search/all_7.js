@@ -2,9 +2,9 @@ var searchData=
 [
   ['g_0',['g',['../unionvec2__u.html#aff0ae00bf7a12746b464e98aa9d13b72',1,'vec2_u::g'],['../structvec3__u.html#acbca58fd977d801b8df9c5609d2874dd',1,'vec3_u::g'],['../unionvec4__u.html#a1357aa5045eab0c3a2d5703b9c418f91',1,'vec4_u::g'],['../structvulkan__renderpass.html#a8577b3c4a55889616408d366cecee327',1,'vulkan_renderpass::g']]],
   ['game_1',['game',['../structgame.html',1,'game'],['../game__types_8h.html#a6b088197c03368f264f33c989d4f271b',1,'game:&#160;game_types.h']]],
-  ['game_20engine_20project_2',['Game Engine Project',['../index.html',1,'']]],
-  ['game_5finst_3',['game_inst',['../structapplication__state.html#ae224fcec4853d590c4068314f75196c2',1,'application_state']]],
-  ['game_5ftypes_2eh_4',['game_types.h',['../game__types_8h.html',1,'']]],
+  ['game_5finst_2',['game_inst',['../structapplication__state.html#ae224fcec4853d590c4068314f75196c2',1,'application_state']]],
+  ['game_5ftypes_2eh_3',['game_types.h',['../game__types_8h.html',1,'']]],
+  ['generation_4',['generation',['../structtexture.html#a86f5c2a9138ae4004bf1528c5365def0',1,'texture']]],
   ['generations_5',['generations',['../structvulkan__descriptor__state.html#a23a6f33aad226b703f3b57fbec15e653',1,'vulkan_descriptor_state']]],
   ['geometry_5findex_5foffset_6',['geometry_index_offset',['../structvulkan__context.html#ad610c646751b6a6c2296c6e0b67d26ad',1,'vulkan_context']]],
   ['geometry_5frender_5fdata_7',['geometry_render_data',['../structgeometry__render__data.html',1,'geometry_render_data'],['../renderer__types_8inl.html#ab3456a4071cbefe6925390af55387301',1,'geometry_render_data:&#160;renderer_types.inl']]],

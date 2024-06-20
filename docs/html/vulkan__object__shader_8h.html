@@ -111,8 +111,38 @@ Functions</h2></td></tr>
 <tr class="separator:ac9910f4b5b4d346672ea8c6e3165e419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21f7e1a7289553b9764fe081c947ae00" id="r_a21f7e1a7289553b9764fe081c947ae00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21f7e1a7289553b9764fe081c947ae00">vulkan_object_shader_update_object</a> (<a class="el" href="structvulkan__context.html">vulkan_context</a> *context, struct <a class="el" href="structvulkan__object__shader.html">vulkan_object_shader</a> *shader, <a class="el" href="structgeometry__render__data.html">geometry_render_data</a> render_data)</td></tr>
 <tr class="separator:a21f7e1a7289553b9764fe081c947ae00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4b8d7da6e86a9f3f867b1cecd13d2d5" id="r_ad4b8d7da6e86a9f3f867b1cecd13d2d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="defines_8h.html#a3a58feb08f4f45ee137ec358217c3270">b8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4b8d7da6e86a9f3f867b1cecd13d2d5">vulkan_object_shader_acquire_resources</a> (<a class="el" href="structvulkan__context.html">vulkan_context</a> *context, struct <a class="el" href="structvulkan__object__shader.html">vulkan_object_shader</a> *shader, <a class="el" href="defines_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> *out_object_id)</td></tr>
+<tr class="separator:ad4b8d7da6e86a9f3f867b1cecd13d2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ce867c846bb1bf802b69a3e2ef3532b" id="r_a3ce867c846bb1bf802b69a3e2ef3532b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ce867c846bb1bf802b69a3e2ef3532b">vulkan_object_shader_release_resources</a> (<a class="el" href="structvulkan__context.html">vulkan_context</a> *context, struct <a class="el" href="structvulkan__object__shader.html">vulkan_object_shader</a> *shader, <a class="el" href="defines_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> object_id)</td></tr>
+<tr class="separator:a3ce867c846bb1bf802b69a3e2ef3532b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ad4b8d7da6e86a9f3f867b1cecd13d2d5" name="ad4b8d7da6e86a9f3f867b1cecd13d2d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4b8d7da6e86a9f3f867b1cecd13d2d5">&#9670;&#160;</a></span>vulkan_object_shader_acquire_resources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="defines_8h.html#a3a58feb08f4f45ee137ec358217c3270">b8</a> vulkan_object_shader_acquire_resources </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structvulkan__context.html">vulkan_context</a> *</td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structvulkan__object__shader.html">vulkan_object_shader</a> *</td>          <td class="paramname"><span class="paramname"><em>shader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="defines_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> *</td>          <td class="paramname"><span class="paramname"><em>out_object_id</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a71d84f0ad899294211a16ef4280c25bd" name="a71d84f0ad899294211a16ef4280c25bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71d84f0ad899294211a16ef4280c25bd">&#9670;&#160;</a></span>vulkan_object_shader_create()</h2>
 
@@ -149,6 +179,32 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="structvulkan__object__shader.html">vulkan_object_shader</a> *</td>          <td class="paramname"><span class="paramname"><em>shader</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ce867c846bb1bf802b69a3e2ef3532b" name="a3ce867c846bb1bf802b69a3e2ef3532b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ce867c846bb1bf802b69a3e2ef3532b">&#9670;&#160;</a></span>vulkan_object_shader_release_resources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vulkan_object_shader_release_resources </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structvulkan__context.html">vulkan_context</a> *</td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structvulkan__object__shader.html">vulkan_object_shader</a> *</td>          <td class="paramname"><span class="paramname"><em>shader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="defines_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a></td>          <td class="paramname"><span class="paramname"><em>object_id</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -8,7 +8,7 @@
 \item 
 struct \mbox{\hyperlink{structglobal__uniform__object}{global\+\_\+uniform\+\_\+object}}
 \begin{DoxyCompactList}\small\item\em Global uniform object for holding all information that will need to be shared across all (or at least most) shaders. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structlocal__uniform__object}{local\+\_\+uniform\+\_\+object}}
+struct \mbox{\hyperlink{structobject__uniform__object}{object\+\_\+uniform\+\_\+object}}
 \begin{DoxyCompactList}\small\item\em Describes the various properties an object needs to be rendered. For now, this JUST has diffuse color and some reserved fields Later on, expect to add specular, metallicness, roughness, etc for more advanced rendering approaches. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgeometry__render__data}{geometry\+\_\+render\+\_\+data}}
 \item 
@@ -23,7 +23,7 @@ typedef enum \mbox{\hyperlink{renderer__types_8inl_aaa5db001f6365d82726eb5717553
 \item 
 typedef struct global\+\_\+uniform\+\_\+object \mbox{\hyperlink{renderer__types_8inl_ad6ce7fe6860d2aff79b7eb0cd797254f}{global\+\_\+uniform\+\_\+object}}
 \begin{DoxyCompactList}\small\item\em Global uniform object for holding all information that will need to be shared across all (or at least most) shaders. \end{DoxyCompactList}\item 
-typedef struct \mbox{\hyperlink{structlocal__uniform__object}{local\+\_\+uniform\+\_\+object}} \mbox{\hyperlink{renderer__types_8inl_a0a8b6349cbcf40304615dd6be4412578}{oobject\+\_\+uniform\+\_\+object}}
+typedef struct object\+\_\+uniform\+\_\+object \mbox{\hyperlink{renderer__types_8inl_a9313b226fdc3e5dbda37b0fa92014415}{object\+\_\+uniform\+\_\+object}}
 \begin{DoxyCompactList}\small\item\em Describes the various properties an object needs to be rendered. For now, this JUST has diffuse color and some reserved fields Later on, expect to add specular, metallicness, roughness, etc for more advanced rendering approaches. \end{DoxyCompactList}\item 
 typedef struct geometry\+\_\+render\+\_\+data \mbox{\hyperlink{renderer__types_8inl_ab3456a4071cbefe6925390af55387301}{geometry\+\_\+render\+\_\+data}}
 \item 
@@ -58,11 +58,11 @@ typedef struct global\+\_\+uniform\+\_\+object global\+\_\+uniform\+\_\+object}
 
 Global uniform object for holding all information that will need to be shared across all (or at least most) shaders. 
 
-\Hypertarget{renderer__types_8inl_a0a8b6349cbcf40304615dd6be4412578}\index{renderer\_types.inl@{renderer\_types.inl}!oobject\_uniform\_object@{oobject\_uniform\_object}}
-\index{oobject\_uniform\_object@{oobject\_uniform\_object}!renderer\_types.inl@{renderer\_types.inl}}
-\doxysubsubsection{\texorpdfstring{oobject\_uniform\_object}{oobject\_uniform\_object}}
-{\footnotesize\ttfamily \label{renderer__types_8inl_a0a8b6349cbcf40304615dd6be4412578} 
-typedef struct \mbox{\hyperlink{structlocal__uniform__object}{local\+\_\+uniform\+\_\+object}} \mbox{\hyperlink{renderer__types_8inl_a0a8b6349cbcf40304615dd6be4412578}{oobject\+\_\+uniform\+\_\+object}}}
+\Hypertarget{renderer__types_8inl_a9313b226fdc3e5dbda37b0fa92014415}\index{renderer\_types.inl@{renderer\_types.inl}!object\_uniform\_object@{object\_uniform\_object}}
+\index{object\_uniform\_object@{object\_uniform\_object}!renderer\_types.inl@{renderer\_types.inl}}
+\doxysubsubsection{\texorpdfstring{object\_uniform\_object}{object\_uniform\_object}}
+{\footnotesize\ttfamily \label{renderer__types_8inl_a9313b226fdc3e5dbda37b0fa92014415} 
+typedef struct object\+\_\+uniform\+\_\+object object\+\_\+uniform\+\_\+object}
 
 
 

@@ -4,6 +4,7 @@
 {\ttfamily \#include "{}core/logger.\+h"{}}\newline
 {\ttfamily \#include "{}core/omemory.\+h"{}}\newline
 {\ttfamily \#include "{}math/math\+\_\+types.\+h"{}}\newline
+{\ttfamily \#include "{}math/omath.\+h"{}}\newline
 {\ttfamily \#include "{}renderer/vulkan/vulkan\+\_\+buffer.\+h"{}}\newline
 {\ttfamily \#include "{}renderer/vulkan/vulkan\+\_\+pipeline.\+h"{}}\newline
 {\ttfamily \#include "{}renderer/vulkan/vulkan\+\_\+shader\+\_\+utils.\+h"{}}\newline
@@ -24,6 +25,10 @@ void \mbox{\hyperlink{vulkan__object__shader_8c_aa17cc66f7287368b8cf3f54d5807851
 void \mbox{\hyperlink{vulkan__object__shader_8c_ac9910f4b5b4d346672ea8c6e3165e419}{vulkan\+\_\+object\+\_\+shader\+\_\+update\+\_\+global\+\_\+state}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}shader, \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}delta\+\_\+time)
 \item 
 void \mbox{\hyperlink{vulkan__object__shader_8c_a21f7e1a7289553b9764fe081c947ae00}{vulkan\+\_\+object\+\_\+shader\+\_\+update\+\_\+object}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}shader, \mbox{\hyperlink{structgeometry__render__data}{geometry\+\_\+render\+\_\+data}} render\+\_\+data)
+\item 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} \mbox{\hyperlink{vulkan__object__shader_8c_ad4b8d7da6e86a9f3f867b1cecd13d2d5}{vulkan\+\_\+object\+\_\+shader\+\_\+acquire\+\_\+resources}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}shader, \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}out\+\_\+object\+\_\+id)
+\item 
+void \mbox{\hyperlink{vulkan__object__shader_8c_a3ce867c846bb1bf802b69a3e2ef3532b}{vulkan\+\_\+object\+\_\+shader\+\_\+release\+\_\+resources}} (\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}context, struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}shader, \mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} object\+\_\+id)
 \end{DoxyCompactItemize}
 
 
@@ -37,6 +42,12 @@ void \mbox{\hyperlink{vulkan__object__shader_8c_a21f7e1a7289553b9764fe081c947ae0
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{vulkan__object__shader_8c_ad4b8d7da6e86a9f3f867b1cecd13d2d5}\index{vulkan\_object\_shader.c@{vulkan\_object\_shader.c}!vulkan\_object\_shader\_acquire\_resources@{vulkan\_object\_shader\_acquire\_resources}}
+\index{vulkan\_object\_shader\_acquire\_resources@{vulkan\_object\_shader\_acquire\_resources}!vulkan\_object\_shader.c@{vulkan\_object\_shader.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_object\_shader\_acquire\_resources()}{vulkan\_object\_shader\_acquire\_resources()}}
+{\footnotesize\ttfamily \label{vulkan__object__shader_8c_ad4b8d7da6e86a9f3f867b1cecd13d2d5} 
+\mbox{\hyperlink{defines_8h_a3a58feb08f4f45ee137ec358217c3270}{b8}} vulkan\+\_\+object\+\_\+shader\+\_\+acquire\+\_\+resources (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}}]{shader}{, }\item[{\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}} \texorpdfstring{$\ast$}{*}}]{out\+\_\+object\+\_\+id}{}\end{DoxyParamCaption})}
+
 \Hypertarget{vulkan__object__shader_8c_a71d84f0ad899294211a16ef4280c25bd}\index{vulkan\_object\_shader.c@{vulkan\_object\_shader.c}!vulkan\_object\_shader\_create@{vulkan\_object\_shader\_create}}
 \index{vulkan\_object\_shader\_create@{vulkan\_object\_shader\_create}!vulkan\_object\_shader.c@{vulkan\_object\_shader.c}}
 \doxysubsubsection{\texorpdfstring{vulkan\_object\_shader\_create()}{vulkan\_object\_shader\_create()}}
@@ -48,6 +59,12 @@ void \mbox{\hyperlink{vulkan__object__shader_8c_a21f7e1a7289553b9764fe081c947ae0
 \doxysubsubsection{\texorpdfstring{vulkan\_object\_shader\_destroy()}{vulkan\_object\_shader\_destroy()}}
 {\footnotesize\ttfamily \label{vulkan__object__shader_8c_a6ace9d29f4186e7203ca39087820c339} 
 void vulkan\+\_\+object\+\_\+shader\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}}]{shader}{}\end{DoxyParamCaption})}
+
+\Hypertarget{vulkan__object__shader_8c_a3ce867c846bb1bf802b69a3e2ef3532b}\index{vulkan\_object\_shader.c@{vulkan\_object\_shader.c}!vulkan\_object\_shader\_release\_resources@{vulkan\_object\_shader\_release\_resources}}
+\index{vulkan\_object\_shader\_release\_resources@{vulkan\_object\_shader\_release\_resources}!vulkan\_object\_shader.c@{vulkan\_object\_shader.c}}
+\doxysubsubsection{\texorpdfstring{vulkan\_object\_shader\_release\_resources()}{vulkan\_object\_shader\_release\_resources()}}
+{\footnotesize\ttfamily \label{vulkan__object__shader_8c_a3ce867c846bb1bf802b69a3e2ef3532b} 
+void vulkan\+\_\+object\+\_\+shader\+\_\+release\+\_\+resources (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvulkan__context}{vulkan\+\_\+context}} \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{struct \mbox{\hyperlink{structvulkan__object__shader}{vulkan\+\_\+object\+\_\+shader}} \texorpdfstring{$\ast$}{*}}]{shader}{, }\item[{\mbox{\hyperlink{defines_8h_a10e94b422ef0c20dcdec20d31a1f5049}{u32}}}]{object\+\_\+id}{}\end{DoxyParamCaption})}
 
 \Hypertarget{vulkan__object__shader_8c_ac9910f4b5b4d346672ea8c6e3165e419}\index{vulkan\_object\_shader.c@{vulkan\_object\_shader.c}!vulkan\_object\_shader\_update\_global\_state@{vulkan\_object\_shader\_update\_global\_state}}
 \index{vulkan\_object\_shader\_update\_global\_state@{vulkan\_object\_shader\_update\_global\_state}!vulkan\_object\_shader.c@{vulkan\_object\_shader.c}}

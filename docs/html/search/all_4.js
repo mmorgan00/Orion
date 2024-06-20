@@ -36,7 +36,7 @@ var searchData=
   ['development_20status_33',['Current Development Status',['../index.html#autotoc_md3',1,'']]],
   ['device_34',['device',['../structvulkan__context.html#a125a2b961a4805e2eefc3ad2ab4f709a',1,'vulkan_context']]],
   ['device_5fextension_5fnames_35',['device_extension_names',['../structvulkan__physical__device__requirements.html#a8fd02bdca69952af910a69708aedf702',1,'vulkan_physical_device_requirements']]],
-  ['diffuse_5fcolor_36',['diffuse_color',['../structlocal__uniform__object.html#a7fd63dfd21d2c16de0b620d7d191ec23',1,'local_uniform_object']]],
+  ['diffuse_5fcolor_36',['diffuse_color',['../structobject__uniform__object.html#a9148a1b231bd4e09552353eaa35c586a',1,'object_uniform_object']]],
   ['discrete_5fgpu_37',['discrete_gpu',['../structvulkan__physical__device__requirements.html#a2a6ed14c466b3fa9f8d2f9e9fd61d61c',1,'vulkan_physical_device_requirements']]],
   ['documentation_38',['Documentation',['../index.html#autotoc_md8',1,'']]]
 ];

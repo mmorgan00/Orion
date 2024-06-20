@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
   0: "_abcdefghiklmnopqrstuvwxyz",
-  1: "acefgiklmprstv",
+  1: "acefgiklmoprstv",
   2: "acdefgilmoprstv",
   3: "_acdefgilmopqrsuv",
   4: "abcdefghiklmnopqrstuvwxyz",
@@ -9,7 +9,7 @@ var indexSectionsWithContent =
   6: "bfklmrsv",
   7: "bcdefiklmnrs",
   8: "bdfilmostv",
-  9: "egp"
+  9: "eo"
 };
 
 var indexSectionNames =

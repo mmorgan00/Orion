@@ -41,7 +41,7 @@ var searchData=
   ['instance_38',['instance',['../structvulkan__context.html#a71e13564f2111dafcda6c332918c196f',1,'vulkan_context']]],
   ['internal_5fdata_39',['internal_data',['../structtexture.html#a2a635d43b6e8cde4581d47b1f3945677',1,'texture']]],
   ['internal_5fstate_40',['internal_state',['../structplatform__state.html#ac902a69fe12cf6868862aad5a57b15d5',1,'platform_state']]],
-  ['invalid_5fid_41',['invalid_id',['../defines_8h.html#a8989d6cd4cbbb9a9e0b1e241736281b7',1,'defines.h']]],
+  ['invalid_5fid_41',['INVALID_ID',['../defines_8h.html#a483b0a38edf0c10ef4a7cb633dc8a9fc',1,'defines.h']]],
   ['is_5flocked_42',['is_locked',['../structvulkan__buffer.html#a36ecf49f62a41c58115355afef1d92a2',1,'vulkan_buffer']]],
   ['is_5fpower_5fof_5f2_43',['is_power_of_2',['../omath_8h.html#a37f19d1d6629edfeaa5c18701c521f0f',1,'omath.h']]],
   ['is_5frunning_44',['is_running',['../structapplication__state.html#a7c10d54c29174a16313dfc1992ccabde',1,'application_state']]],

@@ -107,8 +107,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__uniform__object.html">global_uniform_object</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global uniform object for holding all information that will need to be shared across all (or at least most) shaders.  <a href="structglobal__uniform__object.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlocal__uniform__object.html">local_uniform_object</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the various properties an object needs to be rendered. For now, this JUST has diffuse color and some reserved fields Later on, expect to add specular, metallicness, roughness, etc for more advanced rendering approaches.  <a href="structlocal__uniform__object.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structobject__uniform__object.html">object_uniform_object</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the various properties an object needs to be rendered. For now, this JUST has diffuse color and some reserved fields Later on, expect to add specular, metallicness, roughness, etc for more advanced rendering approaches.  <a href="structobject__uniform__object.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgeometry__render__data.html">geometry_render_data</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,9 +124,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ad6ce7fe6860d2aff79b7eb0cd797254f" id="r_ad6ce7fe6860d2aff79b7eb0cd797254f"><td class="memItemLeft" align="right" valign="top">typedef struct global_uniform_object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6ce7fe6860d2aff79b7eb0cd797254f">global_uniform_object</a></td></tr>
 <tr class="memdesc:ad6ce7fe6860d2aff79b7eb0cd797254f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global uniform object for holding all information that will need to be shared across all (or at least most) shaders.  <br /></td></tr>
 <tr class="separator:ad6ce7fe6860d2aff79b7eb0cd797254f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8b6349cbcf40304615dd6be4412578" id="r_a0a8b6349cbcf40304615dd6be4412578"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structlocal__uniform__object.html">local_uniform_object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a8b6349cbcf40304615dd6be4412578">oobject_uniform_object</a></td></tr>
-<tr class="memdesc:a0a8b6349cbcf40304615dd6be4412578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the various properties an object needs to be rendered. For now, this JUST has diffuse color and some reserved fields Later on, expect to add specular, metallicness, roughness, etc for more advanced rendering approaches.  <br /></td></tr>
-<tr class="separator:a0a8b6349cbcf40304615dd6be4412578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9313b226fdc3e5dbda37b0fa92014415" id="r_a9313b226fdc3e5dbda37b0fa92014415"><td class="memItemLeft" align="right" valign="top">typedef struct object_uniform_object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9313b226fdc3e5dbda37b0fa92014415">object_uniform_object</a></td></tr>
+<tr class="memdesc:a9313b226fdc3e5dbda37b0fa92014415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the various properties an object needs to be rendered. For now, this JUST has diffuse color and some reserved fields Later on, expect to add specular, metallicness, roughness, etc for more advanced rendering approaches.  <br /></td></tr>
+<tr class="separator:a9313b226fdc3e5dbda37b0fa92014415"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3456a4071cbefe6925390af55387301" id="r_ab3456a4071cbefe6925390af55387301"><td class="memItemLeft" align="right" valign="top">typedef struct geometry_render_data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3456a4071cbefe6925390af55387301">geometry_render_data</a></td></tr>
 <tr class="separator:ab3456a4071cbefe6925390af55387301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcddbffe26d088f480f0f5b2be5555db" id="r_afcddbffe26d088f480f0f5b2be5555db"><td class="memItemLeft" align="right" valign="top">typedef struct renderer_backend&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afcddbffe26d088f480f0f5b2be5555db">renderer_backend</a></td></tr>
@@ -173,14 +173,14 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
-<a id="a0a8b6349cbcf40304615dd6be4412578" name="a0a8b6349cbcf40304615dd6be4412578"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a8b6349cbcf40304615dd6be4412578">&#9670;&#160;</a></span>oobject_uniform_object</h2>
+<a id="a9313b226fdc3e5dbda37b0fa92014415" name="a9313b226fdc3e5dbda37b0fa92014415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9313b226fdc3e5dbda37b0fa92014415">&#9670;&#160;</a></span>object_uniform_object</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structlocal__uniform__object.html">local_uniform_object</a> <a class="el" href="#a0a8b6349cbcf40304615dd6be4412578">oobject_uniform_object</a></td>
+          <td class="memname">typedef struct object_uniform_object object_uniform_object</td>
         </tr>
       </table>
 </div><div class="memdoc">

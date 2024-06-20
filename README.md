@@ -1,4 +1,4 @@
-# Game Engine Project {#mainpage}
+# Orion Engine {#mainpage}
 
 ## Overview
 
