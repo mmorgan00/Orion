@@ -231,10 +231,11 @@ b8 application_on_key(u16 code, void *sender, void *listener_inst,
       // Block anything else from processing this.
       return true;
     } else if (key_code == KEY_T) {
-      // Example of an explicit key press. This breaks right now, adding here for testing texture loading
+      // Example of an explicit key press. This breaks right now, adding here
+      // for testing texture loading
       geometry_render_data data;
       data.object_id = INVALID_ID;
-      texture* tex;
+      texture *tex;
       renderer_create_texture("garbage", false, 0, 0, 0, 0, false, tex);
       data.textures[0] = tex;
       renderer_update_object(data);

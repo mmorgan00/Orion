@@ -1,9 +1,10 @@
 /**
  * @file darray.c
- * 
- * @brief Dynamic Array with variety of features supporting stack, queue, and generic array behaviors
- * 
-*/
+ *
+ * @brief Dynamic Array with variety of features supporting stack, queue, and
+ * generic array behaviors
+ *
+ */
 
 #include "containers/darray.h"
 
@@ -12,8 +13,8 @@
 
 /**
  * @brief creates a darray and returns the pointer
- * 
-*/
+ *
+ */
 void *_darray_create(u64 length, u64 stride) {
   u64 header_size = DARRAY_FIELD_LENGTH * sizeof(u64);
   u64 array_size = length * stride;
@@ -26,8 +27,9 @@ void *_darray_create(u64 length, u64 stride) {
 }
 
 /**
- * @brief given the pointer to the darray, cleans up the memory associated with ti
-*/
+ * @brief given the pointer to the darray, cleans up the memory associated with
+ * ti
+ */
 void _darray_destroy(void *array) {
   u64 *header = (u64 *)array - DARRAY_FIELD_LENGTH;
   u64 header_size = DARRAY_FIELD_LENGTH * sizeof(u64);
@@ -38,26 +40,26 @@ void _darray_destroy(void *array) {
 
 /**
  * @brief returns the specific field of a darray, not index item
- * 
+ *
  * This can be Capacity, length, or stride
-*/
+ */
 u64 _darray_field_get(void *array, u64 field) {
   u64 *header = (u64 *)array - DARRAY_FIELD_LENGTH;
   return header[field];
 }
 
-
 /**
  * @brief Sets a field of the darray, capacity length or stride
-*/
+ */
 void _darray_field_set(void *array, u64 field, u64 value) {
   u64 *header = (u64 *)array - DARRAY_FIELD_LENGTH;
   header[field] = value;
 }
 
 /**
- * @brief resizes the array by the resize factor. by default this will double the arary
-*/
+ * @brief resizes the array by the resize factor. by default this will double
+ * the arary
+ */
 void *_darray_resize(void *array) {
   u64 length = darray_length(array);
   u64 stride = darray_stride(array);
@@ -71,8 +73,8 @@ void *_darray_resize(void *array) {
 }
 
 /**
- * @brief 
-*/
+ * @brief
+ */
 void *_darray_push(void *array, const void *value_ptr) {
   u64 length = darray_length(array);
   u64 stride = darray_stride(array);

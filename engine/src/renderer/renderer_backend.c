@@ -34,5 +34,4 @@ void renderer_backend_destroy(renderer_backend *renderer_backend) {
   renderer_backend->create_texture = 0;
   renderer_backend->destroy_texture = 0;
   renderer_backend->update_object = 0;
-
 }

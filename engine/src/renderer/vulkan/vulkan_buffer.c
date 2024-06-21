@@ -7,11 +7,10 @@
 #include "core/logger.h"
 #include "core/omemory.h"
 
-
 /**
  * @brief Creates a vulkan buffer according to the parameters
- * 
-*/
+ *
+ */
 b8 vulkan_buffer_create(vulkan_context *context, u64 size,
                         VkBufferUsageFlagBits usage, u32 memory_property_flags,
                         b8 bind_on_create, vulkan_buffer *out_buffer) {
@@ -67,7 +66,7 @@ b8 vulkan_buffer_create(vulkan_context *context, u64 size,
 
 /**
  * @brief destroys the provided vulkan buffer
-*/
+ */
 void vulkan_buffer_destroy(vulkan_context *context, vulkan_buffer *buffer) {
   if (buffer->memory) {
     vkFreeMemory(context->device.logical_device, buffer->memory,

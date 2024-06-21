@@ -1,19 +1,19 @@
 /**
  * @file vulkan_backend.c
  * @brief The Vulkan backend implementation.
- * 
- * This calls a combination of wrapper functions and direct Vulkan calls, 
+ *
+ * This calls a combination of wrapper functions and direct Vulkan calls,
  * depending on what is needed.
- * 
+ *
  */
 
 #include "vulkan_backend.h"
 #include "vulkan_buffer.h"
 #include "vulkan_command_buffer.h"
 #include "vulkan_device.h"
-#include "vulkan_image.h"
 #include "vulkan_fence.h"
 #include "vulkan_framebuffer.h"
+#include "vulkan_image.h"
 #include "vulkan_platform.h"
 #include "vulkan_renderpass.h"
 #include "vulkan_swapchain.h"
@@ -39,8 +39,6 @@
 static vulkan_context context;
 static u32 cached_framebuffer_width = 0;
 static u32 cached_framebuffer_height = 0;
-
-
 
 VKAPI_ATTR VkBool32 VKAPI_CALL vk_debug_callback(
     VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
@@ -80,10 +78,11 @@ void upload_data_range(vulkan_context *context, VkCommandPool pool,
 }
 
 /**
- * @brief sets up the vulkan renderer with all of the items needed. 
- * TODO: At the end presently, the vertex and index buffers are created. This is temporary, and just to illustrate *something* for now until a
- * proper object loading system is in place
-*/
+ * @brief sets up the vulkan renderer with all of the items needed.
+ * TODO: At the end presently, the vertex and index buffers are created. This is
+ * temporary, and just to illustrate *something* for now until a proper object
+ * loading system is in place
+ */
 b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
                                       const char *application_name,
                                       struct platform_state *plat_state) {
@@ -182,8 +181,9 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   create_info.enabledLayerCount = required_validation_layer_count;
   create_info.ppEnabledLayerNames = required_validation_layer_names;
 
-  VK_CHECK(
-      vkCreateInstance(&create_info, context.allocator, &context.instance));
+  if (!vkCreateInstance(&create_info, context.allocator, &context.instance)) {
+        OERROR("FAILED TO CREATE VULKAN INSTANCE");
+      }
   OINFO("Vulkan Instance created.");
 
   // Debugger
@@ -317,7 +317,8 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 
   // TODO: Temp object
   u32 object_id = 0;
-  if (!vulkan_object_shader_acquire_resources(&context, &context.object_shader, &object_id)) {
+  if (!vulkan_object_shader_acquire_resources(&context, &context.object_shader,
+                                              &object_id)) {
     OERROR("Failed to acquire shader resources.");
     return false;
   }
@@ -329,8 +330,9 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 }
 
 /**
- * @brief After waiting for the device to be idle, cleans up the resources in the reverse order they were created
-*/
+ * @brief After waiting for the device to be idle, cleans up the resources in
+ * the reverse order they were created
+ */
 void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
 
   vkDeviceWaitIdle(context.device.logical_device);
@@ -413,7 +415,7 @@ void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
 
 /**
  * @brief On resize, swapchain will get recreated as a side effect.
-*/
+ */
 void vulkan_renderer_backend_on_resized(renderer_backend *backend, u16 width,
                                         u16 height) {
   cached_framebuffer_width = width;
@@ -425,12 +427,13 @@ void vulkan_renderer_backend_on_resized(renderer_backend *backend, u16 width,
 }
 
 /**
- * @brief prepares to render a frame. Checks appropriate synchronization objects, then obtains the appropriate resources to store in the context
-*/
+ * @brief prepares to render a frame. Checks appropriate synchronization
+ * objects, then obtains the appropriate resources to store in the context
+ */
 b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
                                        f32 delta_time) {
 
-                                        context.frame_delta_time = delta_time; // save this for usage elsewhere
+  context.frame_delta_time = delta_time; // save this for usage elsewhere
   vulkan_device *device = &context.device;
 
   // check if we are recreating swapchain
@@ -514,8 +517,8 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
 
 /**
  * @brief Passes a copy of all current global state to update.
- * 
- * 
+ *
+ *
  * @param projection The projection matrix.
  * @param view The view matrix.
  * @param view_position The position of the view.
@@ -533,17 +536,18 @@ void vulkan_renderer_update_global_state(mat4 projection, mat4 view,
   context.object_shader.global_ubo.projection = projection;
   context.object_shader.global_ubo.view = view;
 
-  // TODO: Other properties - will grow as we add more global state items to the renderer
+  // TODO: Other properties - will grow as we add more global state items to the
+  // renderer
 
-  vulkan_object_shader_update_global_state(&context, &context.object_shader, &context.frame_delta_time);
-
- 
+  vulkan_object_shader_update_global_state(&context, &context.object_shader,
+                                           &context.frame_delta_time);
 }
 
 /**
- * @brief ends a frame properly by ending the rednerpass, ending the commandbuffer, then properly handlign the synchronization objects
- * Lastly, serves the image that was created in the frame
-*/
+ * @brief ends a frame properly by ending the rednerpass, ending the
+ * commandbuffer, then properly handlign the synchronization objects Lastly,
+ * serves the image that was created in the frame
+ */
 b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
                                      f32 delta_time) {
   vulkan_command_buffer *command_buffer =
@@ -609,8 +613,9 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
 }
 
 /**
- * @brief Debug call back for vulkan. Uses various log levels to correspond with the vulkan ones
-*/
+ * @brief Debug call back for vulkan. Uses various log levels to correspond with
+ * the vulkan ones
+ */
 VKAPI_ATTR VkBool32 VKAPI_CALL
 vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
                   VkDebugUtilsMessageTypeFlagsEXT message_types,
@@ -634,11 +639,11 @@ vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
   return VK_FALSE;
 }
 
-
 /**
- * @brief Given the certain type and property, finds the associated vulkan memory index for that generalized 'type'
- * e.g. An image needs a different type than a buffer, etc
-*/
+ * @brief Given the certain type and property, finds the associated vulkan
+ * memory index for that generalized 'type' e.g. An image needs a different type
+ * than a buffer, etc
+ */
 i32 find_memory_index(u32 type_filter, u32 property_flags) {
   VkPhysicalDeviceMemoryProperties memory_properties;
   vkGetPhysicalDeviceMemoryProperties(context.device.physical_device,
@@ -659,7 +664,7 @@ i32 find_memory_index(u32 type_filter, u32 property_flags) {
 
 /**
  * @brief creates command buffers for each image in the swapchain
-*/
+ */
 void create_command_buffers(renderer_backend *backend) {
   if (!context.graphics_command_buffers) {
     context.graphics_command_buffers =
@@ -686,7 +691,7 @@ void create_command_buffers(renderer_backend *backend) {
 
 /**
  * @brief recreates framebuffers for the number of images needed
-*/
+ */
 void regenerate_framebuffers(renderer_backend *backend,
                              vulkan_swapchain *swapchain,
                              vulkan_renderpass *renderpass) {
@@ -704,10 +709,12 @@ void regenerate_framebuffers(renderer_backend *backend,
 
 /**
  * @brief recreates the swapchain
- * This is primarily called on resizing a window, will be helpful to have in general.
- * 
- * @param - renderer backend with context needed for when command buffers are created
-*/
+ * This is primarily called on resizing a window, will be helpful to have in
+ * general.
+ *
+ * @param - renderer backend with context needed for when command buffers are
+ * created
+ */
 b8 recreate_swapchain(renderer_backend *backend) {
   // If already being recreated, do not try again.
   if (context.recreating_swapchain) {
@@ -782,10 +789,12 @@ b8 recreate_swapchain(renderer_backend *backend) {
 }
 
 /**
- * @brief Creates the buffers needed to hold an 'objects' data, currently starting with a vertex buffer and an index buffer
- * 
- * @param - renderer context with handles to vulkan api pieces needed to create buffers
-*/
+ * @brief Creates the buffers needed to hold an 'objects' data, currently
+ * starting with a vertex buffer and an index buffer
+ *
+ * @param - renderer context with handles to vulkan api pieces needed to create
+ * buffers
+ */
 b8 create_buffers(vulkan_context *context) {
   VkMemoryPropertyFlagBits memory_property_flags =
       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
@@ -816,25 +825,34 @@ b8 create_buffers(vulkan_context *context) {
 }
 
 /**
- * @brief Creates a texture in conformity with the vulkan spec for textures. Does nothing *with* the texture, is soley responsible for creating the texture
- * 
- * 
+ * @brief Creates a texture in conformity with the vulkan spec for textures.
+ * Does nothing *with* the texture, is soley responsible for creating the
+ * texture
+ *
+ *
  * @param name - a name for the texture
- * @param auto_release - should the texture be automatically released/cleaned up - TBD functionality
+ * @param auto_release - should the texture be automatically released/cleaned up
+ * - TBD functionality
  * @param width - width of texture in pixels
  * @param height - height of texture in pixels
- * @param channel_count - number of channels, IE RGBA is 4 channels. Might as well enable flexibility here
+ * @param channel_count - number of channels, IE RGBA is 4 channels. Might as
+ * well enable flexibility here
  * @param pixels - buffer containing pixel data
- * @param out_texture - new texture will be created and stored in this to be returned to the caller
-*/
-void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width, i32 height, i32 channel_count, const u8* pixels, b8 has_transparency, struct texture* out_texture){
+ * @param out_texture - new texture will be created and stored in this to be
+ * returned to the caller
+ */
+void vulkan_renderer_create_texture(const char *name, b8 auto_release,
+                                    i32 width, i32 height, i32 channel_count,
+                                    const u8 *pixels, b8 has_transparency,
+                                    struct texture *out_texture) {
   OINFO("Creating vulkan renderer texture");
-  
+
   // Copy details over
   out_texture->height = height;
   out_texture->width = width;
   out_texture->channel_count = channel_count;
-  out_texture->generation = INVALID_ID; // auto invalidate this every time so it needs to be recreated
+  out_texture->generation =
+      INVALID_ID; // auto invalidate this every time so it needs to be recreated
 
   // Following steps from vulkan spec...
 
@@ -843,125 +861,140 @@ void vulkan_renderer_create_texture(const char* name, b8 auto_release, i32 width
 
   vulkan_buffer staging_texture_buffer;
 
-  vulkan_buffer_create(&context, image_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
-  true, &staging_texture_buffer);
+  vulkan_buffer_create(&context, image_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                           VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                       true, &staging_texture_buffer);
 
-  vulkan_buffer_load_data(&context, &staging_texture_buffer, 0, image_size, 0, pixels);
+  vulkan_buffer_load_data(&context, &staging_texture_buffer, 0, image_size, 0,
+                          pixels);
 
-  VkFormat image_format = VK_FORMAT_R8G8B8A8_UNORM; // Change this if we need different formats. Probably will. 
+  VkFormat image_format =
+      VK_FORMAT_R8G8B8A8_UNORM; // Change this if we need different formats.
+                                // Probably will.
   // setup the data handles
-  // TODO: revist this and see if we can do it more elegantly (TUCK AWAY INTO A FUNCITON CALL?)
-  out_texture->internal_data = (vulkan_texture_data*)oallocate(sizeof(vulkan_texture_data), MEMORY_TAG_TEXTURE);
-  vulkan_texture_data* texture_data = (vulkan_texture_data*)out_texture->internal_data; // convenience
+  // TODO: revist this and see if we can do it more elegantly (TUCK AWAY INTO A
+  // FUNCITON CALL?)
+  out_texture->internal_data = (vulkan_texture_data *)oallocate(
+      sizeof(vulkan_texture_data), MEMORY_TAG_TEXTURE);
+  vulkan_texture_data *texture_data =
+      (vulkan_texture_data *)out_texture->internal_data; // convenience
 
-  // TODO: Make this...maybe configurable. Or more parameters depending on image type. Assumptions being made for now
-      vulkan_image_create(
-        &context,
-        VK_IMAGE_TYPE_2D,
-        width,
-        height,
-        image_format, 
-        VK_IMAGE_TILING_OPTIMAL,
-        VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-        true,
-        VK_IMAGE_ASPECT_COLOR_BIT,
-        &texture_data->image);
+  // TODO: Make this...maybe configurable. Or more parameters depending on image
+  // type. Assumptions being made for now
+  vulkan_image_create(
+      &context, VK_IMAGE_TYPE_2D, width, height, image_format,
+      VK_IMAGE_TILING_OPTIMAL,
+      VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT |
+          VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, true, VK_IMAGE_ASPECT_COLOR_BIT,
+      &texture_data->image);
 
-      // Prep command buffer
-      vulkan_command_buffer temp_buffer;
-      VkCommandPool pool = context.device.graphics_command_pool;
-      VkQueue queue = context.device.graphics_queue;
-      vulkan_command_buffer_allocate_and_begin_single_use(&context, pool, &temp_buffer);
+  // Prep command buffer
+  vulkan_command_buffer temp_buffer;
+  VkCommandPool pool = context.device.graphics_command_pool;
+  VkQueue queue = context.device.graphics_queue;
+  vulkan_command_buffer_allocate_and_begin_single_use(&context, pool,
+                                                      &temp_buffer);
 
-    // Convert layout format and copy out data
+  // Convert layout format and copy out data
 
-    // Copy the data from the buffer.
-    vulkan_image_copy_from_buffer(&context, &texture_data->image, staging_texture_buffer.handle, &temp_buffer);
+  // Copy the data from the buffer.
+  vulkan_image_copy_from_buffer(&context, &texture_data->image,
+                                staging_texture_buffer.handle, &temp_buffer);
 
-    // Done with staging, destroy now
-    vulkan_buffer_destroy(&context, &staging_texture_buffer);
+  // Done with staging, destroy now
+  vulkan_buffer_destroy(&context, &staging_texture_buffer);
 
-    // Transition from optimal for data reciept to shader-read-only optimal layout.
-    vulkan_image_transition_layout(
-        &context,
-        &temp_buffer,
-        &texture_data->image,
-        image_format,
-        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+  // Transition from optimal for data reciept to shader-read-only optimal
+  // layout.
+  vulkan_image_transition_layout(&context, &temp_buffer, &texture_data->image,
+                                 image_format,
+                                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
-  vulkan_command_buffer_end_single_use(&context, pool, &temp_buffer, queue); // done with cmd buffer
+  vulkan_command_buffer_end_single_use(&context, pool, &temp_buffer,
+                                       queue); // done with cmd buffer
 
-// Create a sampler for the texture
-    VkSamplerCreateInfo sampler_info = {VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-    // TODO: These filters should be configurable.
-    sampler_info.magFilter = VK_FILTER_LINEAR;
-    sampler_info.minFilter = VK_FILTER_LINEAR;
-    sampler_info.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-    sampler_info.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-    sampler_info.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-    sampler_info.anisotropyEnable = VK_TRUE;
-    sampler_info.maxAnisotropy = 16;
-    sampler_info.borderColor = VK_BORDER_COLOR_INT_OPAQUE_BLACK;
-    sampler_info.unnormalizedCoordinates = VK_FALSE;
-    sampler_info.compareEnable = VK_FALSE;
-    sampler_info.compareOp = VK_COMPARE_OP_ALWAYS;
-    sampler_info.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
-    sampler_info.mipLodBias = 0.0f;
-    sampler_info.minLod = 0.0f;
-    sampler_info.maxLod = 0.0f;
+  // Create a sampler for the texture
+  VkSamplerCreateInfo sampler_info = {VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
+  // TODO: These filters should be configurable.
+  sampler_info.magFilter = VK_FILTER_LINEAR;
+  sampler_info.minFilter = VK_FILTER_LINEAR;
+  sampler_info.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+  sampler_info.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+  sampler_info.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+  sampler_info.anisotropyEnable = VK_TRUE;
+  sampler_info.maxAnisotropy = 16;
+  sampler_info.borderColor = VK_BORDER_COLOR_INT_OPAQUE_BLACK;
+  sampler_info.unnormalizedCoordinates = VK_FALSE;
+  sampler_info.compareEnable = VK_FALSE;
+  sampler_info.compareOp = VK_COMPARE_OP_ALWAYS;
+  sampler_info.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
+  sampler_info.mipLodBias = 0.0f;
+  sampler_info.minLod = 0.0f;
+  sampler_info.maxLod = 0.0f;
 
-    VkResult result = vkCreateSampler(context.device.logical_device, &sampler_info, context.allocator, &texture_data->sampler);
-    if (!vulkan_result_is_success(VK_SUCCESS)) {
-        OERROR("Error creating texture sampler: %s", vulkan_result_string(result, true));
-        return;
-    }
+  VkResult result =
+      vkCreateSampler(context.device.logical_device, &sampler_info,
+                      context.allocator, &texture_data->sampler);
+  if (!vulkan_result_is_success(VK_SUCCESS)) {
+    OERROR("Error creating texture sampler: %s",
+           vulkan_result_string(result, true));
+    return;
+  }
 
-    out_texture->has_transparency = has_transparency;
-    ODEBUG("Finished texture call");
-
+  out_texture->has_transparency = has_transparency;
+  ODEBUG("Finished texture call");
 }
 
 /**
  * @brief Destroys the resources used for textures
- * 
+ *
  * @param texture - the texture struct needing to be destroyed
-*/
-void vulkan_renderer_destroy_texture(struct texture* texture){
+ */
+void vulkan_renderer_destroy_texture(struct texture *texture) {
   vkDeviceWaitIdle(context.device.logical_device); // Synchronization
 
-   vulkan_texture_data* data = (vulkan_texture_data*)texture->internal_data;
-   vulkan_image_destroy(&context, &data->image);
-   ozero_memory(&data->image, sizeof(vulkan_image));
-   vkDestroySampler(context.device.logical_device, data->sampler, context.allocator);
-   data->sampler = 0;
+  vulkan_texture_data *data = (vulkan_texture_data *)texture->internal_data;
+  vulkan_image_destroy(&context, &data->image);
+  ozero_memory(&data->image, sizeof(vulkan_image));
+  vkDestroySampler(context.device.logical_device, data->sampler,
+                   context.allocator);
+  data->sampler = 0;
 
-  ofree(texture->internal_data, sizeof(vulkan_texture_data), MEMORY_TAG_TEXTURE);
+  ofree(texture->internal_data, sizeof(vulkan_texture_data),
+        MEMORY_TAG_TEXTURE);
   ozero_memory(texture, sizeof(struct texture));
-
 }
 
-
 /**
- * @brief  This function draws the object for the most part, and abstracts the various update calls within it
+ * @brief  This function draws the object for the most part, and abstracts the
+ * various update calls within it
  * 1. Obtains a command buffer per vulkan pattern and begins a renderpass
- *  TODO: The next steps are hardcoded to our single object for now. This needs to be adapted better for multiple objects/shaders/buffers
- *  This will likely go into the geometry_render_data struct but TBD
+ *  TODO: The next steps are hardcoded to our single object for now. This needs
+ * to be adapted better for multiple objects/shaders/buffers This will likely go
+ * into the geometry_render_data struct but TBD
  * 2. Binds the appropriate shader set
- * 3. Binds the appropriate buffers (vertex data and index data) 
- * ^ These are currently hard coded into the context, it probably should be handled differently? but it works for now while getting thigs stood up
+ * 3. Binds the appropriate buffers (vertex data and index data)
+ * ^ These are currently hard coded into the context, it probably should be
+ * handled differently? but it works for now while getting thigs stood up
  * 4. Issues the actual draw call
- * 5. End renderpass is called elsewhere (renderer_frontend draw_frame). Might be better suited here? Since we start renderpass here?
+ * 5. End renderpass is called elsewhere (renderer_frontend draw_frame). Might
+ * be better suited here? Since we start renderpass here?
  *
- * @param render_data The data required to render the object presently will contain a model transformation and a texture, but those are not yet fully connected.
+ * @param render_data The data required to render the object presently will
+ * contain a model transformation and a texture, but those are not yet fully
+ * connected.
  */
-void vulkan_renderer_update_object(geometry_render_data render_data){
+void vulkan_renderer_update_object(geometry_render_data render_data) {
   // We'll be needing one of these
-  vulkan_command_buffer* command_buffer = &context.graphics_command_buffers[context.image_index];
+  vulkan_command_buffer *command_buffer =
+      &context.graphics_command_buffers[context.image_index];
 
   // // Update anything on the object before we issue render calls
-  // vulkan_object_shader_update_object(&context, &context.object_shader, render_data);
+  // vulkan_object_shader_update_object(&context, &context.object_shader,
+  // render_data);
 
   //  // Begin renderpass!
   vulkan_renderpass_begin(
