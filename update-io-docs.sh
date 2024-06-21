@@ -22,7 +22,6 @@ fi
 
 # Copy files recursively from source to destination
 cp -r "$SOURCE_DIR"/* "$DEST_DIR"
-rm -rf "./docs"
 
 # Check if the copy operation was successful
 if [ $? -eq 0 ]; then
