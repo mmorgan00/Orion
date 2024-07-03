@@ -4,6 +4,7 @@
 #include "core/omemory.h"
 
 #include "math/math_types.h"
+#include "renderer/vulkan/vulkan_buffer.h"
 #include "renderer/vulkan/vulkan_pipeline.h"
 #include "renderer/vulkan/vulkan_shader_utils.h"
 
@@ -24,8 +25,42 @@ b8 vulkan_object_shader_create(vulkan_context *context,
              BUILTIN_SHADER_NAME_OBJECT);
     }
   }
+  // Global Descriptors
 
-  // TODO: DESCRIPTORS
+  // Create the layout binding for the VP in the vert shader
+  VkDescriptorSetLayoutBinding ubo_layout_binding;
+  ubo_layout_binding.binding = 0;
+  ubo_layout_binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  ubo_layout_binding.descriptorCount = 1;
+  ubo_layout_binding.pImmutableSamplers = 0;
+  ubo_layout_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+
+  // Layout info next
+  VkDescriptorSetLayoutCreateInfo layout_info = {
+      VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
+  layout_info.bindingCount =
+      1; // only doing 1 binding, the ubo for the VP for now
+  layout_info.pBindings = &ubo_layout_binding;
+
+  VK_CHECK(vkCreateDescriptorSetLayout(
+      context->device.logical_device, &layout_info, context->allocator,
+      &out_shader->global_descriptor_set_layout));
+
+  // // Vulkan says pool goes next
+  VkDescriptorPoolSize pool_size;
+  pool_size.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  pool_size.descriptorCount =
+      context->swapchain.image_count; // could also just be 3
+
+  VkDescriptorPoolCreateInfo pool_info = {
+      VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
+  pool_info.poolSizeCount = 1;
+  pool_info.pPoolSizes = &pool_size;
+  pool_info.maxSets = context->swapchain.image_count;
+
+  VK_CHECK(vkCreateDescriptorPool(context->device.logical_device, &pool_info,
+                                  context->allocator,
+                                  &out_shader->global_descriptor_pool));
 
   // Pipeline generation
   VkViewport viewport;
@@ -47,8 +82,8 @@ b8 vulkan_object_shader_create(vulkan_context *context,
   const i32 attribute_count = 1;
   VkVertexInputAttributeDescription attribute_descriptions[attribute_count];
   // Position
-  VkFormat formats[attribute_count] = {VK_FORMAT_R32G32B32_SFLOAT};
-  u64 sizes[attribute_count] = {sizeof(vec3)};
+  VkFormat formats[1] = {VK_FORMAT_R32G32B32_SFLOAT};
+  u64 sizes[1] = {sizeof(vec3)};
   for (u32 i = 0; i < attribute_count; ++i) {
     attribute_descriptions[i].binding =
         0; // binding index - should match binding desc
@@ -58,7 +93,9 @@ b8 vulkan_object_shader_create(vulkan_context *context,
     offset += sizes[i];
   }
 
-  // TODO: Desciptor set layouts.
+  // Descriptor set layouts
+  const i32 descriptor_set_layout_count = 1;
+  VkDescriptorSetLayout layouts[1] = {out_shader->global_descriptor_set_layout};
 
   // Stages
   // NOTE: Should match the number of shader->stages.
@@ -70,14 +107,40 @@ b8 vulkan_object_shader_create(vulkan_context *context,
     stage_create_infos[i] = out_shader->stages[i].shader_stage_create_info;
   }
 
-  if (!vulkan_graphics_pipeline_create(context, &context->main_renderpass,
-                                       attribute_count, attribute_descriptions,
-                                       0, 0, OBJECT_SHADER_STAGE_COUNT,
-                                       stage_create_infos, viewport, scissor,
-                                       false, &out_shader->pipeline)) {
+  if (!vulkan_graphics_pipeline_create(
+          context, &context->main_renderpass, attribute_count,
+          attribute_descriptions, descriptor_set_layout_count, layouts,
+          OBJECT_SHADER_STAGE_COUNT, stage_create_infos, viewport, scissor,
+          false, &out_shader->pipeline)) {
     OERROR("Failed to load graphics pipeline for object shader.");
     return false;
   }
+
+  if (!vulkan_buffer_create(context, sizeof(global_uniform_object),
+                            VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT |
+                                VK_BUFFER_USAGE_TRANSFER_DST_BIT,
+                            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                                VK_MEMORY_PROPERTY_HOST_COHERENT_BIT |
+                                VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+                            true, &out_shader->global_uniform_buffer)) {
+    OERROR("Failed to create global uniform buffers");
+    return false;
+  }
+
+  VkDescriptorSetLayout global_layouts[3] = {
+      out_shader->global_descriptor_set_layout,
+      out_shader->global_descriptor_set_layout,
+      out_shader->global_descriptor_set_layout};
+
+  VkDescriptorSetAllocateInfo allocate_info = {
+      VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
+  allocate_info.descriptorPool = out_shader->global_descriptor_pool;
+  allocate_info.descriptorSetCount = 3;
+  allocate_info.pSetLayouts = global_layouts;
+
+  VK_CHECK(vkAllocateDescriptorSets(context->device.logical_device,
+                                    &allocate_info,
+                                    out_shader->global_descriptor_sets));
 
   return true;
 }
@@ -85,7 +148,20 @@ b8 vulkan_object_shader_create(vulkan_context *context,
 void vulkan_object_shader_destroy(vulkan_context *context,
                                   struct vulkan_object_shader *shader) {
 
+  VkDevice logical_device = context->device.logical_device;
+
+  vulkan_buffer_destroy(context, &shader->global_uniform_buffer);
+
+  // Destroy pipeline.
   vulkan_pipeline_destroy(context, &shader->pipeline);
+
+  // Destroy global descriptor pool.
+  vkDestroyDescriptorPool(logical_device, shader->global_descriptor_pool,
+                          context->allocator);
+
+  // Destroy descriptor set layouts.
+  vkDestroyDescriptorSetLayout(
+      logical_device, shader->global_descriptor_set_layout, context->allocator);
 
   // Destroy shader modules
   for (u32 i = 0; i < OBJECT_SHADER_STAGE_COUNT; i++) {
@@ -96,7 +172,48 @@ void vulkan_object_shader_destroy(vulkan_context *context,
 }
 
 void vulkan_object_shader_use(vulkan_context *context,
-                              struct vulkan_object_shader* shader) {
-                                u32 image_index = context->image_index;
-                                vulkan_pipeline_bind(&context->graphics_command_buffers[image_index], VK_PIPELINE_BIND_POINT_GRAPHICS, &shader->pipeline);
-                              }
+                              struct vulkan_object_shader *shader) {
+  u32 image_index = context->image_index;
+  vulkan_pipeline_bind(&context->graphics_command_buffers[image_index],
+                       VK_PIPELINE_BIND_POINT_GRAPHICS, &shader->pipeline);
+}
+
+void vulkan_object_shader_update_global_state(vulkan_context *context,
+                                              vulkan_object_shader *shader) {
+  u32 image_index = context->image_index;
+  VkCommandBuffer command_buffer =
+      context->graphics_command_buffers[image_index].handle;
+  VkDescriptorSet global_descriptor =
+      shader->global_descriptor_sets[image_index];
+
+  // Bind the global descriptor set to be updated.
+  vkCmdBindDescriptorSets(command_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+                          shader->pipeline.pipeline_layout, 0, 1,
+                          &global_descriptor, 0, 0);
+
+  // Configure the descriptors for the given index.
+  u32 range = sizeof(global_uniform_object);
+  u64 offset = 0;
+
+  // Load the actual data to the UBO
+  vulkan_buffer_load_data(context, &shader->global_uniform_buffer, offset,
+                          range, 0, &shader->global_ubo);
+
+  VkDescriptorBufferInfo buffer_info;
+  buffer_info.buffer = shader->global_uniform_buffer.handle;
+  buffer_info.offset = offset;
+  buffer_info.range = range;
+
+  // Update descriptor sets.
+  VkWriteDescriptorSet descriptor_write = {
+      VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+  descriptor_write.dstSet = shader->global_descriptor_sets[image_index];
+  descriptor_write.dstBinding = 0;
+  descriptor_write.dstArrayElement = 0;
+  descriptor_write.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  descriptor_write.descriptorCount = 1;
+  descriptor_write.pBufferInfo = &buffer_info;
+
+  vkUpdateDescriptorSets(context->device.logical_device, 1, &descriptor_write,
+                         0, 0);
+}

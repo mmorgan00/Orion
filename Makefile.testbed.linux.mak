@@ -4,7 +4,7 @@ OBJ_DIR := obj
 
 ASSEMBLY := testbed
 EXTENSION := 
-COMPILER_FLAGS := -g -fdeclspec -fPIC
+COMPILER_FLAGS := -g -fPIC
 INCLUDE_FLAGS := -Iengine/src -I$(VULKAN_SDK)\include
 LINKER_FLAGS := -L./$(BUILD_DIR)/ -lengine -Wl,-rpath,.
 DEFINES := -D_DEBUG -DKIMPORT
@@ -27,7 +27,7 @@ scaffold: # create build directory
 .PHONY: link
 link: scaffold $(OBJ_FILES) # link
 	@echo Linking $(ASSEMBLY)...
-	clang $(OBJ_FILES) -o $(BUILD_DIR)/$(ASSEMBLY)$(EXTENSION) $(LINKER_FLAGS)
+	gcc $(OBJ_FILES) -o $(BUILD_DIR)/$(ASSEMBLY)$(EXTENSION) $(LINKER_FLAGS)
 
 .PHONY: compile
 compile: #compile .c files
@@ -40,6 +40,6 @@ clean: # clean build directory
 
 $(OBJ_DIR)/%.c.o: %.c # compile .c to .o object
 	@echo   $<...
-	@clang $< $(COMPILER_FLAGS) -c -o $@ $(DEFINES) $(INCLUDE_FLAGS)
+	@gcc $< $(COMPILER_FLAGS) -c -o $@ $(DEFINES) $(INCLUDE_FLAGS)
 
 43 changes: 43 additions & 0 deletions 

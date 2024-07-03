@@ -18,5 +18,5 @@ linkerFlags="-L../bin/ -lengine -Wl,-rpath,."
 defines="-D_DEBUG -DOIMPORT"
 
 echo "Building $assembly..."
-echo clang $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags
-clang $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags
+echo gcc $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags
+gcc $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags
