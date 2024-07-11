@@ -4,15 +4,15 @@ OBJ_DIR := obj
 
 ASSEMBLY := engine
 EXTENSION := .so
-COMPILER_FLAGS := -g -fPIC
-INCLUDE_FLAGS := -Iengine/src -I$(VULKAN_SDK)/include
-LINKER_FLAGS := -g -shared -lvulkan -lxcb -lX11 -lX11-xcb -lxkbcommon -L$(VULKAN_SDK)/lib -L/usr/X11R6/lib
+COMPILER_FLAGS := -g -fdeclspec -fPIC
+INCLUDE_FLAGS := -Iengine/src -I$(VULKAN_SDK)/include 
+LINKER_FLAGS := -g -shared -lvulkan -lxcb -lX11 -lX11-xcb -lglfw -lGL -lGLU -lxkbcommon -L$(VULKAN_SDK)/lib -L/usr/X11R6/lib
 DEFINES := -D_DEBUG -DKEXPORT
 
 # Make does not offer a recursive wildcard function, so here's one:
 #rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
-SRC_FILES := $(shell find $(ASSEMBLY) -name *.c)		# .c files
+SRC_FILES := $(shell find $(ASSEMBLY) -name *.c*)		# .c files
 DIRECTORIES := $(shell find $(ASSEMBLY) -type d)		# directories with .h files
 OBJ_FILES := $(SRC_FILES:%=$(OBJ_DIR)/%.o)		# compiled .o objects
 

@@ -1,9 +1,7 @@
 #!/bin/bash
 
-set echo on
-
-# Get a list of all the .c files.
-cFilenames=$(find . -type f -name "*.c")
+# Get a list of all the .c and .cpp files.
+cFilenames=$(find . -type f -name "*.c*")
 
 hFilenames=$(find . -type f -name "*.h")
 

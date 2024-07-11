@@ -5,8 +5,8 @@
 
 typedef enum renderer_backend_type {
 RENDERER_BACKEND_TYPE_VULKAN,
+RENDERER_BACKEND_TYPE_OPENGL,
 // TODO: Not supported yet. Will add later
-// RENDERER_BACKEND_TYPE_OPENGL,
 // RENDERER_BACKEND_TYPE_DIRECTX
 } renderer_backend_type;
 

@@ -485,9 +485,10 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   vulkan_object_shader_use(&context, &context.object_shader);
 
   // PASS COPIES - DON'T BLOCK REST OF ENGINE UPDATING TO RENDER
-  context.object_shader.global_ubo.projection = mat4_perspective(deg_to_rad(45.0f), 1280 / 720.0f, 0.1f, 1000.0f);
+  context.object_shader.global_ubo.projection =
+      mat4_perspective(deg_to_rad(45.0f), 1280 / 720.0f, 0.1f, 1000.0f);
   static f32 z = -1.0f;
-    z -= 0.005f;
+  z -= 0.005f;
   context.object_shader.global_ubo.view = mat4_translation((vec3){0, 0, z});
 
   // TODO: other ubo properties
