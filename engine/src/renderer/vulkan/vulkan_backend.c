@@ -575,6 +575,37 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
 
   return true;
 }
+void vulkan_renderer_backend_create_texture() {
+
+  vulkan_buffer staging_buffer;
+  vulkan_buffer_create(&context, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, true, &staging_buffer);
+}
+
+
+ // ------------- START PRIVATE FUNCTIONS
+
+/**
+ * @brief creates texture pixel data for a checkerboard 
+ * @param height height of texture in pixels
+ * @param width width of texture in pixels
+ * @param out_texture the texture data in rgba format will be returned here. Pointer SHOULD ALREADY BE ALLOCATED
+ */
+ void create_sample_texture(u32 height, u32 width, u8* out_texture) {
+
+    // row iteration
+    for(u32 y = 0; x < height; y++) {
+      // column iteration
+      for(u32 x = 0; x < width; x++) {
+        u32 i = (y * width + x) * 4;
+        uint8_t color = ((x & 0x8) == (y & 0x8)) ? 0xDD : 0x5F;
+        // RGBA
+        out_texture[i] = color;
+        out_texture[i + 1] = color;
+        out_texture[i + 2] = color;
+        out_texture[i + 3] = 0xFF;
+      }
+    }
+ }  
 
 VKAPI_ATTR VkBool32 VKAPI_CALL
 vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,

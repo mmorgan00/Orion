@@ -40,6 +40,9 @@ b8 renderer_end_frame(f32 delta_time) {
   return result;
 }
 
+/**
+ * @brief Function handler for a window resize. Calls the appropriate backend resize handler with the given parameters
+ */
 void renderer_on_resized(u16 width, u16 height) {
   if (backend) {
     backend->resized(backend, width, height);
@@ -49,6 +52,11 @@ void renderer_on_resized(u16 width, u16 height) {
   }
 }
 
+/**
+ * @brief Renders the frame using the given render packet.
+ * Presently, this performs some small amount of view transformation 
+ * @param packet The render packet of data. Right now this only contains delta time
+ */
 b8 renderer_draw_frame(render_packet *packet) {
   // If the begin frame was successful, continue mid frame ops
   if (renderer_begin_frame(packet->delta_time)) {

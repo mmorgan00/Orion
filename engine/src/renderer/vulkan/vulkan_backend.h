@@ -17,4 +17,6 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
                                                  vec3 view_position,
                                                  vec4 ambient_color, i32 mode);
 
+void vulkan_renderer_backend_create_texture();
+
 b8 vulkan_renderer_backend_end_frame(renderer_backend *backend, f32 delta_time);
