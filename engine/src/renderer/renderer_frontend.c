@@ -58,7 +58,6 @@ b8 renderer_draw_frame(render_packet *packet) {
     static f32 z = -1.0f;
     z -= 0.005f;
     mat4 view = mat4_translation((vec3){0, 0, z});
-    ODEBUG("Calling update global state from renderer_draw_frame");
     backend->update_global_state(projection, view, vec3_zero(), vec4_one(), 0);
 
     b8 result = renderer_end_frame(packet->delta_time);
