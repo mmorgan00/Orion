@@ -277,23 +277,23 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   vertex_3d verts[vert_count];
   ozero_memory(verts, sizeof(vertex_3d) * vert_count);
 
-  verts[0].position.x = -1.0;
-  verts[0].position.y = 2.0;
+  verts[0].position.x = -0.5;
+  verts[0].position.y = -0.5;
   verts[0].tex_coord.u = 0.0;
   verts[0].tex_coord.v = 0.0;
 
-  verts[1].position.x = 1.0;
-  verts[1].position.y = 2.0;
+  verts[1].position.x = 0.5;
+  verts[1].position.y = 0.5;
   verts[1].tex_coord.u = 1.0;
   verts[1].tex_coord.v = 1.0;
 
-  verts[2].position.x = -3.0;
-  verts[2].position.y = 2.0;
+  verts[2].position.x = -0.5;
+  verts[2].position.y = 0.5;
   verts[2].tex_coord.u = 0.0;
   verts[2].tex_coord.v = 1.0;
 
-  verts[3].position.x = 1.0;
-  verts[3].position.y = -2.0;
+  verts[3].position.x = 0.5;
+  verts[3].position.y = -0.5;
   verts[3].tex_coord.u = 1.0;
   verts[3].tex_coord.v = 0.0;
 
@@ -541,7 +541,7 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   context.object_shader.global_ubo.projection =
       mat4_perspective(deg_to_rad(45.0f), 1280 / 720.0f, 0.1f, 1000.0f);
   static f32 z = -1.0f;
-  z -= 0.005f;
+    z -= 0.005f;
   context.object_shader.global_ubo.view = mat4_translation((vec3){0, 0, z});
 
   // TODO: other ubo properties
