@@ -24,6 +24,7 @@
 
 #include "math/math_types.h"
 #include "math/omath.h"
+#include <math.h>
 #include "shaders/vulkan_object_shader.h"
 
 // static context for Vulkan
@@ -276,7 +277,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   vertex_3d verts[vert_count];
   ozero_memory(verts, sizeof(vertex_3d) * vert_count);
 
-  verts[0].position.x = -0.05;
+  verts[0].position.x = -0.5;
   verts[0].position.y = -0.5;
   verts[0].tex_coord.u = 0.0;
   verts[0].tex_coord.v = 0.0;
@@ -284,7 +285,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   verts[1].position.x = 0.5;
   verts[1].position.y = 0.5;
   verts[1].tex_coord.u = 1.0;
-  verts[1].tex_coord.v = 0.0;
+  verts[1].tex_coord.v = 1.0;
 
   verts[2].position.x = -0.5;
   verts[2].position.y = 0.5;
@@ -294,7 +295,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   verts[3].position.x = 0.5;
   verts[3].position.y = -0.5;
   verts[3].tex_coord.u = 1.0;
-  verts[3].tex_coord.v = 1.0;
+  verts[3].tex_coord.v = 0.0;
 
   const u32 index_count = 6;
   u32 indices[6] = {0, 1, 2, 0, 3, 1};
@@ -674,13 +675,20 @@ u8* create_sample_texture(u32 height, u32 width) {
   for (u32 y = 0; y < height; y++) {
     // column iteration
     for (u32 x = 0; x < width; x++) {
-      u32 i = (y * width + x) * 4;
-      uint8_t color = ((x & 0x8) == (y & 0x8)) ? 0xDD : 0x5F;
-      // RGBA
-      texture_data[i] = color;
-      texture_data[i + 1] = color;
-      texture_data[i + 2] = color;
-      texture_data[i + 3] = 0xFF;
+            double nx = (double)x / 512 - 0.5;
+            double ny = (double)y / 512 - 0.5;
+            
+            double angle = atan2(ny, nx);
+            double distance = sqrt(nx*nx + ny*ny);
+            
+            double spiral = fmod(distance * 20 + angle / (2 * O_PI), 1.0);
+            double fractal = fmod(spiral * 5, 1.0);
+            
+            int index = y * 512 + x;
+            texture_data[index] = (unsigned char)(sin(fractal * O_PI * 2) * 127 + 128);
+            texture_data[index + 1] = (unsigned char)(cos(fractal * O_PI * 3) * 127 + 128);
+            texture_data[index + 2]= (unsigned char)(sin(fractal * O_PI * 5) * 127 + 128);
+            texture_data[index + 3] = 0xFF;
     }
   }
   return texture_data;
