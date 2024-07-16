@@ -5,7 +5,8 @@
 #include "core/logger.h"
 #include "core/omemory.h"
 
-i32 temp_find_memory_index(vulkan_context* context, u32 type_filter, u32 property_flags) {
+i32 temp_find_memory_index(vulkan_context *context, u32 type_filter,
+                           u32 property_flags) {
   VkPhysicalDeviceMemoryProperties memory_properties;
   vkGetPhysicalDeviceMemoryProperties(context->device.physical_device,
                                       &memory_properties);
@@ -130,7 +131,8 @@ void vulkan_image_transition_layout(vulkan_context *context, VkFormat format,
                                     VkImageLayout new_layout,
                                     vulkan_image *image) {
 
-  vulkan_command_buffer *trans_buffer = oallocate(sizeof(vulkan_command_buffer), MEMORY_TAG_RENDERER);
+  vulkan_command_buffer *trans_buffer =
+      oallocate(sizeof(vulkan_command_buffer), MEMORY_TAG_RENDERER);
   vulkan_command_buffer_allocate_and_begin_single_use(
       context, context->device.graphics_command_pool, trans_buffer);
 

@@ -2,7 +2,7 @@
 #include "vulkan_texture.h"
 
 void vulkan_texture_create_sampler(vulkan_context *context,
-                                   VkSampler* out_texture_sampler) {
+                                   VkSampler *out_texture_sampler) {
   VkSamplerCreateInfo sampler_info = {VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
   sampler_info.magFilter = VK_FILTER_LINEAR;
   sampler_info.minFilter = VK_FILTER_LINEAR;

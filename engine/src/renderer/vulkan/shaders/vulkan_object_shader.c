@@ -35,12 +35,12 @@ b8 vulkan_object_shader_create(vulkan_context *context,
   ubo_layout_binding.pImmutableSamplers = 0;
   ubo_layout_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
 
-
   // Create the layout binding for a texture sampler
   VkDescriptorSetLayoutBinding texture_sampler_binding;
   texture_sampler_binding.binding = 1;
   texture_sampler_binding.descriptorCount = 1;
-  texture_sampler_binding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  texture_sampler_binding.descriptorType =
+      VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
   texture_sampler_binding.pImmutableSamplers = 0;
   texture_sampler_binding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
 
@@ -49,7 +49,8 @@ b8 vulkan_object_shader_create(vulkan_context *context,
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
   layout_info.bindingCount =
       2; // only doing 1 binding, the ubo for the VP for now
-      VkDescriptorSetLayoutBinding bindings[2] = {ubo_layout_binding, texture_sampler_binding};
+  VkDescriptorSetLayoutBinding bindings[2] = {ubo_layout_binding,
+                                              texture_sampler_binding};
   layout_info.pBindings = bindings;
 
   VK_CHECK(vkCreateDescriptorSetLayout(
@@ -63,9 +64,8 @@ b8 vulkan_object_shader_create(vulkan_context *context,
   pool_sizes[0].descriptorCount =
       context->swapchain.image_count; // could also just be 3
 
-      pool_sizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-  pool_sizes[1].descriptorCount =
-      context->swapchain.image_count;
+  pool_sizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  pool_sizes[1].descriptorCount = context->swapchain.image_count;
 
   VkDescriptorPoolCreateInfo pool_info = {
       VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
@@ -97,8 +97,9 @@ b8 vulkan_object_shader_create(vulkan_context *context,
   const i32 attribute_count = 2; // position, texture sample
   VkVertexInputAttributeDescription attribute_descriptions[attribute_count];
   // Position
-  VkFormat formats[2] = {VK_FORMAT_R32G32B32_SFLOAT, VK_FORMAT_R32G32B32_SFLOAT};
-  u64 sizes[2] = {sizeof(vec3), sizeof(vec2)}; // position, tex 
+  VkFormat formats[2] = {VK_FORMAT_R32G32B32_SFLOAT,
+                         VK_FORMAT_R32G32B32_SFLOAT};
+  u64 sizes[2] = {sizeof(vec3), sizeof(vec2)}; // position, tex
   for (u32 i = 0; i < attribute_count; ++i) {
     attribute_descriptions[i].binding =
         0; // binding index - should match binding desc
@@ -214,10 +215,10 @@ void vulkan_object_shader_update_global_state(vulkan_context *context,
   buffer_info.offset = offset;
   buffer_info.range = range;
 
-
   // Update descriptor sets.
   VkWriteDescriptorSet descriptor_writes[2] = {
-      {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}, {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}};
+      {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET},
+      {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}};
 
   descriptor_writes[0].dstSet = shader->global_descriptor_sets[image_index];
   descriptor_writes[0].dstBinding = 0;
@@ -225,7 +226,6 @@ void vulkan_object_shader_update_global_state(vulkan_context *context,
   descriptor_writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
   descriptor_writes[0].descriptorCount = 1;
   descriptor_writes[0].pBufferInfo = &buffer_info;
-
 
   VkDescriptorImageInfo image_info;
   image_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
@@ -235,7 +235,8 @@ void vulkan_object_shader_update_global_state(vulkan_context *context,
   descriptor_writes[1].dstSet = shader->global_descriptor_sets[image_index];
   descriptor_writes[1].dstBinding = 1;
   descriptor_writes[1].dstArrayElement = 0;
-  descriptor_writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  descriptor_writes[1].descriptorType =
+      VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
   descriptor_writes[1].pImageInfo = &image_info;
   descriptor_writes[1].descriptorCount = 1;
   descriptor_writes[1].pBufferInfo = &buffer_info;

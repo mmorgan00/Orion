@@ -24,8 +24,8 @@
 
 #include "math/math_types.h"
 #include "math/omath.h"
-#include <math.h>
 #include "shaders/vulkan_object_shader.h"
+#include <math.h>
 
 // static context for Vulkan
 static vulkan_context context;
@@ -47,7 +47,7 @@ b8 recreate_swapchain(renderer_backend *backend);
 
 b8 create_buffers(vulkan_context *context);
 
-u8* create_sample_texture(u32 height, u32 width);
+u8 *create_sample_texture(u32 height, u32 width);
 
 void upload_data_range(vulkan_context *context, VkCommandPool pool,
                        VkFence fence, VkQueue queue, vulkan_buffer *buffer,
@@ -277,23 +277,23 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
   vertex_3d verts[vert_count];
   ozero_memory(verts, sizeof(vertex_3d) * vert_count);
 
-  verts[0].position.x = -0.5;
-  verts[0].position.y = -0.5;
+  verts[0].position.x = -1.0;
+  verts[0].position.y = 2.0;
   verts[0].tex_coord.u = 0.0;
   verts[0].tex_coord.v = 0.0;
 
-  verts[1].position.x = 0.5;
-  verts[1].position.y = 0.5;
+  verts[1].position.x = 1.0;
+  verts[1].position.y = 2.0;
   verts[1].tex_coord.u = 1.0;
   verts[1].tex_coord.v = 1.0;
 
-  verts[2].position.x = -0.5;
-  verts[2].position.y = 0.5;
+  verts[2].position.x = -3.0;
+  verts[2].position.y = 2.0;
   verts[2].tex_coord.u = 0.0;
   verts[2].tex_coord.v = 1.0;
 
-  verts[3].position.x = 0.5;
-  verts[3].position.y = -0.5;
+  verts[3].position.x = 1.0;
+  verts[3].position.y = -2.0;
   verts[3].tex_coord.u = 1.0;
   verts[3].tex_coord.v = 0.0;
 
@@ -308,6 +308,43 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
                     context.device.graphics_queue, &context.object_index_buffer,
                     0, sizeof(u32) * index_count, indices);
 
+  vulkan_buffer staging_buffer;
+  u8 *texture_data = create_sample_texture(512, 512);
+
+  vulkan_buffer_create(&context, sizeof(u8) * 512 * 512 * 4,
+                       VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                           VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                       true, &staging_buffer);
+
+  vulkan_buffer_load_data(&context, &staging_buffer, 0,
+                          sizeof(u8) * 512 * 512 * 4, 0, texture_data);
+
+  vulkan_image_create(
+      &context, VK_IMAGE_TYPE_2D, 512, 512, VK_FORMAT_R8G8B8A8_SRGB,
+      VK_IMAGE_TILING_OPTIMAL,
+      VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, true, VK_IMAGE_ASPECT_COLOR_BIT,
+      &context.object_shader.texture.image);
+
+  vulkan_image_transition_layout(&context, VK_FORMAT_R8G8B8A8_SRGB,
+                                 VK_IMAGE_LAYOUT_UNDEFINED,
+                                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                 &context.object_shader.texture.image);
+
+  vulkan_buffer_copy_to_image(&context, 512, 512, staging_buffer,
+                              &context.object_shader.texture.image);
+
+  vulkan_image_transition_layout(&context, VK_FORMAT_R8G8B8A8_SRGB,
+                                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+                                 &context.object_shader.texture.image);
+
+  vulkan_buffer_destroy(&context, &staging_buffer);
+
+  vulkan_texture_create_sampler(&context,
+                                &context.object_shader.texture.sampler);
+
   OINFO("Vulkan renderer initialized successfully.");
   return true;
 }
@@ -315,6 +352,9 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
 
   vkDeviceWaitIdle(context.device.logical_device);
+
+  vkDestroySampler(context.device.logical_device, context.object_shader.texture.sampler, context.allocator);
+  vulkan_image_destroy(&context, &context.object_shader.texture.image);
 
   vulkan_buffer_destroy(&context, &context.object_vertex_buffer);
   vulkan_buffer_destroy(&context, &context.object_index_buffer);
@@ -504,40 +544,6 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   z -= 0.005f;
   context.object_shader.global_ubo.view = mat4_translation((vec3){0, 0, z});
 
-  vulkan_buffer staging_buffer;
-  u8 *texture_data = create_sample_texture(512, 512);
-
-  vulkan_buffer_create(&context, sizeof(u8) * 512 * 512 * 4,
-                       VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
-                           VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                       true, &staging_buffer);
-
-  vulkan_buffer_load_data(&context, &staging_buffer, 0,
-                          sizeof(u8) * 512 * 512 * 4, 0, texture_data);
-
-  vulkan_image_create(
-      &context, VK_IMAGE_TYPE_2D, 512, 512, VK_FORMAT_R8G8B8A8_SRGB,
-      VK_IMAGE_TILING_OPTIMAL,
-      VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
-      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, true, VK_IMAGE_ASPECT_COLOR_BIT,
-      &context.object_shader.texture.image);
-
-  vulkan_image_transition_layout(
-      &context, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED,
-      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, &context.object_shader.texture.image);
-
-  vulkan_buffer_copy_to_image(&context, 512, 512, staging_buffer,
-                              &context.object_shader.texture.image);
-
-  vulkan_image_transition_layout(
-      &context, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-      VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, &context.object_shader.texture.image);
-
-  vulkan_buffer_destroy(&context, &staging_buffer);
-
-  vulkan_texture_create_sampler(&context, &context.object_shader.texture.sampler);
-
   // TODO: other ubo properties
 
   vulkan_object_shader_update_global_state(&context, &context.object_shader);
@@ -658,7 +664,6 @@ void vulkan_renderer_backend_create_texture() {
       VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, &texture_image);
 
   vulkan_buffer_destroy(&context, &staging_buffer);
-
 }
 
 // ------------- START PRIVATE FUNCTIONS
@@ -669,26 +674,29 @@ void vulkan_renderer_backend_create_texture() {
  * @param width width of texture in pixels
  * @param out_texture the texture data in rgba format will be returned here.
  */
-u8* create_sample_texture(u32 height, u32 width) {
-  u8* texture_data = oallocate(sizeof(u8) * 512 * 512 * 4, MEMORY_TAG_RENDERER);
+u8 *create_sample_texture(u32 height, u32 width) {
+  u8 *texture_data = oallocate(sizeof(u8) * 512 * 512 * 4, MEMORY_TAG_RENDERER);
   // row iteration
   for (u32 y = 0; y < height; y++) {
     // column iteration
     for (u32 x = 0; x < width; x++) {
-            double nx = (double)x / 512 - 0.5;
-            double ny = (double)y / 512 - 0.5;
-            
-            double angle = atan2(ny, nx);
-            double distance = sqrt(nx*nx + ny*ny);
-            
-            double spiral = fmod(distance * 20 + angle / (2 * O_PI), 1.0);
-            double fractal = fmod(spiral * 5, 1.0);
-            
-            int index = y * 512 + x;
-            texture_data[index] = (unsigned char)(sin(fractal * O_PI * 2) * 127 + 128);
-            texture_data[index + 1] = (unsigned char)(cos(fractal * O_PI * 3) * 127 + 128);
-            texture_data[index + 2]= (unsigned char)(sin(fractal * O_PI * 5) * 127 + 128);
-            texture_data[index + 3] = 0xFF;
+      double nx = (double)x / 512 - 0.5;
+      double ny = (double)y / 512 - 0.5;
+
+      double angle = atan2(ny, nx);
+      double distance = sqrt(nx * nx + ny * ny);
+
+      double spiral = fmod(distance * 20 + angle / (2 * O_PI), 1.0);
+      double fractal = fmod(spiral * 5, 1.0);
+
+      int index = y * 512 + x;
+      texture_data[index] =
+          (unsigned char)(sin(fractal * O_PI * 2) * 127 + 128);
+      texture_data[index + 1] =
+          (unsigned char)(cos(fractal * O_PI * 3) * 127 + 128);
+      texture_data[index + 2] =
+          (unsigned char)(sin(fractal * O_PI * 5) * 127 + 128);
+      texture_data[index + 3] = 0xFF;
     }
   }
   return texture_data;

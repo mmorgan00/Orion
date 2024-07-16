@@ -197,10 +197,10 @@ void vulkan_buffer_copy_to(vulkan_context *context, VkCommandPool pool,
 
 void vulkan_buffer_copy_to_image(vulkan_context *context, u64 height, u64 width,
                                  vulkan_buffer source_buffer,
-                                 vulkan_image* dest_image) {
-  vulkan_command_buffer *cmd_buffer;
+                                 vulkan_image *dest_image) {
+  vulkan_command_buffer cmd_buffer;
   vulkan_command_buffer_allocate_and_begin_single_use(
-      context, context->device.graphics_command_pool, cmd_buffer);
+      context, context->device.graphics_command_pool, &cmd_buffer);
 
   VkBufferImageCopy region = {VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR};
   region.bufferOffset = 0;
@@ -220,11 +220,11 @@ void vulkan_buffer_copy_to_image(vulkan_context *context, u64 height, u64 width,
   region.imageExtent.height = height;
   region.imageExtent.depth = 1;
 
-  vkCmdCopyBufferToImage(cmd_buffer->handle, source_buffer.handle,
+  vkCmdCopyBufferToImage(cmd_buffer.handle, source_buffer.handle,
                          dest_image->handle,
                          VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 
   vulkan_command_buffer_end_single_use(
-      context, context->device.graphics_command_pool, cmd_buffer,
+      context, context->device.graphics_command_pool, &cmd_buffer,
       context->device.graphics_queue);
 }
