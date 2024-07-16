@@ -35,27 +35,42 @@ b8 vulkan_object_shader_create(vulkan_context *context,
   ubo_layout_binding.pImmutableSamplers = 0;
   ubo_layout_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
 
+
+  // Create the layout binding for a texture sampler
+  VkDescriptorSetLayoutBinding texture_sampler_binding;
+  texture_sampler_binding.binding = 1;
+  texture_sampler_binding.descriptorCount = 1;
+  texture_sampler_binding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  texture_sampler_binding.pImmutableSamplers = 0;
+  texture_sampler_binding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+
   // Layout info next
   VkDescriptorSetLayoutCreateInfo layout_info = {
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
   layout_info.bindingCount =
-      1; // only doing 1 binding, the ubo for the VP for now
-  layout_info.pBindings = &ubo_layout_binding;
+      2; // only doing 1 binding, the ubo for the VP for now
+      VkDescriptorSetLayoutBinding bindings[2] = {ubo_layout_binding, texture_sampler_binding};
+  layout_info.pBindings = bindings;
 
   VK_CHECK(vkCreateDescriptorSetLayout(
       context->device.logical_device, &layout_info, context->allocator,
       &out_shader->global_descriptor_set_layout));
 
   // // Vulkan says pool goes next
-  VkDescriptorPoolSize pool_size;
-  pool_size.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-  pool_size.descriptorCount =
+  VkDescriptorPoolSize pool_sizes[2];
+
+  pool_sizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  pool_sizes[0].descriptorCount =
       context->swapchain.image_count; // could also just be 3
+
+      pool_sizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  pool_sizes[1].descriptorCount =
+      context->swapchain.image_count;
 
   VkDescriptorPoolCreateInfo pool_info = {
       VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-  pool_info.poolSizeCount = 1;
-  pool_info.pPoolSizes = &pool_size;
+  pool_info.poolSizeCount = 2;
+  pool_info.pPoolSizes = pool_sizes;
   pool_info.maxSets = context->swapchain.image_count;
 
   VK_CHECK(vkCreateDescriptorPool(context->device.logical_device, &pool_info,
@@ -79,11 +94,11 @@ b8 vulkan_object_shader_create(vulkan_context *context,
 
   // Attributes
   u32 offset = 0;
-  const i32 attribute_count = 1;
+  const i32 attribute_count = 2; // position, texture sample
   VkVertexInputAttributeDescription attribute_descriptions[attribute_count];
   // Position
-  VkFormat formats[1] = {VK_FORMAT_R32G32B32_SFLOAT};
-  u64 sizes[1] = {sizeof(vec3)};
+  VkFormat formats[2] = {VK_FORMAT_R32G32B32_SFLOAT, VK_FORMAT_R32G32B32_SFLOAT};
+  u64 sizes[2] = {sizeof(vec3), sizeof(vec2)}; // position, tex 
   for (u32 i = 0; i < attribute_count; ++i) {
     attribute_descriptions[i].binding =
         0; // binding index - should match binding desc
@@ -186,8 +201,6 @@ void vulkan_object_shader_update_global_state(vulkan_context *context,
   VkDescriptorSet global_descriptor =
       shader->global_descriptor_sets[image_index];
 
-  
-
   // Configure the descriptors for the given index.
   u32 range = sizeof(global_uniform_object);
   u64 offset = 0;
@@ -201,20 +214,36 @@ void vulkan_object_shader_update_global_state(vulkan_context *context,
   buffer_info.offset = offset;
   buffer_info.range = range;
 
-  // Update descriptor sets.
-  VkWriteDescriptorSet descriptor_write = {
-      VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-  descriptor_write.dstSet = shader->global_descriptor_sets[image_index];
-  descriptor_write.dstBinding = 0;
-  descriptor_write.dstArrayElement = 0;
-  descriptor_write.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-  descriptor_write.descriptorCount = 1;
-  descriptor_write.pBufferInfo = &buffer_info;
 
-  vkUpdateDescriptorSets(context->device.logical_device, 1, &descriptor_write,
+  // Update descriptor sets.
+  VkWriteDescriptorSet descriptor_writes[2] = {
+      {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}, {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}};
+
+  descriptor_writes[0].dstSet = shader->global_descriptor_sets[image_index];
+  descriptor_writes[0].dstBinding = 0;
+  descriptor_writes[0].dstArrayElement = 0;
+  descriptor_writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  descriptor_writes[0].descriptorCount = 1;
+  descriptor_writes[0].pBufferInfo = &buffer_info;
+
+
+  VkDescriptorImageInfo image_info;
+  image_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+  image_info.imageView = shader->texture.image.view;
+  image_info.sampler = shader->texture.sampler;
+
+  descriptor_writes[1].dstSet = shader->global_descriptor_sets[image_index];
+  descriptor_writes[1].dstBinding = 1;
+  descriptor_writes[1].dstArrayElement = 0;
+  descriptor_writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  descriptor_writes[1].pImageInfo = &image_info;
+  descriptor_writes[1].descriptorCount = 1;
+  descriptor_writes[1].pBufferInfo = &buffer_info;
+
+  vkUpdateDescriptorSets(context->device.logical_device, 2, descriptor_writes,
                          0, 0);
 
-                         // Bind the global descriptor set to be updated.
+  // Bind the global descriptor set to be updated.
   vkCmdBindDescriptorSets(command_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
                           shader->pipeline.pipeline_layout, 0, 1,
                           &global_descriptor, 0, 0);

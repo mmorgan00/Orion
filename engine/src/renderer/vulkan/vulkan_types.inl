@@ -132,6 +132,11 @@ typedef struct vulkan_shader_stage {
   VkPipelineShaderStageCreateInfo shader_stage_create_info;
 } vulkan_shader_stage;
 
+typedef struct vulkan_texture {
+  VkSampler sampler;
+  vulkan_image image;
+} vulkan_texture;
+
 #define OBJECT_SHADER_STAGE_COUNT 2 // vertex, fragment for now
 
 typedef struct vulkan_object_shader {
@@ -149,6 +154,8 @@ typedef struct vulkan_object_shader {
   vulkan_buffer global_uniform_buffer; // where the data actually is
 
   vulkan_pipeline pipeline;
+
+  vulkan_texture texture;
   
 } vulkan_object_shader;
 

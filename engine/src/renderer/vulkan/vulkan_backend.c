@@ -4,9 +4,11 @@
 #include "vulkan_device.h"
 #include "vulkan_fence.h"
 #include "vulkan_framebuffer.h"
+#include "vulkan_image.h"
 #include "vulkan_platform.h"
 #include "vulkan_renderpass.h"
 #include "vulkan_swapchain.h"
+#include "vulkan_texture.h"
 
 #include "vulkan_types.inl"
 #include "vulkan_utils.h"
@@ -43,6 +45,8 @@ void regenerate_framebuffers(renderer_backend *backend,
 b8 recreate_swapchain(renderer_backend *backend);
 
 b8 create_buffers(vulkan_context *context);
+
+u8* create_sample_texture(u32 height, u32 width);
 
 void upload_data_range(vulkan_context *context, VkCommandPool pool,
                        VkFence fence, VkQueue queue, vulkan_buffer *buffer,
@@ -274,15 +278,23 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 
   verts[0].position.x = -0.05;
   verts[0].position.y = -0.5;
+  verts[0].tex_coord.u = 0.0;
+  verts[0].tex_coord.v = 0.0;
 
   verts[1].position.x = 0.5;
   verts[1].position.y = 0.5;
+  verts[1].tex_coord.u = 1.0;
+  verts[1].tex_coord.v = 0.0;
 
   verts[2].position.x = -0.5;
   verts[2].position.y = 0.5;
+  verts[2].tex_coord.u = 0.0;
+  verts[2].tex_coord.v = 1.0;
 
   verts[3].position.x = 0.5;
   verts[3].position.y = -0.5;
+  verts[3].tex_coord.u = 1.0;
+  verts[3].tex_coord.v = 1.0;
 
   const u32 index_count = 6;
   u32 indices[6] = {0, 1, 2, 0, 3, 1};
@@ -491,6 +503,40 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   z -= 0.005f;
   context.object_shader.global_ubo.view = mat4_translation((vec3){0, 0, z});
 
+  vulkan_buffer staging_buffer;
+  u8 *texture_data = create_sample_texture(512, 512);
+
+  vulkan_buffer_create(&context, sizeof(u8) * 512 * 512 * 4,
+                       VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                           VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                       true, &staging_buffer);
+
+  vulkan_buffer_load_data(&context, &staging_buffer, 0,
+                          sizeof(u8) * 512 * 512 * 4, 0, texture_data);
+
+  vulkan_image_create(
+      &context, VK_IMAGE_TYPE_2D, 512, 512, VK_FORMAT_R8G8B8A8_SRGB,
+      VK_IMAGE_TILING_OPTIMAL,
+      VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, true, VK_IMAGE_ASPECT_COLOR_BIT,
+      &context.object_shader.texture.image);
+
+  vulkan_image_transition_layout(
+      &context, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED,
+      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, &context.object_shader.texture.image);
+
+  vulkan_buffer_copy_to_image(&context, 512, 512, staging_buffer,
+                              &context.object_shader.texture.image);
+
+  vulkan_image_transition_layout(
+      &context, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+      VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, &context.object_shader.texture.image);
+
+  vulkan_buffer_destroy(&context, &staging_buffer);
+
+  vulkan_texture_create_sampler(&context, &context.object_shader.texture.sampler);
+
   // TODO: other ubo properties
 
   vulkan_object_shader_update_global_state(&context, &context.object_shader);
@@ -503,12 +549,15 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   vkCmdBindVertexBuffers(command_buffer->handle, 0, 1,
                          &context.object_vertex_buffer.handle,
                          (VkDeviceSize *)offsets);
+
   // Bind index buffer at offset.
   vkCmdBindIndexBuffer(command_buffer->handle,
                        context.object_index_buffer.handle, 0,
                        VK_INDEX_TYPE_UINT32);
+
   // Issue the draw.
   vkCmdDrawIndexed(command_buffer->handle, 6, 1, 0, 0, 0);
+
   // TODO: end temporary test code
 }
 
@@ -578,34 +627,64 @@ b8 vulkan_renderer_backend_end_frame(renderer_backend *backend,
 void vulkan_renderer_backend_create_texture() {
 
   vulkan_buffer staging_buffer;
-  vulkan_buffer_create(&context, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, true, &staging_buffer);
+  u8 *texture_data;
+  vulkan_buffer_create(&context, sizeof(u8) * 512 * 512 * 4,
+                       VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                           VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                       true, &staging_buffer);
+
+  vulkan_buffer_load_data(&context, &staging_buffer, 0,
+                          sizeof(u8) * 512 * 512 * 4, 0, texture_data);
+
+  vulkan_image texture_image;
+  vulkan_image_create(
+      &context, VK_IMAGE_TYPE_2D, 512, 512, VK_FORMAT_R8G8B8A8_SRGB,
+      VK_IMAGE_TILING_OPTIMAL,
+      VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+      VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, true, 0,
+      &texture_image);
+
+  vulkan_image_transition_layout(
+      &context, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED,
+      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, &texture_image);
+
+  vulkan_buffer_copy_to_image(&context, 512, 512, staging_buffer,
+                              &texture_image);
+
+  vulkan_image_transition_layout(
+      &context, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+      VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, &texture_image);
+
+  vulkan_buffer_destroy(&context, &staging_buffer);
+
 }
 
-
- // ------------- START PRIVATE FUNCTIONS
+// ------------- START PRIVATE FUNCTIONS
 
 /**
- * @brief creates texture pixel data for a checkerboard 
+ * @brief creates texture pixel data for a checkerboard
  * @param height height of texture in pixels
  * @param width width of texture in pixels
- * @param out_texture the texture data in rgba format will be returned here. Pointer SHOULD ALREADY BE ALLOCATED
+ * @param out_texture the texture data in rgba format will be returned here.
  */
- void create_sample_texture(u32 height, u32 width, u8* out_texture) {
-
-    // row iteration
-    for(u32 y = 0; x < height; y++) {
-      // column iteration
-      for(u32 x = 0; x < width; x++) {
-        u32 i = (y * width + x) * 4;
-        uint8_t color = ((x & 0x8) == (y & 0x8)) ? 0xDD : 0x5F;
-        // RGBA
-        out_texture[i] = color;
-        out_texture[i + 1] = color;
-        out_texture[i + 2] = color;
-        out_texture[i + 3] = 0xFF;
-      }
+u8* create_sample_texture(u32 height, u32 width) {
+  u8* texture_data = oallocate(sizeof(u8) * 512 * 512 * 4, MEMORY_TAG_RENDERER);
+  // row iteration
+  for (u32 y = 0; y < height; y++) {
+    // column iteration
+    for (u32 x = 0; x < width; x++) {
+      u32 i = (y * width + x) * 4;
+      uint8_t color = ((x & 0x8) == (y & 0x8)) ? 0xDD : 0x5F;
+      // RGBA
+      texture_data[i] = color;
+      texture_data[i + 1] = color;
+      texture_data[i + 2] = color;
+      texture_data[i + 3] = 0xFF;
     }
- }  
+  }
+  return texture_data;
+}
 
 VKAPI_ATTR VkBool32 VKAPI_CALL
 vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,

@@ -27,3 +27,7 @@ void vulkan_buffer_copy_to(vulkan_context *context, VkCommandPool pool,
                            VkFence fence, VkQueue queue, VkBuffer source,
                            u64 source_offset, VkBuffer dest, u64 dest_offset,
                            u64 size);
+
+void vulkan_buffer_copy_to_image(vulkan_context *context, u64 height, u64 width,
+                                 vulkan_buffer source_buffer,
+                                 vulkan_image* dest_image);
