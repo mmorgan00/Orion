@@ -34,14 +34,15 @@ typedef struct render_packet {
 
 /**
  * @brief Render Object describing a single entity to draw.
+ * Everything is stored as an ID to allow for instanced draws of the same mesh/texture data. 
  * @param id - ID of the object, used for renderer internal tracking
- * @param geometry_data - Vertex data, using 3D even for 2D cases as the z axis is still relevant for layering
- * @param texture_id - Uses ID here instead of raw texture data to enable texture sharing
+ * @param geometry_data - Vertex data ID. 
+ * @param texture_id - Texture data ID.
  */
 typedef struct render_object {
   u32 id;
-  vertex_3d* geometry_data;
-  u32 texture_id;
+  u32 geometry_data_id;
+  u32 texture_data_id;
 } render_object;
 
 /**

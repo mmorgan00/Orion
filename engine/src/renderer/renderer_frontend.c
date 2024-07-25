@@ -5,13 +5,21 @@
 #include "core/logger.h"
 #include "core/omemory.h"
 #include "math/omath.h"
+#include "containers/darray.h"
 
 // Backend render context
 static renderer_backend *backend = 0;
 
+/**
+ * @brief Current scene data. Later this will be a proper scene graph that can handle multiple transformation dependency chains.
+ * For now, we just want to hold everything in the scene to draw
+ */
+static render_object* scene_data = 0;
+
 b8 renderer_initialize(const char *application_name,
                        struct platform_state *plat_state) {
   backend = oallocate(sizeof(renderer_backend), MEMORY_TAG_RENDERER);
+  scene_data = darray_create(render_object*); // initialize
 
   // TODO: Make configurable
   renderer_backend_create(RENDERER_BACKEND_TYPE_VULKAN, plat_state, backend);
@@ -69,7 +77,6 @@ b8 renderer_draw_frame(render_packet *packet) {
     z += 0.01f;
     mat4 view = mat4_translation((vec3){0, 0, z}); // -30.0f
     view = mat4_inverse(view);
-
     backend->update_global_state(projection, view, vec3_zero(), vec4_one(), 0);
 
     b8 result = renderer_end_frame(packet->delta_time);
@@ -87,11 +94,21 @@ b8 renderer_draw_frame(render_packet *packet) {
 
 /**
  * @brief Creates a new object to be rendered
- * @param vertex_data - geometry data of object
- * @param vertex_count - for now, also needs the count of vertex data since dealing with raw pointers.
- * @param texture_data - raw texture pixel data
- * @param texture_resolution - resolution of texture in pixels. 
+ * @param gemoetry_data_id - geometry data id to reference when drawing 
+ * @param texture_data_id - texture data id to reference when drawing
  */
-u32 renderer_create_object(vertex_3d* vertex_data, u32 vertex_count, u8* texture_data, u32 texture_resolution) {
-  // TODO: Implement
+u32 renderer_register_object(u32 geometry_data_id, u32 texture_data_id) {
+  // Declaring static to increment between calls for multiple objects.
+  // This may be bad code. If it is we'll address it later, but it should work for now
+  static u32 object_id = 1; 
+
+  render_object nro; // new render object
+  nro.geometry_data_id = geometry_data_id;
+  nro.texture_data_id = texture_data_id;
+  nro.id = object_id;
+
+  // REGISTER THE OBJECT NOW
+  darray_push(scene_data, nro);
+
+  return object_id++; // Post incrememnt to return 'current' value, then incrememnt static var for next call
 }

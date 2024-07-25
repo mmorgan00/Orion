@@ -2,7 +2,7 @@
 
 #include <core/logger.h>
 #include <core/omemory.h>
-
+#include <renderer/renderer_frontend.h>
 #include <core/input.h>
 
 
@@ -18,6 +18,10 @@ b8 game_update(struct game* game_inst, f32 delta_time) {
     alloc_count = get_memory_alloc_count();
     if (input_is_key_up('M') && input_was_key_down('M')) {
         ODEBUG("Allocations: %llu (%llu this frame)", alloc_count, alloc_count - prev_alloc_count);
+    }
+    // TODO: Temp code, remove after testing
+    if (input_is_key_up('R') && input_was_key_down('R')) {
+      renderer_register_object(1, 2);
     }
 
 
