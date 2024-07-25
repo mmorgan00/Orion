@@ -81,7 +81,7 @@ b8 renderer_draw_frame(render_packet *packet) {
     mat4 projection =
         mat4_perspective(deg_to_rad(45.0f), 1280 / 720.0f, 0.1f, 1000.0f);
     static f32 z = 0.0f;
-    z += 0.01f;
+    z += 0.001f;
     mat4 view = mat4_translation((vec3){0, 0, z}); // -30.0f
     view = mat4_inverse(view);
     backend->update_global_state(projection, view, vec3_zero(), vec4_one(), 0);
@@ -91,6 +91,8 @@ b8 renderer_draw_frame(render_packet *packet) {
     // If end frame had issue, likely unrecoverable. shutdown
     if (!result) {
       OFATAL("render_end_frame failed. Application shutting down");
+
+      
       return false;
     }
   }
@@ -117,7 +119,15 @@ u32 renderer_register_object(u32 geometry_data_id, u32 texture_data_id) {
 
   // REGISTER THE OBJECT NOW
   darray_push(scene_data, nro);
-
+  // TODO TEMP AS HELL
+    ODEBUG("Vertex 0 X value: %f", mesh_data[0][0].position.x);
+    ODEBUG("Vertex 0 Y value: %f", mesh_data[0][0].position.y);
+    ODEBUG("Vertex 1 X value: %f", mesh_data[0][1].position.x);
+    ODEBUG("Vertex 1 Y value: %f", mesh_data[0][1].position.y);
+    ODEBUG("Vertex 2 X value: %f", mesh_data[0][2].position.x);
+    ODEBUG("Vertex 2 Y value: %f", mesh_data[0][2].position.y);
+    ODEBUG("Vertex 3 X value: %f", mesh_data[0][3].position.x);
+    ODEBUG("Vertex 3 Y value: %f", mesh_data[0][3].position.y);
   return object_id++; // Post incrememnt to return 'current' value, then incrememnt static var for next call
 }
 

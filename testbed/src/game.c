@@ -5,7 +5,7 @@
 #include <renderer/renderer_frontend.h>
 #include <core/input.h>
 
-
+static u32 mesh_data_id;
 b8 game_initialize(struct game* game_inst) {
   ODEBUG("game_initialize() called");
   return true;
@@ -21,7 +21,31 @@ b8 game_update(struct game* game_inst, f32 delta_time) {
     }
     // TODO: Temp code, remove after testing
     if (input_is_key_up('R') && input_was_key_down('R')) {
-      renderer_register_object(1, 2);
+
+      f32 f = 2.0f;
+      vertex_3d plane[6];
+      plane[0].position.x = -0.5 * f;
+      plane[0].position.y = -0.5 * f;
+      plane[0].tex_coord.u = 0.0;
+      plane[0].tex_coord.v = 0.0;
+
+      plane[1].position.x = 0.5 * f;
+      plane[1].position.y = 0.5 * f;
+      plane[1].tex_coord.u = 1.0;
+      plane[1].tex_coord.v = 1.0;
+
+      plane[2].position.x = -0.5 * f;
+      plane[2].position.y = 0.5 * f;
+      plane[2].tex_coord.u = 0.0;
+      plane[2].tex_coord.v = 1.0;
+
+      plane[3].position.x = 0.5 * f;
+      plane[3].position.y = -0.5 * f;
+      plane[3].tex_coord.u = 1.0;
+      plane[3].tex_coord.v = 0.0;
+      mesh_data_id = renderer_load_mesh(plane, 3);
+      ODEBUG("%d", mesh_data_id);
+      renderer_register_object(mesh_data_id, 2);
     }
 
 

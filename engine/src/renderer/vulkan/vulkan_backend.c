@@ -272,7 +272,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 
   create_buffers(&context);
 
-  const f32 f = 10.0f;
+  const f32 f = 2.0f;
 
   // TODO: REMOVE TEMP CODE
   const u32 vert_count = 4;
@@ -524,7 +524,9 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
   context.main_renderpass.h = context.framebuffer_height;
 
   // Begin renderpass!
-  vulkan_renderpass_begin(
+  vulkan_rende
+  
+  rpass_begin(
       command_buffer, &context.main_renderpass,
       context.swapchain.framebuffers[context.image_index].handle);
 
