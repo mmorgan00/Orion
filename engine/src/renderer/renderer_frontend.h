@@ -7,6 +7,7 @@ struct static_mesh_data;
 struct platform_state;
 
 OAPI u32 renderer_register_object(u32 geometry_data_id, u32 texture_data_id);
+OAPI u32 renderer_load_mesh(vertex_3d* mesh_data, u32 vertex_count);
 
 b8 renderer_initialize(const char *application_name,
                        struct platform_state *plat_state);
