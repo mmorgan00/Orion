@@ -272,28 +272,30 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 
   create_buffers(&context);
 
+  const f32 f = 10.0f;
+
   // TODO: REMOVE TEMP CODE
   const u32 vert_count = 4;
   vertex_3d verts[vert_count];
   ozero_memory(verts, sizeof(vertex_3d) * vert_count);
 
-  verts[0].position.x = -0.5;
-  verts[0].position.y = -0.5;
+  verts[0].position.x = -0.5 * f;
+  verts[0].position.y = -0.5 * f;
   verts[0].tex_coord.u = 0.0;
   verts[0].tex_coord.v = 0.0;
 
-  verts[1].position.x = 0.5;
-  verts[1].position.y = 0.5;
+  verts[1].position.x = 0.5 * f;
+  verts[1].position.y = 0.5 * f;
   verts[1].tex_coord.u = 1.0;
   verts[1].tex_coord.v = 1.0;
 
-  verts[2].position.x = -0.5;
-  verts[2].position.y = 0.5;
+  verts[2].position.x = -0.5 * f;
+  verts[2].position.y = 0.5 * f;
   verts[2].tex_coord.u = 0.0;
   verts[2].tex_coord.v = 1.0;
 
-  verts[3].position.x = 0.5;
-  verts[3].position.y = -0.5;
+  verts[3].position.x = 0.5 * f;
+  verts[3].position.y = -0.5 * f;
   verts[3].tex_coord.u = 1.0;
   verts[3].tex_coord.v = 0.0;
 
@@ -674,29 +676,26 @@ void vulkan_renderer_backend_create_texture() {
  */
 u8 *create_sample_texture(u32 height, u32 width) {
   u8 *texture_data = oallocate(sizeof(u8) * 512 * 512 * 4, MEMORY_TAG_RENDERER);
+  oset_memory(texture_data, 0xFF, sizeof(u8) * 512 * 512 * 4);
   // row iteration
-  for (u32 y = 0; y < height; y++) {
-    // column iteration
-    for (u32 x = 0; x < width; x++) {
-      double nx = (double)x / 512 - 0.5;
-      double ny = (double)y / 512 - 0.5;
+  for (u64 row = 0; row < height; ++row) {
+        for (u64 col = 0; col < height; ++col) {
+            u64 index = (row * height) + col;
 
-      double angle = atan2(ny, nx);
-      double distance = sqrt(nx * nx + ny * ny);
-
-      double spiral = fmod(distance * 20 + angle / (2 * O_PI), 1.0);
-      double fractal = fmod(spiral * 5, 1.0);
-
-      int index = y * 512 + x;
-      texture_data[index] =
-          (unsigned char)(sin(fractal * O_PI * 2) * 127 + 128);
-      texture_data[index + 1] =
-          (unsigned char)(cos(fractal * O_PI * 3) * 127 + 128);
-      texture_data[index + 2] =
-          (unsigned char)(sin(fractal * O_PI * 5) * 127 + 128);
-      texture_data[index + 3] = 0xFF;
+            u64 index_bpp = index * 4;
+            if (row % 2) {
+                if (col % 2) {
+                    texture_data[index_bpp + 0] = 0;
+                    texture_data[index_bpp + 1] = 0;
+                }
+            } else {
+                if (!(col % 2)) {
+                    texture_data[index_bpp + 0] = 0;
+                    texture_data[index_bpp + 1] = 0;
+                }
+            }
+        }
     }
-  }
   return texture_data;
 }
 
