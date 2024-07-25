@@ -32,6 +32,17 @@ typedef struct render_packet {
   f32 delta_time;
 } render_packet;
 
+/**
+ * @brief Render Object describing a single entity to draw.
+ * @param id - ID of the object, used for renderer internal tracking
+ * @param geometry_data - Vertex data, using 3D even for 2D cases as the z axis is still relevant for layering
+ * @param texture_id - Uses ID here instead of raw texture data to enable texture sharing
+ */
+typedef struct render_object {
+  u32 id;
+  vertex_3d* geometry_data;
+  u32 texture_id;
+} render_object;
 
 /**
  * @brief Universal Buffer Object for information will be shared across shaders regardless of implementation language or graphics API.

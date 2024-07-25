@@ -12,3 +12,5 @@ void renderer_shutdown();
 void renderer_on_resized(u16 width, u16 height);
 
 b8 renderer_draw_frame(render_packet *packet);
+
+u32 renderer_create_object(vertex_3d* vertex_data, u32 vertex_count, u8* texture_data, u32 texture_resolution);

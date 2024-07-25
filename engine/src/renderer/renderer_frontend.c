@@ -83,3 +83,15 @@ b8 renderer_draw_frame(render_packet *packet) {
 
   return true;
 }
+
+
+/**
+ * @brief Creates a new object to be rendered
+ * @param vertex_data - geometry data of object
+ * @param vertex_count - for now, also needs the count of vertex data since dealing with raw pointers.
+ * @param texture_data - raw texture pixel data
+ * @param texture_resolution - resolution of texture in pixels. 
+ */
+u32 renderer_create_object(vertex_3d* vertex_data, u32 vertex_count, u8* texture_data, u32 texture_resolution) {
+  // TODO: Implement
+}
