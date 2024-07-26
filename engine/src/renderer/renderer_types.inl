@@ -11,6 +11,13 @@ RENDERER_BACKEND_TYPE_OPENGL,
 } renderer_backend_type;
 
 
+typedef struct vertex_data {
+  vertex_3d* vertices;
+  u32 vertex_count;
+  u32* indices;
+  u32 index_count;
+} vertex_data;
+
 typedef struct renderer_backend {
   struct platform_state* plat_state;
   u64 frame_number;
@@ -23,6 +30,7 @@ typedef struct renderer_backend {
 
   b8(*begin_frame)(struct renderer_backend* backend, f32 delta_time);
   void (*update_global_state)(mat4 projection, mat4 view, vec3 view_position, vec4 ambient_colour, i32 mode);
+  void (*draw_object)(struct renderer_backend* backend, vertex_data* vert_data);
   b8(*end_frame)(struct renderer_backend* backend, f32 delta_time);
 
 } renderer_backend;

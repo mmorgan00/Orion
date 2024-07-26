@@ -25,7 +25,6 @@
 #include "math/math_types.h"
 #include "math/omath.h"
 #include "shaders/vulkan_object_shader.h"
-#include <math.h>
 
 // static context for Vulkan
 static vulkan_context context;
@@ -272,44 +271,6 @@ b8 vulkan_renderer_backend_initialize(renderer_backend *backend,
 
   create_buffers(&context);
 
-  const f32 f = 2.0f;
-
-  // TODO: REMOVE TEMP CODE
-  const u32 vert_count = 4;
-  vertex_3d verts[vert_count];
-  ozero_memory(verts, sizeof(vertex_3d) * vert_count);
-
-  verts[0].position.x = -0.5 * f;
-  verts[0].position.y = -0.5 * f;
-  verts[0].tex_coord.u = 0.0;
-  verts[0].tex_coord.v = 0.0;
-
-  verts[1].position.x = 0.5 * f;
-  verts[1].position.y = 0.5 * f;
-  verts[1].tex_coord.u = 1.0;
-  verts[1].tex_coord.v = 1.0;
-
-  verts[2].position.x = -0.5 * f;
-  verts[2].position.y = 0.5 * f;
-  verts[2].tex_coord.u = 0.0;
-  verts[2].tex_coord.v = 1.0;
-
-  verts[3].position.x = 0.5 * f;
-  verts[3].position.y = -0.5 * f;
-  verts[3].tex_coord.u = 1.0;
-  verts[3].tex_coord.v = 0.0;
-
-  const u32 index_count = 6;
-  u32 indices[6] = {0, 1, 2, 0, 3, 1};
-
-  upload_data_range(&context, context.device.graphics_command_pool, 0,
-                    context.device.graphics_queue,
-                    &context.object_vertex_buffer, 0,
-                    sizeof(vertex_3d) * vert_count, verts);
-  upload_data_range(&context, context.device.graphics_command_pool, 0,
-                    context.device.graphics_queue, &context.object_index_buffer,
-                    0, sizeof(u32) * index_count, indices);
-
   vulkan_buffer staging_buffer;
   u8 *texture_data = create_sample_texture(512, 512);
 
@@ -355,7 +316,8 @@ void vulkan_renderer_backend_shutdown(renderer_backend *backend) {
 
   vkDeviceWaitIdle(context.device.logical_device);
 
-  vkDestroySampler(context.device.logical_device, context.object_shader.texture.sampler, context.allocator);
+  vkDestroySampler(context.device.logical_device,
+                   context.object_shader.texture.sampler, context.allocator);
   vulkan_image_destroy(&context, &context.object_shader.texture.image);
 
   vulkan_buffer_destroy(&context, &context.object_vertex_buffer);
@@ -524,9 +486,7 @@ b8 vulkan_renderer_backend_begin_frame(renderer_backend *backend,
   context.main_renderpass.h = context.framebuffer_height;
 
   // Begin renderpass!
-  vulkan_rende
-  
-  rpass_begin(
+  vulkan_renderpass_begin(
       command_buffer, &context.main_renderpass,
       context.swapchain.framebuffers[context.image_index].handle);
 
@@ -542,13 +502,30 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   vulkan_object_shader_use(&context, &context.object_shader);
 
   // PASS COPIES - DON'T BLOCK REST OF ENGINE UPDATING TO RENDER
-  context.object_shader.global_ubo.projection =
-      projection;
+  context.object_shader.global_ubo.projection = projection;
   context.object_shader.global_ubo.view = view;
 
   // TODO: other ubo properties
 
   vulkan_object_shader_update_global_state(&context, &context.object_shader);
+}
+
+void vulkan_renderer_draw_object(renderer_backend *backend,
+                                 vertex_data *vert_data) {
+
+  vulkan_command_buffer *command_buffer =
+      &context.graphics_command_buffers[context.image_index];
+
+  // These buffers have already been created, we're just going to upload into
+  // them again
+  upload_data_range(
+      &context, context.device.graphics_command_pool, 0,
+      context.device.graphics_queue, &context.object_vertex_buffer, 0,
+      sizeof(vertex_3d) * vert_data->vertex_count, vert_data->vertices);
+  upload_data_range(&context, context.device.graphics_command_pool, 0,
+                    context.device.graphics_queue, &context.object_index_buffer,
+                    0, sizeof(u32) * vert_data->index_count,
+                    vert_data->indices);
 
   // TODO: temporary test code
   vulkan_object_shader_use(&context, &context.object_shader);
@@ -565,7 +542,7 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
                        VK_INDEX_TYPE_UINT32);
 
   // Issue the draw.
-  vkCmdDrawIndexed(command_buffer->handle, 6, 1, 0, 0, 0);
+  vkCmdDrawIndexed(command_buffer->handle, vert_data->index_count, 1, 0, 0, 0);
 
   // TODO: end temporary test code
 }
@@ -681,23 +658,23 @@ u8 *create_sample_texture(u32 height, u32 width) {
   oset_memory(texture_data, 0xFF, sizeof(u8) * 512 * 512 * 4);
   // row iteration
   for (u64 row = 0; row < height; ++row) {
-        for (u64 col = 0; col < height; ++col) {
-            u64 index = (row * height) + col;
+    for (u64 col = 0; col < height; ++col) {
+      u64 index = (row * height) + col;
 
-            u64 index_bpp = index * 4;
-            if (row % 2) {
-                if (col % 2) {
-                    texture_data[index_bpp + 0] = 0;
-                    texture_data[index_bpp + 1] = 0;
-                }
-            } else {
-                if (!(col % 2)) {
-                    texture_data[index_bpp + 0] = 0;
-                    texture_data[index_bpp + 1] = 0;
-                }
-            }
+      u64 index_bpp = index * 4;
+      if (row % 2) {
+        if (col % 2) {
+          texture_data[index_bpp + 0] = 0;
+          texture_data[index_bpp + 1] = 0;
         }
+      } else {
+        if (!(col % 2)) {
+          texture_data[index_bpp + 0] = 0;
+          texture_data[index_bpp + 1] = 0;
+        }
+      }
     }
+  }
   return texture_data;
 }
 
