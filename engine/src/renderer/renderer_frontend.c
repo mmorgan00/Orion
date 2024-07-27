@@ -15,7 +15,7 @@ static renderer_backend *backend = 0;
  * handle multiple transformation dependency chains. For now, we just want to
  * hold everything in the scene to draw
  */
-static render_object *scene_data = 0;
+static vertex_data *scene_data = 0;
 
 /**
  * @brief Mesh data stored as array of pointers since meshes can vary in range.
@@ -82,7 +82,7 @@ b8 renderer_draw_frame(render_packet *packet) {
     mat4 projection =
         mat4_perspective(deg_to_rad(45.0f), 1280 / 720.0f, 0.1f, 1000.0f);
     static f32 z = 0.0f;
-    z += 0.001f;
+    z += 0.0001f;
     mat4 view = mat4_translation((vec3){0, 0, z}); // -30.0f
     view = mat4_inverse(view);
     backend->update_global_state(projection, view, vec3_zero(), vec4_one(), 0);
@@ -121,7 +121,9 @@ b8 renderer_draw_frame(render_packet *packet) {
     vd.indices = indices;
     vd.vertices = verts;
     vd.vertex_count = vert_count;
-    backend->draw_object(backend, &vd);
+    for(u32 i = 0; i < darray_length(scene_data); ++i) {
+      backend->draw_object(backend, &vd);
+    }
     // for item in scene{
     //  renderer_draw_object(item)
     //}

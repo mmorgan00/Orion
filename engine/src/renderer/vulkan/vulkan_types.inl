@@ -159,6 +159,21 @@ typedef struct vulkan_object_shader {
   
 } vulkan_object_shader;
 
+#define VULKAN_MAX_GEOMETRY_COUNT 4096; // 4096 unique geometries should get us pretty far
+/**
+ * @brief Holds the geometry data needed for draw calls
+ * Pulling inspiration from vkCmdBindVertexBuffers and vkCmdBindIndexBuffer
+ */
+typedef struct vulkan_geometry_data {
+  u32 id;
+  u32 vertex_count;
+  u32 vertex_size;
+  u32 vertex_buffer_offset;
+  u32 index_count;
+  u32 index_size;
+  u32 index_buffer_offset;
+} vulkan_geometry_data;
+
 typedef struct vulkan_context {
 
   u32 framebuffer_width;
@@ -207,6 +222,8 @@ u64 framebuffer_size_last_generation;
 
   u64 geometry_vertex_offset;
   u64 geometry_index_offset;
+
+  vulkan_geometry_data geometries[VULKAN_MAX_GEOMETRY_COUNT]; 
 
   i32 (*find_memory_index)(u32 type_filter, u32 property_flags);
 

@@ -510,8 +510,7 @@ void vulkan_renderer_backend_update_global_state(mat4 projection, mat4 view,
   vulkan_object_shader_update_global_state(&context, &context.object_shader);
 }
 
-void vulkan_renderer_draw_object(renderer_backend *backend,
-                                 vertex_data *vert_data) {
+void vulkan_renderer_draw_geometry(geometry_render_data data) {
 
   vulkan_command_buffer *command_buffer =
       &context.graphics_command_buffers[context.image_index];

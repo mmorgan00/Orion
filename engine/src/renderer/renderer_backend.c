@@ -13,7 +13,7 @@ b8 renderer_backend_create(renderer_backend_type type,
     out_renderer_backend->begin_frame = vulkan_renderer_backend_begin_frame;
     out_renderer_backend->update_global_state =
         vulkan_renderer_backend_update_global_state;
-    out_renderer_backend->draw_object = vulkan_renderer_draw_object;
+    out_renderer_backend->draw_geometry = vulkan_renderer_draw_geometry;
     out_renderer_backend->end_frame = vulkan_renderer_backend_end_frame;
     out_renderer_backend->resized = vulkan_renderer_backend_on_resized;
 
